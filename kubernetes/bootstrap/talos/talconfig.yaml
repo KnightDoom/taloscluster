@@ -43,7 +43,7 @@ nodes:
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/0dd49b9d4fa14b2add314727864e17c39036f48dff4db8b3b3cb8731ff8ebc9c
+    talosImageURL: factory.talos.dev/installer/d964f773a9abe4b45d6d49c5e73edaef6c6de07686e83f86920c4d6fd262e524
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -58,7 +58,7 @@ nodes:
   - hostname: "talos2"
     ipAddress: "192.168.86.28"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/0dd49b9d4fa14b2add314727864e17c39036f48dff4db8b3b3cb8731ff8ebc9c
+    talosImageURL: factory.talos.dev/installer/d964f773a9abe4b45d6d49c5e73edaef6c6de07686e83f86920c4d6fd262e524
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
