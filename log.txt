@@ -1,0 +1,470 @@
+task: [/home/knightdoom/control/taloscluster] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/kubernetes] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/bootstrap] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/workstation] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/talos] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/bootstrap] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/workstation] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/kubernetes] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/talos] Not found - Using alternative (Taskfile.yaml)
+Any conflicting files in the kubernetes directory will be overwritten... continue? [assuming yes]
+Load data '/home/knightdoom/control/taloscluster/config.yaml'
+Copy file '/home/knightdoom/control/taloscluster/bootstrap/overrides/gpu-worker-patch.yaml' -> '/home/knightdoom/control/taloscluster/gpu-worker-patch.yaml'
+Skip excluded path '/home/knightdoom/control/taloscluster/bootstrap/overrides/readme.partial.yaml.j2'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/.sops.yaml.j2' -> '/home/knightdoom/control/taloscluster/.sops.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes' -> '/home/knightdoom/control/taloscluster/kubernetes'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps' -> '/home/knightdoom/control/taloscluster/kubernetes/apps'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/app' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/app/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/issuers' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/issuers'
+Skip excluded path '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/issuers/.mjfilter.py'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/issuers/issuers.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/issuers/issuers.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/issuers/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/issuers/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/issuers/secret.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/issuers/secret.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/cert-manager/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/ks.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/cert-manager/namespace.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/namespace.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/github' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/github/ingress.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github/ingress.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/github/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/github/receiver.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github/receiver.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/github/secret.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github/secret.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/flux-system/webhooks/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/app/helm-values.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app/helm-values.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/app/kustomizeconfig.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app/kustomizeconfig.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/config' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/config'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/config/cilium-l2.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/config/cilium-l2.yaml'
+Skip empty file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/config/cilium-l3.yaml.j2'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/config/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/config/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/cilium/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/app/helm-values.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app/helm-values.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/app/kustomizeconfig.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app/kustomizeconfig.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/coredns/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/app' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/app/helm-values.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app/helm-values.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/app/kustomizeconfig.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app/kustomizeconfig.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kubelet-csr-approver/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/ks.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/metrics-server' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/metrics-server/app' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/metrics-server/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/metrics-server/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/metrics-server/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server/ks.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/namespace.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/reloader' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/reloader/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/reloader/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/reloader/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/reloader/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/app/helm-values.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app/helm-values.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/app/kustomizeconfig.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app/kustomizeconfig.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/kube-system/spegel/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network'
+Skip excluded path '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/.mjfilter.py'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/configs' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/configs'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/configs/config.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/configs/config.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/dnsendpoint.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/dnsendpoint.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/app/secret.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/secret.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/cloudflared/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/echo-server' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/echo-server/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/echo-server/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/echo-server/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/echo-server/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns/app/secret.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/app/secret.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/external-dns/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/certificates' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/certificates'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/certificates/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/certificates/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/certificates/production.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/certificates/production.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/certificates/staging.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/certificates/staging.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/external' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/external'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/external/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/external/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/external/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/external/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/internal' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/internal'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/internal/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/internal/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/internal/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/internal/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/ingress-nginx/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/k8s-gateway' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/k8s-gateway/app' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/k8s-gateway/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/k8s-gateway/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/k8s-gateway/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway/ks.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/network/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/network/namespace.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/network/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/observability'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/namespace.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/prometheus-operator-crds' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/prometheus-operator-crds/app' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/prometheus-operator-crds/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/prometheus-operator-crds/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/observability/prometheus-operator-crds/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/namespace.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/namespace.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/openebs' -> '/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/openebs/app' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs/app'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/openebs/app/helmrelease.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs/app/helmrelease.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/openebs/app/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs/app/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/apps/openebs-system/openebs/ks.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs/ks.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/flux' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap/flux'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/flux/github-deploy-key.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/flux/github-deploy-key.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/flux/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/flux/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/helmfile.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap/helmfile.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/README.md.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/README.md'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/controller' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/controller'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/api-access.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/controller/api-access.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/cluster.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/controller/cluster.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/disable-admission-controller.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/controller/disable-admission-controller.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/etcd.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/controller/etcd.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global' -> '/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/cluster-discovery.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/cluster-discovery.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/containerd.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/containerd.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/disable-search-domain.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/disable-search-domain.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/dns.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/dns.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/hostdns.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/hostdns.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/kubelet.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/kubelet.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/ntp.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/ntp.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/openebs-local.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/openebs-local.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/global/sysctl.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/global/sysctl.yaml'
+Copy file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/patches/gpu-worker-patch.yaml' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/patches/gpu-worker-patch.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/bootstrap/talos/talconfig.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/talconfig.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux' -> '/home/knightdoom/control/taloscluster/kubernetes/flux'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/apps.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/apps.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/config' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/config'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/config/cluster.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/config/cluster.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/config/flux.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/config/flux.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/config/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/config/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/repositories'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/git' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/git'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/git/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/git/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/bjw-s.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/bjw-s.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/cilium.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/cilium.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/coredns.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/coredns.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/external-dns.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/external-dns.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/ingress-nginx.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/ingress-nginx.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/jetstack.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/jetstack.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/k8s-gateway.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/k8s-gateway.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/kustomization.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/metrics-server.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/metrics-server.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/openebs.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/openebs.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/postfinance.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/postfinance.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/prometheus-community.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/prometheus-community.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/spegel.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/spegel.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/stakater.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/stakater.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/oci' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/oci'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/oci/kustomization.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/repositories/oci/kustomization.yaml'
+Create dir '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/vars' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/vars'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/vars/cluster-secrets.sops.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/vars/cluster-secrets.sops.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/vars/cluster-settings.yaml.j2' -> 
+'/home/knightdoom/control/taloscluster/kubernetes/flux/vars/cluster-settings.yaml'
+Render file '/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/vars/kustomization.yaml.j2' -> '/home/knightdoom/control/taloscluster/kubernetes/flux/vars/kustomization.yaml'
+=== Validating standalone manifests in /home/knightdoom/control/taloscluster/kubernetes/flux ===
+/home/knightdoom/control/taloscluster/kubernetes/flux/apps.yaml - Kustomization cluster-apps is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux ===
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/vars/ ===
+stdin - cluster-secrets Secret skipped
+stdin - ConfigMap cluster-settings is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/config/ ===
+stdin - Kustomization cluster is valid
+stdin - Kustomization flux is valid
+stdin - GitRepository home-kubernetes is valid
+stdin - OCIRepository flux-manifests is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/repositories/oci/ ===
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/repositories/helm/ ===
+stdin - HelmRepository coredns is valid
+stdin - HelmRepository ingress-nginx is valid
+stdin - HelmRepository jetstack is valid
+stdin - HelmRepository k8s-gateway is valid
+stdin - HelmRepository metrics-server is valid
+stdin - HelmRepository openebs is valid
+stdin - HelmRepository postfinance is valid
+stdin - HelmRepository prometheus-community is valid
+stdin - HelmRepository spegel is valid
+stdin - HelmRepository stakater is valid
+stdin - HelmRepository external-dns is valid
+stdin - HelmRepository cilium is valid
+stdin - HelmRepository bjw-s is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/repositories/ ===
+stdin - HelmRepository external-dns is valid
+stdin - HelmRepository ingress-nginx is valid
+stdin - HelmRepository jetstack is valid
+stdin - HelmRepository k8s-gateway is valid
+stdin - HelmRepository metrics-server is valid
+stdin - HelmRepository openebs is valid
+stdin - HelmRepository postfinance is valid
+stdin - HelmRepository prometheus-community is valid
+stdin - HelmRepository spegel is valid
+stdin - HelmRepository stakater is valid
+stdin - HelmRepository cilium is valid
+stdin - HelmRepository bjw-s is valid
+stdin - HelmRepository coredns is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/flux/repositories/git/ ===
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps ===
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/config/ ===
+stdin - CiliumL2AnnouncementPolicy l2-policy is valid
+stdin - CiliumLoadBalancerIPPool l2-pool is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/cilium/app/ ===
+stdin - ConfigMap cilium-helm-values-tc45b84ft8 is valid
+stdin - HelmRelease cilium is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/ ===
+stdin - Namespace kube-system is valid
+stdin - Kustomization cilium-config is valid
+stdin - Kustomization metrics-server is valid
+stdin - Kustomization reloader is valid
+stdin - Kustomization cilium is valid
+stdin - Kustomization spegel is valid
+stdin - Kustomization kubelet-csr-approver is valid
+stdin - Kustomization coredns is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/reloader/app/ ===
+stdin - HelmRelease reloader is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/metrics-server/app/ ===
+stdin - HelmRelease metrics-server is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/coredns/app/ ===
+stdin - ConfigMap coredns-helm-values-82h885ft25 is valid
+stdin - HelmRelease coredns is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/kubelet-csr-approver/app/ ===
+stdin - ConfigMap kubelet-csr-approver-helm-values-ft57gbmf7c is valid
+stdin - HelmRelease kubelet-csr-approver is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/kube-system/spegel/app/ ===
+stdin - ConfigMap spegel-helm-values-4d85t65bbc is valid
+stdin - HelmRelease spegel is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/observability/ ===
+stdin - Namespace observability is valid
+stdin - Kustomization prometheus-operator-crds is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/observability/prometheus-operator-crds/app/ ===
+stdin - HelmRelease prometheus-operator-crds is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/echo-server/app/ ===
+stdin - HelmRelease echo-server is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/external-dns/app/ ===
+stdin - external-dns-secret Secret skipped
+stdin - HelmRelease external-dns is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/k8s-gateway/app/ ===
+stdin - HelmRelease k8s-gateway is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/ ===
+stdin - Namespace network is valid
+stdin - Kustomization external-dns is valid
+stdin - Kustomization ingress-nginx-external is valid
+stdin - Kustomization ingress-nginx-internal is valid
+stdin - Kustomization k8s-gateway is valid
+stdin - Kustomization echo-server is valid
+stdin - Kustomization ingress-nginx-certificates is valid
+stdin - Kustomization cloudflared is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/external/ ===
+stdin - HelmRelease ingress-nginx-external is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/certificates/ ===
+stdin - Certificate ${SECRET_DOMAIN/./-}-staging is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/ingress-nginx/internal/ ===
+stdin - HelmRelease ingress-nginx-internal is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/network/cloudflared/app/ ===
+stdin - cloudflared-secret Secret skipped
+stdin - ConfigMap cloudflared-configmap is valid
+stdin - HelmRelease cloudflared is valid
+stdin - DNSEndpoint cloudflared is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/ ===
+stdin - Namespace flux-system is valid
+stdin - Kustomization flux-webhooks is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/ ===
+stdin - github-webhook-token-secret Secret skipped
+stdin - Ingress flux-webhook is valid
+stdin - Receiver github-receiver is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/flux-system/webhooks/app/github/ ===
+stdin - github-webhook-token-secret Secret skipped
+stdin - Ingress flux-webhook is valid
+stdin - Receiver github-receiver is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/openebs/app/ ===
+stdin - HelmRelease openebs is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/openebs-system/ ===
+stdin - Namespace openebs-system is valid
+stdin - Kustomization openebs is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/ ===
+stdin - Namespace cert-manager is valid
+stdin - Kustomization cert-manager is valid
+stdin - Kustomization cert-manager-issuers is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/issuers/ ===
+stdin - cert-manager-secret Secret skipped
+stdin - ClusterIssuer letsencrypt-production is valid
+stdin - ClusterIssuer letsencrypt-staging is valid
+=== Validating kustomizations in /home/knightdoom/control/taloscluster/kubernetes/apps/cert-manager/cert-manager/app/ ===
+stdin - HelmRelease cert-manager is valid
+task: [/home/knightdoom/control/taloscluster] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/kubernetes] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/bootstrap] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/workstation] Not found - Using alternative (Taskfile.yaml)
+task: [/home/knightdoom/control/taloscluster/.taskfiles/talos] Not found - Using alternative (Taskfile.yaml)
+There are issues with your Talhelper config file:
+field: "nodes[0].extraManifests"
+  * extraManifests[0], "stat gpu-worker-patch.yaml: no such file or directory"

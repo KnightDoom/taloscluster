@@ -40,6 +40,8 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.86.25"
+    extraManifests:
+      - patches/gpu-worker-patch.yaml
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
