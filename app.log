@@ -1,0 +1,12 @@
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/talos0
+DEBUG:root:Found files: []
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/talos1
+DEBUG:root:Directory does not exist: bootstrap/templates/kubernetes/bootstrap/talos/patches/talos1
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/talos2
+DEBUG:root:Directory does not exist: bootstrap/templates/kubernetes/bootstrap/talos/patches/talos2
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/global
+DEBUG:root:Found files: ['bootstrap/templates/kubernetes/bootstrap/talos/patches/global/cluster-discovery.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/containerd.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/disable-search-domain.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/dns.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/hostdns.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/kubelet.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/ntp.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/openebs-local.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/global/sysctl.yaml.j2']
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/controller
+DEBUG:root:Found files: ['bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/api-access.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/cluster.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/disable-admission-controller.yaml.j2', 'bootstrap/templates/kubernetes/bootstrap/talos/patches/controller/etcd.yaml.j2']
+DEBUG:root:Checking path: bootstrap/templates/kubernetes/bootstrap/talos/patches/worker
+DEBUG:root:Directory does not exist: bootstrap/templates/kubernetes/bootstrap/talos/patches/worker
