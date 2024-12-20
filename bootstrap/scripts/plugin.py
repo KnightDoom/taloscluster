@@ -9,7 +9,7 @@ from netaddr import IPNetwork
 
 import makejinja
 import validation
-
+import logging
 
 # Return the filename of a path without the j2 extension
 def basename(value: str) -> str:
@@ -18,10 +18,17 @@ def basename(value: str) -> str:
 
 # Return a list of files in the talos patches directory
 def talos_patches(value: str) -> list[str]:
+    # Configure logging
+    logging.basicConfig(level=logging.DEBUG)
+
     path = Path(f'bootstrap/templates/kubernetes/bootstrap/talos/patches/{value}')
+    logging.debug(f"Checking path: {path}")
     if not path.is_dir():
-        return []
-    return [str(f) for f in sorted(path.glob('*.yaml.j2')) if f.is_file()]
+      logging.debug(f"Directory does not exist: {path}")
+      return []
+    files = [str(f) for f in sorted(path.glob('*.yaml.j2')) if f.is_file()]   
+    logging.debug(f"Found files: {files}")
+    return files
 
 
 # Return the nth host in a CIDR range

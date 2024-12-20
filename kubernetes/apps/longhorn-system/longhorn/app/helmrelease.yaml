@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: longhron
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: longhorn-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  valuesFrom:
+   - kind: ConfigMap
+     name: longhorn-helm-values
+  values:
+    metrics:
+      serviceMonitor:
+        # -- Setting that allows the creation of a Prometheus ServiceMonitor resource for Longhorn Manager components.
+        enabled: false
+     # local:
+       # lvm:
+         # enabled: false
+       # zfs:
+         # enabled: false
+     # replicated:
+       # mayastor:
+         # enabled: false
+   # openebs-crds:
+     # csi:
+       # volumeSnapshots:
+         # enabled: false
+   # localpv-provisioner:
+     # localpv:
+       # image:
+         # registry: quay.io/
+     # helperPod:
+       # image:
+         # registry: quay.io/
+     # hostpathClass:
+       # enabled: true
+       # name: openebs-hostpath
+       # isDefaultClass: false
+       # basePath: /var/openebs/local

@@ -13,6 +13,8 @@ repositories:
     url: https://coredns.github.io/helm
   - name: postfinance
     url: https://postfinance.github.io/kubelet-csr-approver
+  - name: longhorn
+    url: https://charts.longhorn.io
 
 releases:
   - name: prometheus-operator-crds
@@ -52,6 +54,17 @@ releases:
     version: v0.0.27
     values:
       - ../apps/kube-system/spegel/app/helm-values.yaml
+    needs:
+      - observability/prometheus-operator-crds
+      - kube-system/cilium
+      - kube-system/coredns
+      - kube-system/kubelet-csr-approver
+  - name: longhorn
+    namespace: longhorn-system
+    chart: longhorn/longhorn
+    version: 1.7.2
+    values: 
+      - ../apps/longhorn-system/longhorn/app/helm-values.yaml
     needs:
       - observability/prometheus-operator-crds
       - kube-system/cilium
