@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prowlarr
+  name: sonarr
 spec:
   interval: 30m
   chart:
@@ -22,9 +22,12 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
     controllers:
-      prowlarr:
+      sonarr:
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -34,23 +37,23 @@ spec:
               # tag: 16
             # envFrom: &envFrom
               # - secretRef:
-                  # name: prowlarr-secret
+                  # name: sonarr-secret
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr-develop
-              tag: 1.28.2.4885@sha256:f4ab000bcd12f61e064ba43c28b4afb7b732fcf157aa183d1bfa238347b73017
+              repository: ghcr.io/onedr0p/sonarr-develop
+              tag: 4.0.11.2774@sha256:91f219ec537b4501a7fee51f6ce6c829d85c1b7f5ae21e8214e4abf14111ad2f
             env:
-              PROWLARR__APP__INSTANCENAME: Prowlarr
-              PROWLARR__APP__THEME: dark
-              PROWLARR__AUTH__METHOD: External
-              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              PROWLARR__LOG__DBENABLED: "False"
-              PROWLARR__LOG__LEVEL: info
-              PROWLARR__SERVER__PORT: &port 80
-              PROWLARR__UPDATE__BRANCH: develop
+              SONARR__APP__INSTANCENAME: Sonarr
+              SONARR__APP__THEME: dark
+              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              SONARR__LOG__DBENABLED: "False"
+              SONARR__LOG__LEVEL: info
+              SONARR__SERVER__PORT: &port 80
+              SONARR__UPDATE__BRANCH: develop
               TZ: America/New_York
-            # envFrom: *envFrom
+ #           envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
@@ -72,7 +75,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 1Gi
+                memory: 4Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -83,7 +86,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: prowlarr
+        controller: sonarr
         ports:
           http:
             port: *port
@@ -99,12 +102,26 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: prowlarr-config
+        existingClaim: sonarr
+      # scripts:
+        # type: configMap
+        # name: sonarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/codec-tagger.sh
+            # subPath: codec-tagger.sh
+            # readOnly: true
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+          # - path: /scripts/tba-refresher.sh
+            # subPath: tba-refresher.sh
+            # readOnly: true
       tmp:
         type: emptyDir
       media:
         type: nfs
-        server: 192.168.86.9
-        path: /PlexLib
+        server: expanse.internal
+        path: /mnt/eros/Media
         globalMounts:
-          - path: /library
+          - path: /media

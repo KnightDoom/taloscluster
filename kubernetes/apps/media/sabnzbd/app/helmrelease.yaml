@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prowlarr
+  name: sabnzbd
 spec:
   interval: 30m
   chart:
@@ -22,42 +22,44 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
     controllers:
-      prowlarr:
+      sabnzbd:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-          # init-db:
-            # image:
-              # repository: ghcr.io/onedr0p/postgres-init
-              # tag: 16
-            # envFrom: &envFrom
-              # - secretRef:
-                  # name: prowlarr-secret
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr-develop
-              tag: 1.28.2.4885@sha256:f4ab000bcd12f61e064ba43c28b4afb7b732fcf157aa183d1bfa238347b73017
+              repository: ghcr.io/onedr0p/sabnzbd
+              tag: 4.4.0@sha256:d2dbde184900504bf3636d2df74e466e223d6b2474b4d21a58c72eadfffa7e99
             env:
-              PROWLARR__APP__INSTANCENAME: Prowlarr
-              PROWLARR__APP__THEME: dark
-              PROWLARR__AUTH__METHOD: External
-              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              PROWLARR__LOG__DBENABLED: "False"
-              PROWLARR__LOG__LEVEL: info
-              PROWLARR__SERVER__PORT: &port 80
-              PROWLARR__UPDATE__BRANCH: develop
               TZ: America/New_York
-            # envFrom: *envFrom
+              SABNZBD__PORT: &port 80
+              SABNZBD__HOST_WHITELIST_ENTRIES: >-
+                sabnzbd,
+                sabnzbd.default,
+                sabnzbd.default.svc,
+                sabnzbd.default.svc.cluster,
+                sabnzbd.default.svc.cluster.local,
+                sabnzbd.knightd.win
+#              CROSS_SEED_ENABLED: false
+#              CROSS_SEED_HOST: cross-seed.default.svc.cluster.local
+#              CROSS_SEED_PORT: 80
+#              CROSS_SEED_SLEEP_INTERVAL: 30
+#              PUSHOVER_ENABLED: false
+#            envFrom:
+#              - secretRef:
+#                  name: sabnzbd-secret
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
+                    path: /api?mode=version
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -72,7 +74,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 1Gi
+                memory: 12Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -83,7 +85,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: prowlarr
+        controller: sabnzbd
         ports:
           http:
             port: *port
@@ -91,7 +93,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: "{{ .Release.Name }}.knightd.win"
+          - host: sabnzbd.knightd.win
             paths:
               - path: /
                 service:
@@ -99,9 +101,18 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: prowlarr-config
+        existingClaim: sabnab-configs
       tmp:
         type: emptyDir
+      incomplete:
+        type: emptyDir
+        path: /incomplete
+      # scripts:
+        # type: configMap
+        # name: sabnzbd-scripts
+        # defaultMode: 0775
+        # globalMounts:
+          # - readOnly: true
       media:
         type: nfs
         server: 192.168.86.9
