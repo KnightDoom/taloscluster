@@ -100,7 +100,7 @@ spec:
             }
         className: external
         hosts:
-          - host: "{{ .Release.Name }}y.knightd.win"
+          - host: "{{ .Release.Name }}yy.knightd.win"
             paths:
               - path: /
                 service:
