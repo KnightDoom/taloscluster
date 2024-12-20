@@ -104,9 +104,6 @@ spec:
         existingClaim: sabnab-configs
       tmp:
         type: emptyDir
-      incomplete:
-        type: emptyDir
-        path: /incomplete
       # scripts:
         # type: configMap
         # name: sabnzbd-scripts
