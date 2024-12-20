@@ -104,6 +104,10 @@ spec:
         existingClaim: sabnab-configs
       tmp:
         type: emptyDir
+      incomplete:
+        type: emptyDir
+        globalMounts:
+          - path: /downloads
       # scripts:
         # type: configMap
         # name: sabnzbd-scripts

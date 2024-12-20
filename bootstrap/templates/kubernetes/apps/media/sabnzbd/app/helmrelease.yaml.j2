@@ -106,7 +106,8 @@ spec:
         type: emptyDir
       incomplete:
         type: emptyDir
-        path: /incomplete
+        globalMounts:
+          - path: /downloads
       # scripts:
         # type: configMap
         # name: sabnzbd-scripts
