@@ -13,7 +13,7 @@ resources:
   - ./spegel.yaml
   - ./stakater.yaml
  # - ./onedr0p.yaml
+  - ./nvdp.yaml
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
-  - ./nvdp.yaml
   - ./k8s-gateway.yaml
