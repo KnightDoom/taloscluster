@@ -22,11 +22,11 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-#    - name: nvidia-gpu
-#    namespace: kube-system
-    - name: longhorn
-      namespace: longhorn-system
+  # dependsOn:
+# #    - name: nvidia-gpu
+# #    namespace: kube-system
+    # - name: longhorn
+      # namespace: longhorn-system
   values:
     controllers:
       plex:
