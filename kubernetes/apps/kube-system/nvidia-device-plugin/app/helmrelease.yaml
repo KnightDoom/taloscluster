@@ -21,4 +21,4 @@ spec:
     remediation:
       retries: 3
   values:
-    runtimeClassName: "nvidia"
+    runtimeClassName: nvidia

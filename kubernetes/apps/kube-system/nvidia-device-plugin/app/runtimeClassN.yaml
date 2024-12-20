@@ -6,4 +6,4 @@ metadata:
 handler: nvidia
 scheduling:
     nodeSelector:
-      gpu: "nvidia"
+      gpu: nvidia
