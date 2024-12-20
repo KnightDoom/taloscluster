@@ -40,6 +40,8 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.86.25"
+    nodeLabels:
+      gpu: nvidia 
     patches:
       - "@./patches/talos0/gpu-worker-patch.yaml"
   - hostname: "talos1"

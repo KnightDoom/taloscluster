@@ -86,6 +86,12 @@ nodes:
       - #{ manifest }#
       #% endfor %#
     #% endif %#
+    #% if item.labels %#
+    nodeLabels:
+      #% for key, value in item.labels.items() %#
+      #{ key }#: #{ value }# 
+      #% endfor %#
+    #% endif %#
     #% if item.extension_services %#
     extensionServices:
       #% for es in item.extension_services %#
