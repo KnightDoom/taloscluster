@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prowlarr
+  name: radarr
 spec:
   interval: 30m
   chart:
@@ -22,9 +22,12 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
     controllers:
-      prowlarr:
+      radarr:
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -34,21 +37,21 @@ spec:
               # tag: 16
             # envFrom: &envFrom
               # - secretRef:
-                  # name: prowlarr-secret
+                  # name: radarr-secret
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr-develop
-              tag: 1.28.2.4885@sha256:f4ab000bcd12f61e064ba43c28b4afb7b732fcf157aa183d1bfa238347b73017
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.16.3.9541@sha256:af1d6a1fb22f135997ed90ec65a5ebc0dec917576f7267002a6b5b4144aedaa0
             env:
-              PROWLARR__APP__INSTANCENAME: Prowlarr
-              PROWLARR__APP__THEME: dark
-              PROWLARR__AUTH__METHOD: External
-              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              PROWLARR__LOG__DBENABLED: "False"
-              PROWLARR__LOG__LEVEL: info
-              PROWLARR__SERVER__PORT: &port 80
-              PROWLARR__UPDATE__BRANCH: develop
+              RADARR__APP__INSTANCENAME: Radarr
+              RADARR__APP__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__LOG__LEVEL: info
+              RADARR__SERVER__PORT: &port 80
+              RADARR__UPDATE__BRANCH: develop
               TZ: America/New_York
             # envFrom: *envFrom
             probes:
@@ -72,7 +75,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 1Gi
+                memory: 4Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -83,7 +86,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: prowlarr
+        controller: radarr
         ports:
           http:
             port: *port
@@ -99,7 +102,15 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: prowlarr-config
+        existingClaim: radarr
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
       tmp:
         type: emptyDir
       media:
