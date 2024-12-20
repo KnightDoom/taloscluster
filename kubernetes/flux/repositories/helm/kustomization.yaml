@@ -15,4 +15,5 @@ resources:
  # - ./onedr0p.yaml
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
+  - ./nvdp.yaml
   - ./k8s-gateway.yaml
