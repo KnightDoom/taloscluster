@@ -7,12 +7,12 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: longhron
+      chart: longhorn
      # version: 4.1.1
       sourceRef:
         kind: HelmRepository
         name: longhorn
-        namespace: longhorn-system
+        namespace: flux-system
   install:
     remediation:
       retries: 3
@@ -27,7 +27,7 @@ spec:
     metrics:
       serviceMonitor:
         # -- Setting that allows the creation of a Prometheus ServiceMonitor resource for Longhorn Manager components.
-        enabled: false
+        enabled: true
      # local:
        # lvm:
          # enabled: false
