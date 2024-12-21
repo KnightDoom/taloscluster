@@ -20,8 +20,10 @@ The features included will depend on the type of configuration you want to use. 
 
 **Other features include:**
 
-- A [Renovate](https://www.mend.io/renovate)-ready repository with pull request diffs provided by [flux-local](https://github.com/allenporter/flux-local)
-- Integrated [GitHub Actions](https://github.com/features/actions) with helpful workflows.
+- Dev env managed w/ [mise](https://mise.jdx.dev/)
+- Workflow automation w/ [GitHub Actions](https://github.com/features/actions)
+- Dependency automation w/ [Renovate](https://www.mend.io/renovate)
+- Flux HelmRelease and Kustomization diffs w/ [flux-local](https://github.com/allenporter/flux-local)
 
 ## 💻 Machine Preparation
 
@@ -55,7 +57,7 @@ Once you have installed Talos on your nodes, there are six stages to getting a F
 
 1. Create a new **public** repository by clicking the big green "Use this template" button at the top of this page.
 
-2. Clone **your new repo** to you local workstation and `cd` into it.
+2. Use `git clone` to download **the repo you just created** to your local workstation and `cd` into it.
 
 3. Continue on to 🌱 [**Stage 2**](#-stage-2-setup-your-local-workstation-environment)
 
@@ -63,18 +65,8 @@ Once you have installed Talos on your nodes, there are six stages to getting a F
 
 You have two different options for setting up your local workstation.
 
-- First option is using a `devcontainer` which requires you to have Docker and VSCode installed. This method is the fastest to get going because all the required CLI tools are provided for you in my [devcontainer](https://github.com/onedr0p/cluster-template/pkgs/container/cluster-template%2Fdevcontainer) image.
-- The second option is setting up the CLI tools directly on your workstation.
 
-#### Devcontainer method
-
-1. Start Docker and open your repository in VSCode. There will be a pop-up asking you to use the `devcontainer`, click the button to start using it.
-
-2. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
-
-#### Non-devcontainer method
-
-1. Install the most recent version of [task](https://taskfile.dev/) and [direnv](https://direnv.net/)
+2. Use mise to install the **required** CLI tools.
 
     ```sh
     # Homebrew
@@ -84,7 +76,8 @@ You have two different options for setting up your local workstation.
       && ln -sf /usr/bin/go-task /usr/local/bin/task
     ```
 
-2. [Hook `direnv` into your preferred shell](https://direnv.net/docs/hook.html), then run:
+
+3. Use mise to install the **required** Python dependencies.
 
     ```sh
     task workstation:direnv
@@ -128,6 +121,8 @@ You have two different options for setting up your local workstation.
 
 1. Generate the `config.yaml` from the [config.sample.yaml](./config.sample.yaml) configuration file.
 
+   📍 _If the below command fails `mise` is either not install or configured incorrectly._
+
     ```sh
     task init
     ```
@@ -165,8 +160,6 @@ You have two different options for setting up your local workstation.
 1. The `kubeconfig` for interacting with your cluster should have been created in the root of your repository.
 
 2. Verify the nodes are online
-
-    📍 _If this command **fails** you likely haven't configured `direnv` as [mentioned previously](#non-devcontainer-method) in the guide._
 
     ```sh
     kubectl get nodes -o wide
