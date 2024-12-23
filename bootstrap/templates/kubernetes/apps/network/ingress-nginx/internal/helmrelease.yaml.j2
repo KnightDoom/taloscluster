@@ -30,7 +30,7 @@ spec:
         #% if bgp.enabled %#
         externalTrafficPolicy: Local
         #% else %#
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Cluster #modified?
         #% endif %#
       ingressClassResource:
         name: internal

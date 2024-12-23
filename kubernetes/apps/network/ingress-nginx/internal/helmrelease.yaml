@@ -26,7 +26,8 @@ spec:
       service:
         annotations:
           lbipam.cilium.io/ips: "192.168.86.230"
-        externalTrafficPolicy: Cluster
+          nginx.ingress.kubernetes.io/configuration-snippet: "real_ip_header CF-Connecting-IP;"
+        externalTrafficPolicy: Cluster #modified?
       ingressClassResource:
         name: internal
         default: true
