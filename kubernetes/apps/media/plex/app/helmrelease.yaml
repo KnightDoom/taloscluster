@@ -101,6 +101,7 @@ spec:
               proxy_pass              http://plex.default.svc.cluster.local:32400;
               proxy_http_version      1.1;
             }
+          nginx.ingress.kubernetes.io/configuration-snippet: "real_ip_header CF-Connecting-IP"
         className: internal
         hosts:
           - host: "{{ .Release.Name }}.knightd.win"
