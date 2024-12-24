@@ -23,7 +23,16 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
+    fallthrough: 
+      enabled: true
+      zones: "."
     ttl: 1
+    extraZonePlugins:
+      - name: forward
+        parameters: "*.${SECRET_DOMAIN} 1.1.1.1"
+      - name: forward
+        parameters: ". /etc/resolv.conf"
+
     service:
       type: LoadBalancer
       port: 53
@@ -31,3 +40,4 @@ spec:
         lbipam.cilium.io/ips: "192.168.86.229"
       externalTrafficPolicy: Cluster
     watchedResources: ["Ingress", "Service"]
+
