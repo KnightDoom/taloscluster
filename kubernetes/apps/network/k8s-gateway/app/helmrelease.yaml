@@ -23,14 +23,14 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
-    fallthrough: 
-      enabled: true
+#    fallthrough: 
+#      enabled: true
     ttl: 1
-    extraZonePlugins:
-      - name: forward
-        parameters: "*.${SECRET_DOMAIN} 1.1.1.1"
-      - name: forward
-        parameters: ". /etc/resolv.conf"
+ #   extraZonePlugins:
+#      - name: forward
+#        parameters: "*.${SECRET_DOMAIN} 1.1.1.1"
+ #     - name: forward
+ #       parameters: ". /etc/resolv.conf"
 
     service:
       type: LoadBalancer
