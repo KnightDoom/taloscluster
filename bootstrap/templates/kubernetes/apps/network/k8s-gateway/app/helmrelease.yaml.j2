@@ -23,14 +23,29 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
-#    fallthrough: 
-#      enabled: true
+    fallthrough: 
+      enabled: true
     ttl: 1
- #   extraZonePlugins:
-#      - name: forward
-#        parameters: "*.${SECRET_DOMAIN} 1.1.1.1"
- #     - name: forward
- #       parameters: ". /etc/resolv.conf"
+    extraZonePlugins:
+      - name: log
+      - name: errors
+      # Serves a /health endpoint on :8080, required for livenessProbe
+      - name: health
+        configBlock: "|-
+          lameduck 5s"
+      # Serves a /ready endpoint on :8181, required for readinessProbe
+      - name: ready
+      # Serves a /metrics endpoint on :9153, required for serviceMonitor
+      - name: prometheus
+        parameters: "0.0.0.0:9153"
+      - name: forward
+        parameters: "*.knightd.win 1.1.1.1"
+      - name: forward
+        parameters: ". /etc/resolv.conf"
+      - name: loop
+      - name: reload
+      - name: loadbalance
+
 
     service:
       type: LoadBalancer
