@@ -1,0 +1,88 @@
+#fill here with helm values for chart
+ # env:
+      # - name: notifiarr-app-key
+        # valueFrom:
+          # secretKeyRef:
+            # name: notifiarr-app-key
+            # key: api-token
+            
+    controllers:
+      notifiarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/golift/notifiarr
+              tag: 0.8.3@sha256:7922f7d0e0336ca0e91182820c5d4b2ddc2d86083fa847c5a1088b41d5b20903
+            env:
+              - TZ: America/New_York
+              - TMPDIR: /tmpdir
+              - name: DN_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: notifiarr-app-key
+                      key: api-token
+              - DN_BIND_ADDR: '0.0.0.0:'*port
+              - DN_UPSTREAMS_0: '172.16.0.0/16'
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 6767
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: notifiarr
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: notifiarr.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: notifiarr
+        globalMounts:
+          - path: /config
+      machine-id:
+        type: hostPath
+        hostPath: /etc/machine-id
+        globalMounts:
+          - path: /etc/machine-id
+            readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          mountPath: /tmpdir

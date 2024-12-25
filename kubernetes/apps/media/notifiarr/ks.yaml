@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/media/mybot/app
+  path: ./kubernetes/apps/media/notifiarr/app
   prune: false
   sourceRef:
     kind: GitRepository
