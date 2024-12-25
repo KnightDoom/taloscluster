@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-pod
+spec:
+  containers:
+  - name: debug-container
+    image: busybox
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - mountPath: /config
+      name: tautuli-volume
+  volumes:
+  - name: tautuli-volume
+    persistentVolumeClaim:
+      claimName: tautuli
+  restartPolicy: Never

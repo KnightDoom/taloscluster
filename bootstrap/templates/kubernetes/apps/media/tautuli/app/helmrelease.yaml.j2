@@ -37,10 +37,9 @@ spec:
             command:
               - python
               - Tautulli.py
-            args:
-              -config
+              - '--config'
               - /config/config.ini
-              - --datadir
+              - '--datadir'
               - /config
             probes:
               liveness: &probes
@@ -48,9 +47,9 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /tautuli
                     port: &port 8181
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 15
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
