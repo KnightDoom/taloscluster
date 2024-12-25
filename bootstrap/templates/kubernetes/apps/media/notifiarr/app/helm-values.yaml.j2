@@ -26,7 +26,7 @@
                     name: notifiarr-app-key
                     key: api-token
               - name: DN_BIND_ADDR
-                value: '0.0.0.0:80'
+                value: '0.0.0.0:5454'
               - name: DN_UPSTREAMS_0
                 value: '172.16.0.0/16'
             probes:
@@ -35,7 +35,7 @@
                 custom: true
                 spec:
                   tcpSocket:
-                    port: &port 80
+                    port: &port 5454
                   initialDelaySeconds: 50
                   periodSeconds: 30
                   timeoutSeconds: 1
@@ -63,7 +63,7 @@
         controller: notifiarr
         ports:
           http:
-            port: 80
+            port: 5454
     ingress:
       app:
         className: internal
