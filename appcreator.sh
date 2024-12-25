@@ -222,9 +222,9 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  valuesFrom:
-   - kind: ConfigMap
-     name: $AppName-helm-values
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: $AppName-helm-values
 #  values: 
 #     #enter values here for global overrides  
 EOF
@@ -286,24 +286,24 @@ EOF
     fi
 
     # Create helm-values.yaml.j2 file
-    echo "Creating helm-values.yaml.j2 file in $app_subdir"
-    cat > "$app_subdir/helm-values.yaml.j2" <<EOF
-#fill here with helm values for chart
-EOF
-    echo "helm-values.yaml.j2 file created."
+#    echo "Creating helm-values.yaml.j2 file in $app_subdir"
+#    cat > "$app_subdir/helm-values.yaml.j2" <<EOF
+##fill here with helm values for chart
+#EOF
+#    echo "helm-values.yaml.j2 file created."
 
-    # Create kustomizeconfig.yaml.j2 file
-    echo "Creating kustomizeconfig.yaml.j2 file in $app_subdir"
-    cat > "$app_subdir/kustomizeconfig.yaml.j2" <<EOF
----
-nameReference:
-  - kind: ConfigMap
-    version: v1
-    fieldSpecs:
-      - path: spec/valuesFrom/name
-        kind: HelmRelease
-EOF
-    echo "kustomizeconfig.yaml.j2 file created."
+#    # Create kustomizeconfig.yaml.j2 file
+#    echo "Creating kustomizeconfig.yaml.j2 file in $app_subdir"
+#    cat > "$app_subdir/kustomizeconfig.yaml.j2" <<EOF
+#---
+#nameReference:
+#  - kind: ConfigMap
+#    version: v1
+#    fieldSpecs:
+#      - path: spec/valuesFrom/name
+#        kind: HelmRelease
+#EOF
+#    echo "kustomizeconfig.yaml.j2 file created."
 
     # Create kustomization.yaml.j2 with conditional resource inclusion
     echo "Creating kustomization.yaml.j2 file in $app_subdir"
@@ -317,12 +317,12 @@ resources:
   # Include secret.sops.yaml only if required
   $(if [[ "$secrets_required" == "yes" ]]; then echo "- ./secret.sops.yaml"; fi)
   - ./helmrelease.yaml
-configMapGenerator:
-  - name: $AppName-helm-values
-    files:
-      - values.yaml=./helm-values.yaml
-configurations:
-  - kustomizeconfig.yaml
+#configMapGenerator:
+#  - name: $AppName-helm-values
+#    files:
+#      - values.yaml=./helm-values.yaml
+#configurations:
+#  - kustomizeconfig.yaml
 generatorOptions:
   disableNameSuffixHash: true
 EOF
