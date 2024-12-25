@@ -64,7 +64,6 @@
         controller: notifiarr
         ports:
           http:
-            path: /
             port: 6767
     ingress:
       app:
