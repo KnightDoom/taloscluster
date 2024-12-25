@@ -16,15 +16,19 @@
               repository: docker.io/golift/notifiarr
               tag: 0.8.3@sha256:7922f7d0e0336ca0e91182820c5d4b2ddc2d86083fa847c5a1088b41d5b20903
             env:
-              TZ: America/New_York
-              TMPDIR: /tmpdir
+              - name: TZ
+                value: America/New_York
+              - name: TMPDIR
+                value: /tmpdir
               - name: DN_API_KEY
                 valueFrom:
                   secretKeyRef:
                     name: notifiarr-app-key
                     key: api-token
-              DN_BIND_ADDR: '0.0.0.0:*port'
-              DN_UPSTREAMS_0: '172.16.0.0/16'
+              - name: DN_BIND_ADDR
+                value: '0.0.0.0:*port'
+              - name: DN_UPSTREAMS_0
+                value: '172.16.0.0/16'
             probes:
               liveness: &probes
                 enabled: true
