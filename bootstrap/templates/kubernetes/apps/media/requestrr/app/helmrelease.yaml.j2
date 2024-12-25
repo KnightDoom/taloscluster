@@ -96,6 +96,8 @@ spec:
     persistence:
       config:
         existingClaim: requestrr
+        globalMounts:
+          - path: /root/config
       # scripts:
         # type: configMap
         # name: radarr-configmap
