@@ -19,10 +19,10 @@
               - TZ: America/New_York
               - TMPDIR: /tmpdir
               - name: DN_API_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: notifiarr-app-key
-                      key: api-token
+                valueFrom:
+                  secretKeyRef:
+                    name: notifiarr-app-key
+                    key: api-token
               - DN_BIND_ADDR: '0.0.0.0:*port'
               - DN_UPSTREAMS_0: '172.16.0.0/16'
             probes:
