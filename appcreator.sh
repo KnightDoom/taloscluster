@@ -147,7 +147,9 @@ create_app() {
         echo "The application '$AppName' already exists in namespace '$SelectedNamespace'."
         return
     fi
-
+    # Ask for the PortNum`
+    echo "You selected namespace '$SelectedNamespace'. Now, please enter the port for '$AppName'."
+    read -p "Enter the Port Number: " PortNum
     # Create the app directory
     echo "Creating new application folder: $app_dir"
     mkdir -p "$app_dir"
@@ -225,8 +227,99 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: $AppName-helm-values
-#  values: 
-#     #enter values here for global overrides  
+  values: 
+     #enter values here for global overrides  
+    controllers:
+      $AppName:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.17.0.9555@sha256:ca1d1f55524c1d58cd9aa58e747b7ee37536aed4f95852ab07eb0b984dcf1817
+            env:
+              # RADARR__APP__INSTANCENAME: Radarr
+              # RADARR__APP__THEME: dark
+              portNum: &port $PortNum
+              TZ: America/New_York
+            # envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: $AppName
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: "{{ .Release.Name }}.knightd.win"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: $AppName
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          path: /tmp
+      media:
+        type: nfs
+        server: 192.168.86.9
+        path: /PlexLib
+        globalMounts:
+          - path: /library
+
 EOF
     echo "helmrelease.yaml.j2 file created."
 
