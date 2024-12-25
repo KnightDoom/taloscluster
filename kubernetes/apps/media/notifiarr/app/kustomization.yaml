@@ -4,11 +4,5 @@ kind: Kustomization
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-configMapGenerator:
-  - name: notifiarr-helm-values
-    files:
-      - values.yaml=./helm-values.yaml
-configurations:
-  - kustomizeconfig.yaml
 generatorOptions:
   disableNameSuffixHash: true
