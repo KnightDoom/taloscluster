@@ -35,7 +35,7 @@
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /ping
                     port: &port 6767
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -64,8 +64,8 @@
         controller: notifiarr
         ports:
           http:
-            path: /ping
-            port: *port
+            path:
+              port: *port
     ingress:
       app:
         className: internal
@@ -90,4 +90,4 @@
       tmpy:
         type: emptyDir
         globalMounts:
-          - mountPath: /tmp
+          - path: /tmp
