@@ -23,7 +23,7 @@
                     secretKeyRef:
                       name: notifiarr-app-key
                       key: api-token
-              - DN_BIND_ADDR: '0.0.0.0:'*port
+              - DN_BIND_ADDR: '0.0.0.0:*port'
               - DN_UPSTREAMS_0: '172.16.0.0/16'
             probes:
               liveness: &probes
