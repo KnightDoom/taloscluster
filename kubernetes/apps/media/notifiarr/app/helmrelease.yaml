@@ -22,7 +22,7 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values: 
+  values:
 #     #enter values here for global overrides  
     controllers:
       notifiarr:
