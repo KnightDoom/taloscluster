@@ -17,9 +17,9 @@
               tag: 0.8.3@sha256:7922f7d0e0336ca0e91182820c5d4b2ddc2d86083fa847c5a1088b41d5b20903
             env:
               - name: TZ
-                value: America/New_York
+                value: "America/New_York"
               - name: TMPDIR
-                value: /tmpdir
+                value: "/tmpdir"
               - name: DN_API_KEY
                 valueFrom:
                   secretKeyRef:
