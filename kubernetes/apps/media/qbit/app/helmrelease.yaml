@@ -29,14 +29,6 @@ spec:
       qbit:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-          # init-db:
-            # image:
-              # repository: ghcr.io/onedr0p/postgres-init
-              # tag: 16
-            # envFrom: &envFrom
-              # - secretRef:
-                  # name: radarr-secret
         containers:
           app:
             image:
@@ -76,7 +68,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "*/5 * * * *"
-        container:
+        containers:
           qbitportforward:
             image: 
               repository: docker.io/mjmeli/qbittorrent-port-forward-gluetun-server
