@@ -291,6 +291,8 @@ spec:
     ingress:
       app:
         className: internal
+        #annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /$AppName
         hosts:
           - host: "{{ .Release.Name }}.knightd.win"
             paths:
