@@ -314,7 +314,7 @@ spec:
       tmp:
         type: emptyDir
         globalMounts:
-          path: /tmp
+          - path: /tmp
       media:
         type: nfs
         server: 192.168.86.9
