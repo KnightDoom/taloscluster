@@ -13,3 +13,4 @@ resources:
   - ./requestrr/ks.yaml
   - ./flaresolverr/ks.yaml
   - ./bazarr/ks.yaml
+  - ./qbit/ks.yaml
