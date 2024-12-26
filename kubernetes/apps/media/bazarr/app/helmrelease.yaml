@@ -45,7 +45,7 @@ spec:
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              portNum: &port 6767
+              portNum: &port 443
               TZ: America/New_York
             # envFrom: *envFrom
             probes:
@@ -79,7 +79,7 @@ spec:
             env:
               INTERFACE: 0.0.0.0
               PORT: 7879
-              URL: 'http://bazarr:6767'
+              URL: 'http://bazarr:443'
               APIKEY: "newsn7zz12j67l4cwovjt6cyq6raqzmz"    
             probes:
               liveness: &probes
