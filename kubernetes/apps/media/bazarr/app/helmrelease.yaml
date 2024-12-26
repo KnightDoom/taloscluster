@@ -1,0 +1,158 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: bazarr
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: bazarr-helm-values
+  values: 
+     #enter values here for global overrides  
+    controllers:
+      bazarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/bazarr
+              tag: 1.4.5@sha256:c0bf91443c32f3978777b4ddd2732908f51b157bbe00cd3259b23f7716bb4af7
+            env:
+              # RADARR__APP__INSTANCENAME: Radarr
+              # RADARR__APP__THEME: dark
+              portNum: &port 6767
+              TZ: America/New_York
+            # envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 4Gi
+          exportarr:
+            image: 
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.0.1@sha256:727e7bc8f2f0934a2117978c59f4476b954018b849a010ea6cfb380bd6539644  
+            env:
+              INTERFACE: 0.0.0.0
+              PORT: 7879
+              URL: 'http://bazarr:6767'
+              APIKEY: "newsn7zz12j67l4cwovjt6cyq6raqzmz"    
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz
+                    port: 7879
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: bazarr
+        ports:
+          http:
+            port: *port
+      metrics:
+        controller: bazarr
+        ports:
+          metrics:
+            port: 7879
+    ingress:
+      app:
+        className: internal
+        #annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /bazarr
+        hosts:
+          - host: "{{ .Release.Name }}.knightd.win"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: bazarr
+        globalMounts:
+          - path: /config
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      media:
+        type: nfs
+        server: 192.168.86.9
+        path: /PlexLib
+        globalMounts:
+          - path: /library
+
