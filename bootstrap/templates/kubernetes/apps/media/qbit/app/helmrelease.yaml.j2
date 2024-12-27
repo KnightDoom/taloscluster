@@ -20,9 +20,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-#  valuesFrom:
-#   - kind: ConfigMap
-#     name: qbit-helm-values
   values: 
      #enter values here for global overrides  
     controllers:
@@ -35,8 +32,6 @@ spec:
               repository: ghcr.io/onedr0p/qbittorrent
               tag: 5.0.3@sha256:025f32d260a3e924885405c0ca01ab8e396360330438ef8562ffd973d2dbb927
             env:
-              # RADARR__APP__INSTANCENAME: Radarr
-              # RADARR__APP__THEME: dark
               QBT_WEBUI_PORT: 10095
               QBT_TORRENTING_PORT: 6881
               portNum: &port 10095
@@ -48,7 +43,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /
                     port: *port
                   initialDelaySeconds: 300
                   periodSeconds: 10
@@ -64,7 +59,40 @@ spec:
                 cpu: 1000m
               limits:
                 memory: 4Gi
-      gluetun:
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: latest
+            env:
+              - name: portNum
+                value: "10095"
+              - name: VPN_TYPE
+                value: "wireguard"
+              - name: VPN_INTERFACE
+                value: "wg0"
+              - name: VPN_SERVICE_PROVIDER
+                value: "nordvpn"
+              - name: WIREGUARD_PRIVATE_KEY
+                valueFrom:              
+                  secretKeyRef:
+                    name: qbit-info
+                    key: nordwg
+              - name: TZ
+                value: "America/New_York"
+            # envFrom: *envFrom
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities:
+                add:
+                  - NET_ADMIN
+            resources:
+              requests:
+                cpu: 1000m
+              limits:
+                memory: 4Gi
+      qbitforward:
         type: cronjob
         cronjob:
           schedule: "*/5 * * * *"
