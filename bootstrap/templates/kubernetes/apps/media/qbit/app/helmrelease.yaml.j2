@@ -88,10 +88,11 @@ spec:
             # envFrom: *envFrom
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities:
                 add:
                   - NET_ADMIN
+                  - NET_RAW
             resources:
               requests:
                 cpu: 100m
