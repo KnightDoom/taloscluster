@@ -67,7 +67,7 @@ spec:
               tag: latest
             env:
               - name: portNum
-                value: "10095"
+                value: "8080"
               - name: VPN_TYPE
                 value: "wireguard"
               - name: VPN_INTERFACE
@@ -75,6 +75,10 @@ spec:
               - name: VPN_SERVICE_PROVIDER
                 value: "nordvpn"
               - name: WIREGUARD_PRIVATE_KEY
+              - name: FIREWALL_INPUT_PORTS
+                value: 8080
+              - name: FIREWALL_OUTBOUND_SUBNETS
+                value: "10.96.0.0/16,10.69.0.0/16"
                 valueFrom:              
                   secretKeyRef:
                     name: qbit-info
@@ -83,8 +87,8 @@ spec:
                 value: "America/New_York"
             # envFrom: *envFrom
             securityContext:
-              allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities:
                 add:
                   - NET_ADMIN
@@ -93,6 +97,7 @@ spec:
                 cpu: 100m
                 memory: 100Mi
               limits:
+                squat.ai/tun: "1"
                 memory: 4Gi
       qbitforward:
         type: cronjob
@@ -119,7 +124,7 @@ spec:
               - name: QBT_ADDR
                 value: 'http://qbit:6767'
               - name: GTN_ADDR
-                value: 'http://qbit-gluetun:8000'
+                value: 'http://gluetun:8000'
             probes:
               liveness: &probes
                 enabled: false
