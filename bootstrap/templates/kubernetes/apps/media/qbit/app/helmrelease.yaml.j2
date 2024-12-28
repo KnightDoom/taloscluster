@@ -33,7 +33,7 @@ spec:
               tag: 5.0.3@sha256:025f32d260a3e924885405c0ca01ab8e396360330438ef8562ffd973d2dbb927
             env:
               QBT_WEBUI_PORT: 10095
-              QBT_TORRENTING_PORT: 6881
+              QBT_TORRENTING_PORT: 25656
               portNum: &port 10095
               TZ: America/New_York
             # envFrom: *envFrom
@@ -80,7 +80,7 @@ spec:
                     name: qbit-info
                     key: nordwg
               - name: FIREWALL_INPUT_PORTS
-                value: 8080
+                value: 10095
               - name: FIREWALL_OUTBOUND_SUBNETS
                 value: "10.96.0.0/16,10.69.0.0/16"
               - name: TZ
@@ -127,7 +127,7 @@ spec:
               - name: QBT_ADDR
                 value: 'http://qbit:6767'
               - name: GTN_ADDR
-                value: 'http://gluetun:8080'
+                value: 'http://gluetun:8000'
             probes:
               liveness: &probes
                 enabled: false
@@ -160,16 +160,16 @@ spec:
         controller: qbit
         ports:
           tcptor:
-            port: 6881
+            port: 25656
             protocol: TCP
           udptor:
-            port: 6881
+            port: 25656
             protocol: UDP
       gluetun:
         controller: qbit
         ports:
           gluetun:
-            port: 8080
+            port: 8000
     ingress:
       app:
         className: internal
