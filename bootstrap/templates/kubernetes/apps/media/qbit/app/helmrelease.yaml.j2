@@ -201,8 +201,8 @@ spec:
           # - path: /scripts/pushover-notifier.sh
             # subPath: pushover-notifier.sh
             # readOnly: true
-      incomplete:
-        exitingClaim: qbit-incomplete
+      qbit-incomplete:
+        existingClaim: qbit-incomplete
         globalMounts:
           - path: /incomplete
       tmp:
