@@ -11,6 +11,11 @@ resources:
   - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./spegel.yaml
+  - ./authentik-charts.yaml
+  - ./bitnami.yaml
+  - ./crunchydata.yaml
+  - ./crunchy-userinit.yaml
+  - ./userinit-controller.yaml
   - ./stakater.yaml
  # - ./onedr0p.yaml
   - ./nvdp.yaml

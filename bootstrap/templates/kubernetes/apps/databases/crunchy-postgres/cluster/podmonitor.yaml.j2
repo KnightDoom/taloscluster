@@ -1,34 +1,25 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/podmonitor_v1.json
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: cpgo-postgres
+  name: &name postgres
 spec:
-  jobLabel: cpgo-postgres
+  jobLabel: *name
   namespaceSelector:
     matchNames:
-      - databases
+      - database
   podMetricsEndpoints:
     - honorLabels: true
       path: /metrics
       port: exporter
       relabelings:
-        - sourceLabels:
-            [
-              "__meta_kubernetes_namespace",
-              "__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster",
-            ]
+        - sourceLabels: ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster"]
           targetLabel: pg_cluster
           separator: "/"
-          replacement: "$1$2"
-        - sourceLabels:
-            [
-              __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance,
-            ]
+          replacement: '$1$2'
+        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance]
           targetLabel: deployment
-        - sourceLabels:
-            [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
+        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
           targetLabel: role
         - sourceLabels: [__meta_kubernetes_pod_name]
           targetLabel: instance
@@ -36,3 +27,4 @@ spec:
     matchLabels:
       postgres-operator.crunchydata.com/cluster: postgres
       postgres-operator.crunchydata.com/crunchy-postgres-exporter: "true"
+      
