@@ -113,8 +113,10 @@ spec:
   backups:
     pgbackrest:
       configuration: &backupConfig
-        - secret:
-            name: crunchy-pgo-secret
+        s3:
+          bucket: crunchy-backup
+          endpoint: ${bootstrap_s3.s3_endpoint}}
+          region: us-east
       global: &backupFlag
         # Global
         compress-type: "bz2"
@@ -146,7 +148,7 @@ spec:
       repos:
         - name: repo1
           s3: &minio
-            bucket: crunchy-postgres
+            bucket: crunchy-backup
             endpoint: ${bootstrap_s3.s3_endpoint}}
             region: us-east
           schedules:
