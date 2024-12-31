@@ -155,8 +155,8 @@ spec:
           - path: /tmp
       media:
         type: nfs
-        server: 192.168.86.9
-        path: /PlexLib
+        server: "192.168.86.9"
+        path: "/PlexLib"
         globalMounts:
           - path: /library
 

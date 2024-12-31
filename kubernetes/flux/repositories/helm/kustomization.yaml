@@ -17,6 +17,7 @@ resources:
   - ./crunchy-userinit.yaml
   - ./userinit-controller.yaml
   - ./stakater.yaml
+  - ./external-secrets.yaml
  # - ./onedr0p.yaml
   - ./nvdp.yaml
   - ./longhorn.yaml
