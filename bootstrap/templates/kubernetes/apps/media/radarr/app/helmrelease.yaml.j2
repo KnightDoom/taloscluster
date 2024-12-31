@@ -116,7 +116,7 @@ spec:
         type: emptyDir
       media:
         type: nfs
-        server: 192.168.86.9
-        path: /PlexLib
+        server: "#{ bootstrap_plex.nfs_server_ip }#"
+        path: "#{ bootstrap_plex.export_path }#"
         globalMounts:
           - path: /library

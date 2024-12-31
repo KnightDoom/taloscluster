@@ -39,10 +39,12 @@ spec:
               tag: 1.41.3.9314-a0bfb8370@sha256:38fcbef239341db591f8ff87f20777d9a783b79f757fc42e360041d7ba78eada
             env:
               TZ: America/New_York
-              PLEX_ADVERTISE_URL: https://plex.knightd.win,https://192.168.86.236:324000
-              PLEX_NO_AUTH_NETWORKS: 192.168.86.0/24
+              PLEX_ADVERTISE_URL: "#{ bootstrap_plex.advertise_url }#"
+              PLEX_NO_AUTH_NETWORKS: "#{ bootstrap_plex.no_auth_networks }#"
+              #% if bootstrap_plex.nvidia_enabled %#
               NVIDIA_VISIBLE_DEVICES: all
               NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+              #% endif %#
             probes:
               liveness: &probes
                 enabled: true
@@ -80,7 +82,9 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
+      #% if bootstrap_plex.nvidia_enabled %#
       runtimeClassName: nvidia
+      #% endif %#
       #nodeSelector:
         #intel.feature.node.kubernetes.io/gpu: "true"
     service:
@@ -88,7 +92,7 @@ spec:
         controller: plex
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: 192.168.86.236
+          lbipam.cilium.io/ips: "#{ bootstrap_plex.load_balancer_ip }#"
         ports:
           http:
             port: 32400
@@ -132,7 +136,7 @@ spec:
         type: emptyDir
       media:
         type: nfs
-        server: 192.168.86.9
-        path: /PlexLib
+        server: "#{ bootstrap_plex.nfs_server_ip }#"
+        path: "#{ bootstrap_plex.export_path }#"
         globalMounts:
           - path: /library
