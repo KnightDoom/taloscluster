@@ -76,9 +76,9 @@ spec:
               WORKERS_PER_CORE: 1
               MAX_WORKERS: 1
               WEBB_CONCURRENCY:  1
-            envFrom:
-              - secretRef:
-                   name: mealie-db-secret
+ #           envFrom:
+  #            - secretRef:
+   #                name: mealie-db-secret
             probes:
               liveness: &probes
                 enabled: true
