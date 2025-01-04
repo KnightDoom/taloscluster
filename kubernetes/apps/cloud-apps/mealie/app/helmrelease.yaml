@@ -1,0 +1,155 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mealie
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: mealie-helm-values
+  values: 
+     #enter values here for global overrides  
+        #    postgresPassword: ""
+        #    username: ""
+        #    password: ""
+        #    database: ""
+    controllers:
+      app:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/mealie-recipes/mealie
+              tag: v2.4.1@sha256:efd4001597fbcea58aa1e2ff54f5e5b5f8fe6237df6862a2e4576dcb5ff0d24e
+            env:
+              # RADARR__APP__INSTANCENAME: Radarr
+              # RADARR__APP__THEME: dark
+              portNum: &port 9000
+              TZ: America/New_York
+              THEME_LIGHT_PRIMARY: "#E58325"
+              THEME_LIGHT_ACCENT: "#007A99" 
+              THEME_LIGHT_SECONDARY:  "#973542"
+              THEME_LIGHT_SUCCESS: "#43A047"
+              THEME_LIGHT_INFO: "#1976D2"
+              THEME_LIGHT_WARNING:  "#FF6D00"
+              THEME_LIGHT_ERROR: "#EF5350"
+              THEME_DARK_PRIMARY:  "#E58325"
+              THEME_DARK_ACCENT:  "#007A99"
+              THEME_DARK_SECONDARY:  "#973542"
+              THEME_DARK_SUCCESS: "#43A047"
+              THEME_DARK_INFO: "#1976D2"
+              THEME_DARK_WARNING:  "#FF6D00"
+              THEME_DARK_ERROR: "#EF5350"
+              OIDC_AUTH_ENABLED: false
+              LDAP_AUTH_ENABLED: false
+              ALLOW_SIGNUP: true
+              DEFAULT_GROUP: Home
+              BASE_URL: ""
+              TOKEN_TIME: 48
+              SECURITY_MAX_LOGIN_ATTEMPTS: 10
+              SECURITY_USER_LOCKOUT_TIME: 1
+              WORKERS_PER_CORE: 1
+              MAX_WORKERS: 1
+              WEBB_CONCURRENCY:  1
+              envFrom:
+                - secretRef:
+                     name: mealie-db-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: 
+                      - python
+                      - /app/mealie/scripts/healthcheck.py
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: app
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        #annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /mealie
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: mealie
+        globalMounts:
+          - path: /app/data/
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      media:
+        type: nfs
+        server: 192.168.86.9
+        path: /PlexLib
+        globalMounts:
+          - path: /library
+
