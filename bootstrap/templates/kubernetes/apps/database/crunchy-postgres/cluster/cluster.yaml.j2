@@ -46,22 +46,7 @@ spec:
           labelSelector:
             matchLabels:
               postgres-operator.crunchydata.com/data: postgres
-  userInterface:
-    pgAdmin:
-      users: #registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-0
-        - username: postgres@${SECRET_DOMAIN}
-          role:  Administrator
-          passwordRef:
-            name: postgres-user-postgres
-            key: password
-             
-      dataVolumeClaimSpec:
-        storageClassName: longhorn-static
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: 1Gi
+  
   users:
     # Superuser
     - name: *superuser
