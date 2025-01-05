@@ -7,5 +7,6 @@ resources:
   - ./externalsecret.yaml
   - ./pgadmin.yaml
 #  - ./gatus.yaml
+  - ./secret.sops.yaml
   - ./longhorn-pvc.yaml
   - ./podmonitor.yaml

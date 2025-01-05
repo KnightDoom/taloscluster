@@ -4,10 +4,10 @@ metadata:
   name: pgadmin
 spec:
   users:
-  - username: pgadmin@${SECRET_DOMAIN}
+  - username: "pgadmin@talos.com"
     role: Administrator
     passwordRef:
-      name: postgres-pguser-postgres
+      name: pgadmin-password-secret
       key: password
   dataVolumeClaimSpec:
     storageClassName: longhorn-static
