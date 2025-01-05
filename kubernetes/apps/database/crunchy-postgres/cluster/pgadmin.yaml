@@ -9,6 +9,7 @@ spec:
     passwordRef:
       name: pgadmin-password-secret
       key: password
+  
   dataVolumeClaimSpec:
     storageClassName: longhorn
     accessModes:
@@ -37,7 +38,7 @@ spec:
               service:
                 name: postgres-pgadmin
                 port:
-                  number: 5050
+                  number: 80
 ---
 apiVersion: v1
 kind: Service
@@ -47,8 +48,11 @@ spec:
   ports:
     - name: pgadmin
       protocol: TCP
-      port: 5050
+      port: 80
       targetPort: 5050
+  selector:
+    postgres-operator.crunchydata.com/pgadmin: pgadmin
+  
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
