@@ -48,7 +48,13 @@ spec:
               postgres-operator.crunchydata.com/data: postgres
   userInterface:
     pgAdmin:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-0
+      users: #registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-0
+        - username: postgres@${SECRET_DOMAIN}
+          role:  Administrator
+          passwordRef:
+            name: postgres-user-postgres
+            key: password
+             
       dataVolumeClaimSpec:
         storageClassName: longhorn-static
         accessModes:
