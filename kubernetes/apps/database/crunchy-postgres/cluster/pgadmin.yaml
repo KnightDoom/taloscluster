@@ -1,21 +1,21 @@
-apiVersion: postgres-operator.crunchydata.com/v1beta1
-kind: PGAdmin
-metadata:
-  name: pgadmin
-spec:
-  users:
-  - username: "pgadmin@talos.com"
-    role: Administrator
-    passwordRef:
-      name: pgadmin-password-secret
-      key: password
-  dataVolumeClaimSpec:
-    storageClassName: longhorn-static
-    accessModes:
-    - "ReadWriteOnce"
-    resources:
-      requests:
-        storage: 1Gi
+# apiVersion: postgres-operator.crunchydata.com/v1beta1
+# kind: PGAdmin
+# metadata:
+  # name: pgadmin
+# spec:
+  # users:
+  # - username: "pgadmin@talos.com"
+    # role: Administrator
+    # passwordRef:
+      # name: pgadmin-password-secret
+      # key: password
+  # dataVolumeClaimSpec:
+    # storageClassName: longhorn-static
+    # accessModes:
+    # - "ReadWriteOnce"
+    # resources:
+      # requests:
+        # storage: 1Gi
   #
   #serverGroups:
   #- name: supply
