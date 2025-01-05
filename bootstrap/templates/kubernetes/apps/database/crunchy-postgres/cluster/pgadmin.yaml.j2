@@ -1,25 +1,24 @@
-# apiVersion: postgres-operator.crunchydata.com/v1beta1
-# kind: PGAdmin
-# metadata:
-  # name: pgadmin
-# spec:
-  # users:
-  # - username: "pgadmin@talos.com"
-    # role: Administrator
-    # passwordRef:
-      # name: pgadmin-password-secret
-      # key: password
-  # dataVolumeClaimSpec:
-    # storageClassName: longhorn-static
-    # accessModes:
-    # - "ReadWriteOnce"
-    # resources:
-      # requests:
-        # storage: 1Gi
-  #
-  #serverGroups:
-  #- name: supply
-    #postgresClusterSelector: {}
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PGAdmin
+metadata:
+  name: pgadmin
+spec:
+  users:
+  - username: "pgadmin@talos.com"
+    role: Administrator
+    passwordRef:
+      name: pgadmin-password-secret
+      key: password
+  dataVolumeClaimSpec:
+    storageClassName: longhorn
+    accessModes:
+    - "ReadWriteOnce"
+    resources:
+      requests:
+        storage: 1Gi
+  serverGroups:
+  - name: postgres
+    postgresClusterSelector: {}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -39,3 +38,18 @@ spec:
                 name: postgres-pgadmin
                 port:
                   number: 5050
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-pgadmin
+spec:
+  ports:
+    - name: pgadmin
+      protocol: TCP
+      port: 5050
+      targetPort: 5050
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
