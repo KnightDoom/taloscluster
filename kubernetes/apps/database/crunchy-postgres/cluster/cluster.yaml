@@ -66,6 +66,7 @@ spec:
     # Applications
     - name: mealie
       databases: ["mealie"]
+      options: "SUPERUSER"
       password:
         type: AlphaNumeric
     - name: "atuin"
