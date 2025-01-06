@@ -66,6 +66,7 @@ spec:
     # Applications
     - name: mealie
       databases: ["mealie"]
+      options: "REPLICATION LOGIN CREATEDB CREATEROLE SUPERUSER"
       password:
         type: AlphaNumeric
     - name: "atuin"
