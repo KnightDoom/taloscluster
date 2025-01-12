@@ -107,8 +107,6 @@ spec:
     persistence:
       config:
         existingClaim: firefly
-        globalMounts:
-          - path: "/var/www/html/storage/uploads"
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -126,5 +124,5 @@ spec:
         server: 192.168.86.9
         path: /BackedStorage/firefly
         globalMounts:
-          - path: /uploads
+          - path: /files
 
