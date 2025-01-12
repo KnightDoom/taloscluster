@@ -69,7 +69,7 @@ spec:
               # always use quotes
               REDIS_DB: "0"
               REDIS_CACHE_DB: "1"
-              portNum: &port 80
+              portNum: &port 8080
               TRUSTED_PROXIES: "**"
               TZ: "America/New_York"
               APP_NAME: *appname
@@ -81,8 +81,7 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /health
+                  tcpSocket:
                     port: *port
                   initialDelaySeconds: 15
                   periodSeconds: 10
@@ -90,9 +89,11 @@ spec:
                   failureThreshold: 30
               readiness: *probes
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              runAsUser: 0
+              runAsNonRoot: false
+              capabilities: { add: ["CHOWN"] }
             resources:
               requests:
                 cpu: 100m
