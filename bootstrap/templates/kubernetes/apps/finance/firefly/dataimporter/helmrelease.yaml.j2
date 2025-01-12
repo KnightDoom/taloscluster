@@ -75,7 +75,7 @@ spec:
               APP_NAME: *appname
             envFrom:
               - secretRef:
-                   name: firefly_app_token
+                   name: firefly-app-token
             probes:
               liveness: &probes
                 enabled: true

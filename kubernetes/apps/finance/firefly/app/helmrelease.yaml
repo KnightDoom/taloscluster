@@ -54,7 +54,7 @@ spec:
                - secretRef:
                    name: firefly-db-secret
                - secretRef:
-                   name: firefly_app_password
+                   name: firefly-app-password
             probes:
               liveness: &probes
                 enabled: true
