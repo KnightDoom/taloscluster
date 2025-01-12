@@ -1,0 +1,149 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &appname fireflydi
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: firefly-helm-values
+  values: 
+     #enter values here for global overrides  
+    controllers:
+      firefly:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository: fireflyiii/data-importer
+              tag: version-1.5.6
+            env:
+              IGNORE_DUPLICATE_ERRORS: "false"
+              FIREFLY_III_URL: "http://firefly:8080"
+              USE_CACHE: "false"
+              IGNORE_NOT_FOUND_TRANSACTIONS: "false"
+              CAN_POST_AUTOIMPORT: true
+              CAN_POST_FILES: true
+              #JSON_CONFIGURATION_DIR: "storage/configurations"
+              #CONNECTION_TIMEOUT: "31.41"
+              APP_ENV: local
+              APP_DEBUG: false
+              LOG_CHANNEL: stack
+              LOG_RETURN_JSON: false
+              LOG_LEVEL: debug # debug, info, notice, warning, error, critical, alert, emergency
+              BROADCAST_DRIVER: "log"
+              CACHE_DRIVER: "file"
+              QUEUE_CONNECTION: "sync"
+              SESSION_DRIVER: "file"
+              SESSION_LIFETIME: "120"
+              IS_EXTERNAL: "false"
+              REDIS_HOST: "127.0.0.1"
+              REDIS_PASSWORD: "null" 
+              REDIS_PORT: "6379"
+              ASSET_URL: ""
+              # always use quotes
+              REDIS_DB: "0"
+              REDIS_CACHE_DB: "1"
+              portNum: &port 80
+              TRUSTED_PROXIES: "**"
+              TZ: "America/New_York"
+              APP_NAME: *appname
+            envFrom:
+              - secretRef:
+                   name: firefly_app_token
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 30
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: firefly
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        #annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /firefly
+        hosts:
+          - host: "{{ .Release.Name }}.knightd.win"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: fireflydi
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      uploads:
+        type: nfs
+        server: 192.168.86.9
+        path: /BackedStorage/firefly
+        globalMounts:
+          - path: /fireflyrepo
+
