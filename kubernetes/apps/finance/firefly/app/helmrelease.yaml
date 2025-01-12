@@ -40,8 +40,8 @@ spec:
         containers:
           app:
             image:
-              repository: docker pull ghcr.io/deedee-ops/firefly-iii:6.1.25
-              tag: version-6.1.21
+              repository: docker pull ghcr.io/deedee-ops/firefly-iii
+              tag: 6.1.25
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
