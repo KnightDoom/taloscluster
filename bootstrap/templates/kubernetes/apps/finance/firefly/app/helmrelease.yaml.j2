@@ -40,7 +40,7 @@ spec:
         containers:
           app:
             image:
-              repository: fireflyiii/core
+              repository: docker pull ghcr.io/deedee-ops/firefly-iii:6.1.25
               tag: version-6.1.21
             env:
               # RADARR__APP__INSTANCENAME: Radarr
@@ -107,6 +107,8 @@ spec:
     persistence:
       config:
         existingClaim: firefly
+        globalMounts:
+          - path: "/var/www/html/storage/uploads"
       # scripts:
         # type: configMap
         # name: radarr-configmap
