@@ -91,7 +91,13 @@ spec:
               repository: alpine
               tag: latest
             command:
-              - "sh -c \"apk add tzdata && ln -s /usr/share/zoneinfo/${TZ} /etc/localtime| echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/$STATIC_CRON_TOKEN;echo\"| crontab - && crond -f -L /dev/stdout\""
+              - "sh"
+              - "-c"
+              - >
+                  apk add --no-cache tzdata &&
+                  ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime &&
+                  echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/${STATIC_CRON_TOKEN}; echo\" | crontab - &&
+                  crond -f -L /dev/stdout
             envFrom:
                - secretRef:
                    name: firefly-app-password
@@ -138,6 +144,10 @@ spec:
     persistence:
       config:
         existingClaim: firefly
+        advancedMounts:
+          firefly:
+            app:
+              - path: /config
       # scripts:
         # type: configMap
         # name: radarr-configmap

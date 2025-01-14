@@ -26,7 +26,7 @@ spec:
   values: 
      #enter values here for global overrides  
     controllers:
-      firefly:
+      fireflydi:
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -103,14 +103,18 @@ spec:
       fireflydi-cron:
         type: cronjob
         cronjob:
-          schedule: "*/5 * * * *"
+          schedule: "0 0 * * *"
         containers:
           fireflydi-cron:
             image: 
               repository: alpine
               tag: latest
             command:
-              - "curl --location --request POST \'https://fireflydi:8080/autoimport?directory=$IMPORT_DIR_ALLOWLIST&secret=$AUTO_IMPORT_SECRET\'"
+              - "sh"
+              - "-c"
+              - >
+                curl --location --request POST \
+                "https://fireflydi:8080/autoimport?directory=${IMPORT_DIR_ALLOWLIST}&secret=${AUTO_IMPORT_SECRET}"
             envFrom:
               - secretRef:
                    name: firefly-app-token
@@ -157,6 +161,10 @@ spec:
     persistence:
       config:
         existingClaim: fireflydi
+        advancedMounts:
+          fireflydi:
+            app:
+              - path: /config
       # scripts:
         # type: configMap
         # name: radarr-configmap
