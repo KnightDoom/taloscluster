@@ -216,13 +216,13 @@ data:
             "http://fireflydi:8080/autoimport?directory=$folder&secret=$AUTO_IMPORT_SECRET" \
             --silent --show-error)
           status=$?
-          echo $response > $folder/$(date).report.txt
           if [ $status -eq 0 ]; then
             echo "Request succeeded: $response"
           else
             echo "Request failed with status: $status and $response"
           fi
-
+           echo $response > $folder/$(date +'%b%d_%Y-import-report.txt').report.txt
+           echo "Report Created $folder//$(date +'%b%d_%Y-import-report.txt').report.txt"
           # Rename all .csv files to .csv.completed
           for csv_file in "$folder"/*.[cC][sS][vV]; do
             mv "$csv_file" "$csv_file.completed"
