@@ -93,11 +93,7 @@ spec:
             command:
               - "sh"
               - "-c"
-              - >
-                  apk add --no-cache tzdata &&
-                  ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime &&
-                  echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/${STATIC_CRON_TOKEN}; echo\" | crontab - &&
-                  crond -f -L /dev/stdout
+              - "wget -qO- http://firefly:8080/api/v1/cron/${STATIC_CRON_TOKEN}"
             envFrom:
                - secretRef:
                    name: firefly-app-password
@@ -135,7 +131,7 @@ spec:
         #annotations:
         # - nginx.ingress.kubernetes.io/app-root: /firefly
         hosts:
-          - host: "{{ .Release.Name }}.knightd.win"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
