@@ -113,7 +113,7 @@ spec:
             command:
               - "sh"
               - "-c"
-              - curl --location --request POST "http://fireflydi:8080/autoimport?directory=$(IMPORT_DIR_ALLOWLIST)&secret=$(AUTO_IMPORT_SECRET)"
+              - "/import-script/script.sh"
             envFrom:
               - secretRef:
                    name: firefly-app-token
@@ -172,6 +172,11 @@ spec:
           # - path: /scripts/pushover-notifier.sh
             # subPath: pushover-notifier.sh
             # readOnly: true
+      scripted:
+        type: configMap
+        name: fireflydi-script
+        globalMounts:
+          - path: /import-script
       tmp:
         type: emptyDir
         globalMounts:
@@ -182,4 +187,46 @@ spec:
         path: /BackedStorage/firefly
         globalMounts:
           - path: /fireflyrepo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fireflydi-script
+data:
+  script.sh: |
+    #! /bin/sh
+                  
+    # Optional: ensure 'curl' is available (uncomment if needed)
+    # apk add --no-cache curl
+    # The Bash script:
+    BASE_DIR=$IMPORT_DIR_ALLOWLIST
+    # Loop through each subfolder
+    echo "looking in Folder $BASE_DIR"
+    for folder in "${BASE_DIR}"/*; do
+      # Check if it's a directory
+      if [ -d "$folder" ]; then
+        echo "Found folder $folder"
+        # Check if there are .csv files
+        if ls "$folder" | grep -iq csv 2>/dev/null; then
+          echo "Found CSV file(s) in: $folder"
+
+          # Make the curl request
+          response=$(curl --location --request POST \
+            "http://fireflydi:8080/autoimport?directory=${folder}&secret=${AUTO_IMPORT_SECRET}" \
+            --silent --show-error)
+          status=$?
+          echo $response > $folder/$(date).report.txt
+          if [ $status -eq 0 ]; then
+            echo "Request succeeded: $response"
+          else
+            echo "Request failed with status: $status and $response"
+          fi
+
+          # Rename all .csv files to .csv.completed
+          for csv_file in "$folder"/*.[cC][sS][vV]; do
+            mv "$csv_file" "${csv_file}.completed"
+          done
+        fi
+      fi
+    done
 
