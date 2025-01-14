@@ -108,7 +108,7 @@ spec:
         containers:
           fireflydi-cron:
             image: 
-              repository: alpine
+              repository: yauritux/busybox-curl
               tag: latest
             command:
               - "sh"
