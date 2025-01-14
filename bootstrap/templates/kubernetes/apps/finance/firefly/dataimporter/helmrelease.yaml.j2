@@ -203,7 +203,7 @@ data:
     BASE_DIR=$IMPORT_DIR_ALLOWLIST
     # Loop through each subfolder
     echo "looking in Folder $BASE_DIR"
-    for folder in "${BASE_DIR}"/*; do
+    for folder in "$BASE_DIR"/*; do
       # Check if it's a directory
       if [ -d "$folder" ]; then
         echo "Found folder $folder"
@@ -213,7 +213,7 @@ data:
 
           # Make the curl request
           response=$(curl --location --request POST \
-            "http://fireflydi:8080/autoimport?directory=${folder}&secret=${AUTO_IMPORT_SECRET}" \
+            "http://fireflydi:8080/autoimport?directory=${folder}&secret=$($AUTO_IMPORT_SECRET)" \
             --silent --show-error)
           status=$?
           echo $response > $folder/$(date).report.txt
