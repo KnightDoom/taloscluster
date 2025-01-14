@@ -213,7 +213,7 @@ data:
 
           # Make the curl request
           response=$(curl --location --request POST \
-            "http://fireflydi:8080/autoimport?directory=${folder}&secret=$($AUTO_IMPORT_SECRET)" \
+            "http://fireflydi:8080/autoimport?directory=$folder&secret=$AUTO_IMPORT_SECRET" \
             --silent --show-error)
           status=$?
           echo $response > $folder/$(date).report.txt
@@ -225,7 +225,7 @@ data:
 
           # Rename all .csv files to .csv.completed
           for csv_file in "$folder"/*.[cC][sS][vV]; do
-            mv "$csv_file" "${csv_file}.completed"
+            mv "$csv_file" "$csv_file.completed"
           done
         fi
       fi
