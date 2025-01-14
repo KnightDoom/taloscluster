@@ -142,7 +142,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: firefly
+        controller: fireflydi
         ports:
           http:
             port: *port
