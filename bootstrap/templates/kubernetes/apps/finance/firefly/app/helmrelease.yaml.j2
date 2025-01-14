@@ -49,6 +49,9 @@ spec:
               DEFAULT_LOCALE: "equal"
               portNum: &port 8080
               TRUSTED_PROXIES: "**"
+              ENABLE_EXCHANGE_RATES: true
+              ENABLE_EXTERNAL_RATES: true
+              ALLOW_WEBHOOKS: true
               TZ: America/New_York
             envFrom:
                - secretRef:
@@ -76,6 +79,34 @@ spec:
               requests:
                 cpu: 100m
                 memory: 100Mi
+              limits:
+                memory: 4Gi
+      fireflycron:
+        type: cronjob
+        cronjob:
+          schedule: "*/5 * * * *"
+        containers:
+          fireflycron:
+            image: 
+              repository: alpine
+              tag: latest
+            command:
+              - "sh -c \"apk add tzdata && ln -s /usr/share/zoneinfo/${TZ} /etc/localtime| echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/$STATIC_CRON_TOKEN;echo\"| crontab - && crond -f -L /dev/stdout\""
+            envFrom:
+               - secretRef:
+                   name: firefly-app-password
+            probes:
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 10Mi
               limits:
                 memory: 4Gi
     defaultPodOptions:
