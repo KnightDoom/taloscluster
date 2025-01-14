@@ -175,6 +175,7 @@ spec:
       scripted:
         type: configMap
         name: fireflydi-script
+        defaultMode: 0555
         globalMounts:
           - path: /import-script
       tmp:
