@@ -113,7 +113,7 @@ spec:
             command:
               - "sh"
               - "-c"
-              - curl --location --request POST \"https://fireflydi:8080/autoimport?directory=$(IMPORT_DIR_ALLOWLIST)&secret=$(AUTO_IMPORT_SECRET)\"
+              - curl --location --request POST "https://fireflydi:8080/autoimport?directory=$(IMPORT_DIR_ALLOWLIST)&secret=$(AUTO_IMPORT_SECRET)"
             envFrom:
               - secretRef:
                    name: firefly-app-token
