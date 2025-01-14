@@ -208,7 +208,7 @@ data:
       if [ -d "$folder" ]; then
         echo "Found folder $folder"
         # Check if there are .csv files
-        if ls "$folder" | grep -iq csv 2>/dev/null; then
+        if ls "$folder" | grep -iqe "csv$" 2>/dev/null; then
           echo "Found CSV file(s) in: $folder"
 
           # Make the curl request
