@@ -22,8 +22,14 @@ spec:
   patroni: # turn on sync writes to at least 1 other replica
     dynamicConfiguration:
       synchronous_mode: true
+      synchronous_node_count: 2
       postgresql:
-        max_wal_size: 3GB
+        max_wal_size: 2GB
+        shared_buffers: 1GB
+        temp_buffers: 500MB
+        work_mem: 500MB
+        maintenance_work_mem: 1GB
+        effective_cache_size: 6GB
         synchronous_commit: "on"
         parameters:
           max_connections: 500
