@@ -19,31 +19,37 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      repository: ghcr.io/larivierec/bitwarden-cli
-      tag: latest
-    envFrom:
-      - secretRef:
-          name: bitwarden-cli
+    controllers:
+      bitwarden:
+        enabled: true
+        containers:
+          bitwarden:
+            image:
+              repository: ghcr.io/larivierec/bitwarden-cli
+              tag: latest
+            envFrom:
+              - secretRef:
+                name: bitwarden-cli
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:  ["sh", "-c", "curl -X POST -s http://127.0.0.1:8087/sync | jq -e '.success == true'"]
+                timeoutSeconds: 5
+              readiness:
+                enabled: false
+            resources:
+              requests:
+                memory: 256Mi
+                cpu: 100m
+              limits:
+                memory: 512Mi
     service:
       main:
         controller: main
         ports:
           http:
             port: 8087
-    probes:
-      liveness:
-        enabled: true
-        custom: true
-        spec:
-          exec:
-            command:  ["sh", "-c", "curl -X POST -s http://127.0.0.1:8087/sync | jq -e '.success == true'"]
-          timeoutSeconds: 5
-      readiness:
-        enabled: false
-    resources:
-      requests:
-        memory: 256Mi
-        cpu: 100m
-      limits:
-        memory: 512Mi
+    
