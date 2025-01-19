@@ -28,8 +28,8 @@ spec:
               repository: ghcr.io/larivierec/bitwarden-cli
               tag: latest
             envFrom:
-            - secretRef:
-              name: bitwarden-cli
+              - secretRef:
+                  name: bitwarden-cli
             probes:
               liveness:
                 enabled: true
