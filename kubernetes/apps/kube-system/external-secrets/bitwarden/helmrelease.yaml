@@ -22,12 +22,12 @@ spec:
     image:
       repository: ghcr.io/larivierec/bitwarden-cli
       tag: latest
-    envFrom:
-      - secretRef:
-          name: bitwarden-cli
     controllers:
       main:
         enabled: true
+    envFrom:
+      - secretRef:
+          name: bitwarden-cli
     service:
       main:
         controller: main
