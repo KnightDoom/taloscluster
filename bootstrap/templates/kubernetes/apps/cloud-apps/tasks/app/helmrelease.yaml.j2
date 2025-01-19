@@ -113,6 +113,9 @@ spec:
     persistence:
       config:
         existingClaim: tasks
+        globalMounts:
+          - path: /tasks
+          - path: /config
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -125,8 +128,4 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      tasked:
-        existingClaim: tasks
-        globalMounts:
-          - path: /tasks
 
