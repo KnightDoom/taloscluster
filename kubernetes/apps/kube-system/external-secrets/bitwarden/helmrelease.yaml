@@ -23,13 +23,13 @@ spec:
       bitwarden:
         enabled: true
         containers:
-          bitwarden:
+          app:
             image:
               repository: ghcr.io/larivierec/bitwarden-cli
               tag: latest
             envFrom:
               - secretRef:
-                name: bitwarden-cli
+                  name: bitwarden-cli
             probes:
               liveness:
                 enabled: true
@@ -48,7 +48,7 @@ spec:
                 memory: 512Mi
     service:
       main:
-        controller: main
+        controller: bitwarden
         ports:
           http:
             port: 8087
