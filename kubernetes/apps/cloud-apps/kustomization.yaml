@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./trillium/ks.yaml
   - ./mealie/ks.yaml
+  - ./tasks/ks.yaml

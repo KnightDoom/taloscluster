@@ -1,0 +1,132 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tasks
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: tasks-helm-values
+  values: 
+     #enter values here for global overrides  
+    controllers:
+      tasks:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository:  baldissaramatheus/tasks.md
+              tag: 2.5.4
+            args:
+              - |
+                 echo "1"
+                 mkdir -p /config/stylesheets && echo "stylesheets_created"
+                 mkdir -p /config/images && echo "images_created"
+                 mkdir -p /config/sort && echo "sort_created"
+                 mkdir -p /config/tasks && echo "tasks_created"
+                 cp -r /config/stylesheets/. /stylesheets/ && echo "copied config_stylesheets to stylesheets"
+                 cp -r /stylesheets/. /config/stylesheets && echo "copied stylesheets to config_stylesheets"
+                 node /api/server.js
+            command:
+              - sh
+              - -c
+            env:
+              portNum: &port 8080
+              PUID: 1000
+              PGID: 1000
+              TZ: America/New_York
+            # envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: tasks
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: external
+        #annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /tasks
+        hosts:
+          - host: "{{ .Release.Name }}.knightd.win"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: tasks
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      config:
+        existingClaim: tasks
+        globalMounts:
+          - path: /tasks
+
