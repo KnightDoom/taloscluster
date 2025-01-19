@@ -115,7 +115,7 @@ spec:
         existingClaim: tasks
         globalMounts:
           - path: /tasks
-            subPath: /tasks
+            subPath: tasks
           - path: /config
       # scripts:
         # type: configMap
