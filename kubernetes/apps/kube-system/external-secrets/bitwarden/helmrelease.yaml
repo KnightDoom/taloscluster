@@ -29,7 +29,7 @@ spec:
               tag: latest
             envFrom:
             - secretRef:
-                name: bitwarden-cli
+              name: bitwarden-cli
             probes:
               liveness:
                 enabled: true

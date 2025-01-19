@@ -23,13 +23,13 @@ spec:
       bitwarden:
         enabled: true
         containers:
-          bitwarden:
+          app:
             image:
               repository: ghcr.io/larivierec/bitwarden-cli
               tag: latest
             envFrom:
-              - secretRef:
-                name: bitwarden-cli
+            - secretRef:
+              name: bitwarden-cli
             probes:
               liveness:
                 enabled: true
@@ -37,7 +37,7 @@ spec:
                 spec:
                   exec:
                     command:  ["sh", "-c", "curl -X POST -s http://127.0.0.1:8087/sync | jq -e '.success == true'"]
-                timeoutSeconds: 5
+                  timeoutSeconds: 5
               readiness:
                 enabled: false
             resources:
@@ -48,7 +48,7 @@ spec:
                 memory: 512Mi
     service:
       main:
-        controller: main
+        controller: bitwarden
         ports:
           http:
             port: 8087
