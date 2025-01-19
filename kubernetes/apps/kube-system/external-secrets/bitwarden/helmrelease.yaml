@@ -28,8 +28,8 @@ spec:
               repository: ghcr.io/larivierec/bitwarden-cli
               tag: latest
             envFrom:
-              - secretRef:
-                  name: bitwarden-cli
+            - secretRef:
+                name: bitwarden-cli
             probes:
               liveness:
                 enabled: true
@@ -37,7 +37,7 @@ spec:
                 spec:
                   exec:
                     command:  ["sh", "-c", "curl -X POST -s http://127.0.0.1:8087/sync | jq -e '.success == true'"]
-                timeoutSeconds: 5
+                  timeoutSeconds: 5
               readiness:
                 enabled: false
             resources:
