@@ -25,6 +25,9 @@ spec:
     envFrom:
       - secretRef:
           name: bitwarden-cli
+    controllers:
+      main:
+        enabled: true
     service:
       main:
         controller: main
