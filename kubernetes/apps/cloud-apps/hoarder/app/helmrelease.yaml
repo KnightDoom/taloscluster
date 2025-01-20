@@ -40,7 +40,7 @@ spec:
               portNum: &port 3000
               TZ: America/New_York
               DATA_DIR: "/config"
-              NEXTAUTH_URL: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              NEXTAUTH_URL: "http://hoarder:3000"
             envFrom:
               - secretRef:
                   name: hoarder-env

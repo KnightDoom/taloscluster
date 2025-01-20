@@ -39,7 +39,7 @@ spec:
               # RADARR__APP__THEME: dark
               portNum: &port 7700
               TZ: America/New_York
-              NEXTAUTH_URL: "hoarder.${SECRET_DOMAIN}"
+              NEXTAUTH_URL: "http://hoarder:3000"
               MEILI_NO_ANALYTICS: true
             envFrom:
               - secretRef:
