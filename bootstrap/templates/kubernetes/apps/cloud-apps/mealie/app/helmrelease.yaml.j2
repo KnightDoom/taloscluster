@@ -74,11 +74,13 @@ spec:
               SECURITY_MAX_LOGIN_ATTEMPTS: 10
               SECURITY_USER_LOCKOUT_TIME: 1
               WORKERS_PER_CORE: 1
-              MAX_WORKERS: 1
+              MAX_WORKERS: 2
               WEBB_CONCURRENCY:  1
             envFrom:
               - secretRef:
                    name: mealie-db-secret
+              - secretRef:
+                   name: mealie-env
             probes:
               liveness: &probes
                 enabled: true

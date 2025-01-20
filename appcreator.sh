@@ -294,6 +294,7 @@ spec:
         className: internal
         #annotations:
         # - nginx.ingress.kubernetes.io/app-root: /$AppName
+        # - external-dns.alpha.kubernetes.io/target: "external.\$\{SECRET_DOMAIN\}" 
         hosts:
           - host: "{{ .Release.Name }}.knightd.win"
             paths:

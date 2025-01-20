@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: mealie
+  name: meilisearch
 spec:
   interval: 30m
   chart:
@@ -22,74 +22,36 @@ spec:
       retries: 3
 #  valuesFrom:
 #   - kind: ConfigMap
-#     name: mealie-helm-values
+#     name: hoarder-helm-values
   values: 
      #enter values here for global overrides  
-        #    postgresPassword: ""
-        #    username: ""
-        #    password: ""
-        #    database: ""
     controllers:
-      app:
+      meilisearch:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-          # init-db:
-            # image:
-              # repository: ghcr.io/onedr0p/postgres-init
-              # tag: 16
-            # envFrom: &envFrom
-              # - secretRef:
-                  # name: radarr-secret
         containers:
           app:
             image:
-              repository: ghcr.io/mealie-recipes/mealie
-              tag: v2.4.2@sha256:4c97581d31546fc5cbfeacf00a8fa5f866d0b48cd1a2cd4441e48afe260b317c
+              repository: getmeili/meilisearch
+              tag: "v1.11.1"
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              portNum: &port 9000
+              portNum: &port 7700
               TZ: America/New_York
-              THEME_LIGHT_PRIMARY: "#E58325"
-              THEME_LIGHT_ACCENT: "#007A99" 
-              THEME_LIGHT_SECONDARY:  "#973542"
-              THEME_LIGHT_SUCCESS: "#43A047"
-              THEME_LIGHT_INFO: "#1976D2"
-              THEME_LIGHT_WARNING:  "#FF6D00"
-              THEME_LIGHT_ERROR: "#EF5350"
-              THEME_DARK_PRIMARY:  "#E58325"
-              THEME_DARK_ACCENT:  "#007A99"
-              THEME_DARK_SECONDARY:  "#973542"
-              THEME_DARK_SUCCESS: "#43A047"
-              THEME_DARK_INFO: "#1976D2"
-              THEME_DARK_WARNING:  "#FF6D00"
-              THEME_DARK_ERROR: "#EF5350"
-              OIDC_AUTH_ENABLED: false
-              LDAP_AUTH_ENABLED: false
-              ALLOW_SIGNUP: true
-              DEFAULT_GROUP: Home
-              BASE_URL: ""
-              TOKEN_TIME: 48
-              SECURITY_MAX_LOGIN_ATTEMPTS: 10
-              SECURITY_USER_LOCKOUT_TIME: 1
-              WORKERS_PER_CORE: 1
-              MAX_WORKERS: 2
-              WEBB_CONCURRENCY:  1
+              NEXTAUTH_URL: "hoarder.${SECRET_DOMAIN}"
+              MEILI_NO_ANALYTICS: true
             envFrom:
               - secretRef:
-                   name: mealie-db-secret
-              - secretRef:
-                   name: mealie-env
+                  name: hoarder-env
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
-                  exec:
-                    command: 
-                      - python
-                      - /app/mealie/scripts/healthcheck.py
+                  httpGet:
+                    path: /
+                    port: *port
                   initialDelaySeconds: 15
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -114,16 +76,18 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
-      app:
-        controller: app
+      web:
+        controller: meilisearch
         ports:
           http:
             port: *port
     ingress:
+      enabled: false
       app:
         className: internal
         #annotations:
-        # - nginx.ingress.kubernetes.io/app-root: /mealie
+        # - nginx.ingress.kubernetes.io/app-root: /meilisearch
+        # - external-dns.alpha.kubernetes.io/target: "external.$\{SECRET_DOMAIN\}" 
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -133,9 +97,9 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: mealie
+        existingClaim: meilisearch
         globalMounts:
-          - path: /app/data/
+          - path: "/meili_data"
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -148,10 +112,4 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      media:
-        type: nfs
-        server: 192.168.86.9
-        path: /PlexLib
-        globalMounts:
-          - path: /library
 
