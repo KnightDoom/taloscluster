@@ -89,7 +89,7 @@ spec:
             port: *port
     ingress:
       app:
-        className: internal
+        className: external
         #annotations:
         # - nginx.ingress.kubernetes.io/app-root: /trillium
         hosts:
