@@ -81,20 +81,6 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      enabled: false
-      app:
-        className: internal
-        #annotations:
-        # - nginx.ingress.kubernetes.io/app-root: /meilisearch
-        # - external-dns.alpha.kubernetes.io/target: "external.$\{SECRET_DOMAIN\}" 
-        hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
     persistence:
       config:
         existingClaim: meilisearch
