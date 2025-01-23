@@ -92,7 +92,7 @@ spec:
         #annotations:
         # - nginx.ingress.kubernetes.io/app-root: /uptime
         hosts:
-          - host: "{{ .Release.Name }}.knightd.win"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
