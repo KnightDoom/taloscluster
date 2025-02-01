@@ -65,19 +65,4 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: 2
-    persistence:
-       config:
-         existingClaim: authentik
-      # # scripts:
-        # type: configMap
-        # name: radarr-configmap
-        # defaultMode: 0775
-        # globalMounts:
-          # - path: /scripts/pushover-notifier.sh
-            # subPath: pushover-notifier.sh
-            # readOnly: true
-      tmp:
-        type: emptyDir
-        globalMounts:
-          - path: /tmp
 
