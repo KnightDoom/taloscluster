@@ -33,9 +33,9 @@ spec:
             name: authentik-secret
         - secretRef:
             name: authentik-db-secret
-    # authentik:
-      # redis:
-        # host: dragonfly.database.svc.cluster.local
+    authentik:
+      redis:
+        host: dragonfly.database.svc.cluster.local
     server:
       autoscaling:
         enabled: true
