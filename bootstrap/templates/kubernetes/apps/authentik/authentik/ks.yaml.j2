@@ -20,7 +20,7 @@ spec:
   dependsOn:
     - name: crunchy-postgres-operator-cluster
     - name: crunchy-postgres-stores
-    - name: external-secrets-stores
+    - name: external-secrets-bitwarden
   postBuild:
     substitute:
       APP: *app
