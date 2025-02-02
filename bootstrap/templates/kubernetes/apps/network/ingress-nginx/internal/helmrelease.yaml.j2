@@ -23,6 +23,7 @@ spec:
   values:
     fullnameOverride: ingress-nginx-internal
     controller:
+      allowSnippetAnnotations: "true"
       service:
         annotations:
           lbipam.cilium.io/ips: "#{ bootstrap_cloudflare.ingress_vip }#"
