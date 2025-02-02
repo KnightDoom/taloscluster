@@ -26,7 +26,7 @@ spec:
       postgresql:
         synchronous_commit: "off" #on
         parameters:
-          max_connections: 100
+          max_connections: 200
           shared_buffers: 4GB
           effective_cache_size: 12GB
           maintenance_work_mem: 1GB
@@ -231,10 +231,12 @@ spec:
         global:
           # Grafana requires session
           # Ref: https://github.com/grafana/grafana/issues/74260
-          pool_mode: session
+          pool_mode: transaction
           client_tls_sslmode: prefer
-          default_pool_size: "100"
+          default_pool_size: "130"
           max_client_conn: "500"
+          idle_transaction_timeout:"10"
+          client_idle_timeout: "10"
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
