@@ -88,7 +88,7 @@ spec:
               - name: TZ
                 value: "America/New_York"
               - name: DNS_ADDRESS
-                value:  103.86.96.100
+                value:  208.67.222.222
               - name: BLOCK_MALICIOUS
                 value: 'off'
             # envFrom: *envFrom
