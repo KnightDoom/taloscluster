@@ -231,12 +231,12 @@ spec:
         global:
           # Grafana requires session
           # Ref: https://github.com/grafana/grafana/issues/74260
-          pool_mode: transaction
+          pool_mode: session
           client_tls_sslmode: prefer
           default_pool_size: "130"
           max_client_conn: "500"
-          idle_transaction_timeout: "10"
-          client_idle_timeout: "10"
+          idle_transaction_timeout: "30"
+          client_idle_timeout: "30"
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
