@@ -38,9 +38,11 @@ spec:
         host: dragonfly.database.svc.cluster.local
     server:
       readinessProbes:
-        failureThreshold: 3
-        periodSeconds: 20
-        timeoutSeconds: 5
+        enabled: false
+      startupProbes:
+        enabled: false
+      livenessProbes:
+        enabled: false  
       autoscaling:
         enabled: true
         minReplicas: 2
