@@ -69,4 +69,22 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: 2
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sso-internal-ingress
+spec:
+  ingressClassName: internal
+  rules:
+  - host: authentik.knightd.win
+    http:
+      paths:
+      - backend:
+          service:
+            name: authentik-server
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
 
