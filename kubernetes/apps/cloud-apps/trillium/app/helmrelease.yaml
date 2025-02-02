@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: triliumnext/notes
-              tag: latest
+              tag: v0.91.5@sha256:6ee5786b60d0ce84e5d82dbebe1094ec42234c8e0b064025d3d543d646402431
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
