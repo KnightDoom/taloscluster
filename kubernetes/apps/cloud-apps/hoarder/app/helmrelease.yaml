@@ -41,6 +41,8 @@ spec:
               TZ: America/New_York
               DATA_DIR: "/config"
               NEXTAUTH_URL: "http://hoarder:3000"
+              DISABLE_SIGNUPS: "true"
+              DISABLE_PASSWORD_AUTH: "true"
             envFrom:
               - secretRef:
                   name: hoarder-env
