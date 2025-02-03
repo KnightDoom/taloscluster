@@ -73,7 +73,7 @@ spec:
             claimName: authentik-media
       volumeMounts:
         - name: authentik-media
-          mountPath: /data
+          mountPath: /media/public/data
     worker:
       autoscaling:
         enabled: true
