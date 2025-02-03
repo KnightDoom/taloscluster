@@ -41,6 +41,7 @@ spec:
               TZ: America/New_York
               DATA_DIR: "/config"
               #NEXTAUTH_URL: "http://hoarder:3000"
+              NEXTAUTH_URL_INTERNAL: "http://hoarder:3000"
               NEXTAUTH_URL: "http://hoarder.${SECRET_DOMAIN}"
               DISABLE_SIGNUPS: "true"
               DISABLE_PASSWORD_AUTH: "true"
