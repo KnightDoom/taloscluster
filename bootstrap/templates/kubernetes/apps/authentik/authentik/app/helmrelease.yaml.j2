@@ -42,7 +42,7 @@ spec:
       startupProbes:
         enabled: false
       livenessProbes:
-        enabled: false  
+        enabled: false
       autoscaling:
         enabled: true
         minReplicas: 2
@@ -67,6 +67,13 @@ spec:
         hosts:
           - sso.${SECRET_DOMAIN}
         https: false
+      volumes:
+        - name: authentik-media
+          persistentVolumeClaim:
+            claimName: authentik-media
+      volumeMounts:
+        - name: authentik-media
+          mountPath: /data
     worker:
       autoscaling:
         enabled: true
