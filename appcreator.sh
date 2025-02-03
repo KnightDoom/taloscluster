@@ -27,14 +27,14 @@ ask_for_chart_and_repo() {
     repo_file="/home/knightdoom/control/taloscluster/bootstrap/templates/kubernetes/flux/repositories/helm/$RepoName.yaml.j2"
     if [ ! -f "$repo_file" ]; then
         echo "$RepoName.yaml.j2 does not exist."
-        
+
         # Ask if the repository type is OCI
         read -p "Is the repository OCI? (yes/no): " OCI
         if [[ "$OCI" == "yes" ]]; then
             # Ask for the OCI Repo URL
             read -p "Enter the OCI repository URL: " RepoUrl
         fi
-        
+
         # Create the HelmRepository YAML file
         echo "Creating $RepoName.yaml.j2"
         cat > "$repo_file" <<EOF
@@ -69,7 +69,7 @@ EOF
 select_namespace() {
     directories=$(find "$AppsDirectory" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
     options="$directories new_namespace"
-    
+
     echo "Select a namespace:"
     select namespace in $options; do
         case $namespace in
@@ -84,7 +84,7 @@ select_namespace() {
                     echo "The namespace '$namespace_name' already exists. Please choose a different name."
                     continue
                 fi
-                
+
                 # Create the new folder for the namespace
                 echo "Creating new namespace folder: $new_namespace_dir"
                 mkdir -p "$new_namespace_dir"
@@ -161,7 +161,7 @@ create_app() {
         echo "Appending - ./$AppName/ks.yaml to $kustomization_file"
         echo -e "\n  - ./$AppName/ks.yaml" >> "$kustomization_file"
         echo "App path added to kustomization.yaml.j2."
-    
+
         # Remove empty lines from the kustomization.yaml.j2 file
         echo "Removing empty lines from $kustomization_file"
         sed -i '/^$/d' "$kustomization_file"
@@ -227,8 +227,8 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: $AppName-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
     controllers:
       $AppName:
         annotations:
@@ -293,10 +293,15 @@ spec:
       app:
         className: internal
         #annotations:
-        # - nginx.ingress.kubernetes.io/app-root: /$AppName
-        # - external-dns.alpha.kubernetes.io/target: "external.\$\{SECRET_DOMAIN\}" 
+        #  nginx.ingress.kubernetes.io/app-root: /$AppName
+        #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
+        #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
+        #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
+        #  nginx.ingress.kubernetes.io/auth-snippet: |
+        #  proxy_set_header X-Forwarded-Host $http_host;
         hosts:
-          - host: "{{ .Release.Name }}.knightd.win"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -336,17 +341,17 @@ EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: $AppName-ingress 
-  namespace: $SelectedNamespace 
+  name: $AppName-ingress
+  namespace: $SelectedNamespace
   #annotations:
-    #external-dns.alpha.kubernetes.io/target: "$AppName.\$\{SECRET_DOMAIN\}" 
+    #external-dns.alpha.kubernetes.io/target: "$AppName.\$\{SECRET_DOMAIN\}"
 spec:
-  ingressClassName: internal #external or internal 
+  ingressClassName: internal #external or internal
   rules:
-    - host: "$AppName.\$\{SECRET_DOMAIN}" 
+    - host: "$AppName.\$\{SECRET_DOMAIN}"
       http:
         paths:
-          - path: / 
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -370,7 +375,7 @@ EOF
           # secretKeyRef:
             # name: external-dns-secret
             # key: api-token
-          
+
 # ---
 # apiVersion: v1
 # kind: Secret
@@ -457,7 +462,7 @@ create_app
 #
 #    # Prepare the options for select (existing directories and the "new namespace" option)
 #    options="$directories new_namespace"
-#    
+#
 #    # Display the menu and get selection
 #    echo "Select a namespace:"
 #    select namespace in $options; do
@@ -474,7 +479,7 @@ create_app
 #                    echo "The namespace '$namespace_name' already exists. Please choose a different name."
 #                    continue
 #                fi
-#                
+#
 #                # Create the new folder for the namespace
 #                echo "Creating new namespace folder: $new_namespace_dir"
 #                mkdir -p "$new_namespace_dir"
@@ -508,7 +513,7 @@ create_app
 #                SelectedNamespace="$namespace_name"
 #                break
 #                ;;
-#            
+#
 #            # Handle existing namespace selection
 #            *)
 #                echo "You selected an existing namespace: $namespace"
@@ -549,7 +554,7 @@ create_app
 #        echo "Appending - ./$AppName/ks.yaml to $kustomization_file"
 #        echo -e "\n  - ./$AppName/ks.yaml" >> "$kustomization_file"
 #        echo "App path added to kustomization.yaml.j2."
-#    
+#
 #        # Remove empty lines from the kustomization.yaml.j2 file
 #        echo "Removing empty lines from $kustomization_file"
 #        sed -i '/^$/d' "$kustomization_file"
@@ -564,7 +569,7 @@ create_app
 #apiVersion: kustomize.toolkit.fluxcd.io/v1
 #kind: Kustomization
 #metadata:
-#  name: &app $AppName 
+#  name: &app $AppName
 #  namespace: flux-system
 #spec:
 #  targetNamespace: $SelectedNamespace
@@ -616,8 +621,8 @@ create_app
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: $AppName-helm-values
-##  values: 
-##     #enter values here for global overrides  
+##  values:
+##     #enter values here for global overrides
 #EOF
 #    echo "helmrelease.yaml.j2 file created."
 #

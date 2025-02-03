@@ -86,7 +86,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-  - host: authentik.knightd.win
+  - host: authentik.${SECRET_DOMAIN}
     http:
       paths:
       - backend:
