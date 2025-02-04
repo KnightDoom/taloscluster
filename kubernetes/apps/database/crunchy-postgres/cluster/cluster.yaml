@@ -237,6 +237,7 @@ spec:
           max_client_conn: "500"
           idle_transaction_timeout: "30"
           client_idle_timeout: "30"
+          admin_users: _crunchypgbouncer
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
