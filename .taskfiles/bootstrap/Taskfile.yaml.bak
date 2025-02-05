@@ -65,6 +65,21 @@ tasks:
       - test -f {{.SOPS_AGE_KEY_FILE}}
       - which flux kubectl sops
 
+<<<<<<< HEAD
+  apps:
+    internal: false
+    dir: '{{.KUBERNETES_DIR}}/bootstrap/talos'
+    cmds:
+      - until kubectl wait --for=condition=Ready=False nodes --all --timeout=600s; do sleep 10; done
+      - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff #--debug
+      - until kubectl wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml
+      - which helmfile kubectl
+
+=======
+>>>>>>> 917d471c (fix: separate out bootstrap app task into own task)
   age-keygen:
     desc: Bootstrap the Sops Age key
     cmd: age-keygen --output {{.SOPS_AGE_KEY_FILE}}
