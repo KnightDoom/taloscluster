@@ -26,7 +26,8 @@ spec:
   values:
     fullnameOverride: ingress-nginx-external
     controller:
-      allowSnippetAnnotations: "true"
+      allow-snippet-annotations: "true"
+      #allowSnippetAnnotations: "true"
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN}"

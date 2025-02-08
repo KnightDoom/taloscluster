@@ -1,0 +1,18 @@
+# kubectl run sqlite3-pod --namespace=cloud-apps --image=nouchka/sqlite3 --restart=Never --command -- /bin/sh -c "sleep 3600" --overrides='{  "apiVersion": "v1",  "kind": "Pod",  "metadata": {    "name": "sqlite3-pod"  },  "spec": {    "containers": [      {        "name": "sqlite3",        "image": "nouchka/sqlite3",        "command": ["/bin/sh", "-c", "sleep 3600"],        "volumeMounts": [          {            "mountPath": "/data",            "name": "hoarder-pvc"          }        ]      }    ],    "volumes": [      {        "name": "hoarder-pvc",        "persistentVolumeClaim": {          "claimName": "hoarder"        }      }    ]  }}'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sqlite3-pod
+  namespace: cloud-apps
+spec:
+  containers:
+    - name: sqlite3
+      image: nouchka/sqlite3
+      command: ["/bin/sh", "-c", "sleep 3600"]
+      volumeMounts:
+        - mountPath: "/data"
+          name: hoarder-pvc
+  volumes:
+    - name: hoarder-pvc
+      persistentVolumeClaim:
+        claimName: hoarder
