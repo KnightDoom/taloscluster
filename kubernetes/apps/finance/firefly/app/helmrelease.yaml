@@ -78,6 +78,7 @@ spec:
                   failureThreshold: 30
               readiness: *probes
             securityContext:
+              privileged: true
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
@@ -118,7 +119,6 @@ spec:
               limits:
                 memory: 4Gi
     defaultPodOptions:
-      privileged: true
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
