@@ -79,7 +79,7 @@ spec:
               readiness: *probes
             securityContext:
               privileged: true
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
               readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
