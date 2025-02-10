@@ -118,8 +118,8 @@ spec:
               limits:
                 memory: 4Gi
     defaultPodOptions:
+      privileged: true
       securityContext:
-        privileged: true
         runAsNonRoot: false
         runAsUser: 0
         runAsGroup: 0
