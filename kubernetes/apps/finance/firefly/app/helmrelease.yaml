@@ -108,7 +108,7 @@ spec:
                 enabled: false
               readiness: *probes
             securityContext:
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
               readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
@@ -119,10 +119,11 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
+        privileged: true
         runAsNonRoot: false
         runAsUser: 0
         runAsGroup: 0
-        fsGroup: 1000
+        fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
