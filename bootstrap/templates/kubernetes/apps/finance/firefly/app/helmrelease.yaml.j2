@@ -23,25 +23,31 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: firefly-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
     controllers:
       firefly:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-          # init-db:
-            # image:
-              # repository: ghcr.io/onedr0p/postgres-init
-              # tag: 16
-            # envFrom: &envFrom
-              # - secretRef:
-                  # name: radarr-secret
+        #initContainers:
+         # init-app:
+          #  image:
+           #   repository: fireflyiii/core
+            #  tag: version-6.2.5
+            #command:
+            #  - "sh"
+            #  - "-c"
+            #  - "mkdir -p /tmp/html /tmp/apache2 /config/upload"
+            #  - "cp -rT /var/www/html/ /tmp/html/"
+            #  - "rm -rf /tmp/html/storage/upload"
+            #  - "ln -s /config/upload /tmp/html/storage/upload"
+            #  - "ln -s /"
+              #!/usr/bin/env bash
         containers:
           app:
             image:
-              repository: ghcr.io/deedee-ops/firefly-iii
-              tag: v6.2.4
+              repository: fireflyiii/core
+              tag: version-6.2.5
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
@@ -87,7 +93,7 @@ spec:
           schedule: "*/5 * * * *"
         containers:
           fireflycron:
-            image: 
+            image:
               repository: alpine
               tag: latest
             command:
@@ -143,7 +149,8 @@ spec:
         advancedMounts:
           firefly:
             app:
-              - path: /config
+              - path: /var/www/html/storage/upload
+                subPath: upload
       # scripts:
         # type: configMap
         # name: radarr-configmap
