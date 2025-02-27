@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: getmeili/meilisearch
-              tag: "v1.11.1"
+              tag: "v1.13.2"
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
