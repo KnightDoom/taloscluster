@@ -23,8 +23,8 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: mealie-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
         #    postgresPassword: ""
         #    username: ""
         #    password: ""
@@ -45,14 +45,14 @@ spec:
           app:
             image:
               repository: ghcr.io/mealie-recipes/mealie
-              tag: v2.7.1@sha256:708e9ffb843bafdcebf46ee35bb45d1b003518e8c204483a1da039b4076ef980
+              tag: v2.5.0@sha256:0a9839f19e74d5c4a818161a5850b16d9608b240381691c317d3c23cd62e0c0f
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
               portNum: &port 9000
               TZ: America/New_York
               THEME_LIGHT_PRIMARY: "#E58325"
-              THEME_LIGHT_ACCENT: "#007A99" 
+              THEME_LIGHT_ACCENT: "#007A99"
               THEME_LIGHT_SECONDARY:  "#973542"
               THEME_LIGHT_SUCCESS: "#43A047"
               THEME_LIGHT_INFO: "#1976D2"
@@ -87,7 +87,7 @@ spec:
                 custom: true
                 spec:
                   exec:
-                    command: 
+                    command:
                       - python
                       - /app/mealie/scripts/healthcheck.py
                   initialDelaySeconds: 15
