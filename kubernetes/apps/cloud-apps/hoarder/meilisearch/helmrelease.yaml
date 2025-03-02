@@ -23,8 +23,8 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: hoarder-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
     controllers:
       meilisearch:
         annotations:
@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: getmeili/meilisearch
-              tag: "v1.13.2"
+              tag: "v1.11.1"
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
