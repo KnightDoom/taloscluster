@@ -32,7 +32,7 @@ spec:
         containers:
           app:
             image:
-              repository: alior99/zotify:latest
+              repository: alior99/zotify
               tag: latest
               pullPolicy: Always
             envFrom:
@@ -54,9 +54,9 @@ spec:
                   failureThreshold: 3
               readiness: *probes
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              #capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 100m
@@ -65,10 +65,10 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
