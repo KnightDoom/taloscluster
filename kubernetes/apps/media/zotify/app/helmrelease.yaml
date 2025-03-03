@@ -117,7 +117,7 @@ spec:
       zotify-downloadsurls:
           type: secret
           name: zotify-music-urls
-          defaultMode: 420
+          defaultMode: 422
           items:
               - key: downloads.txt
                 path: downloads.txt
