@@ -39,6 +39,7 @@ spec:
               - secretRef:
                   name: zotify-music-env
             command: ["python3","-m","zotify","$ARGSS"]
+            #command: ["sleep","3600"]
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
             probes:
