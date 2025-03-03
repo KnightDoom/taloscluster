@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: renan1050/zotify
-              tag: latest
+              tag: teste
               pullPolicy: Always
             envFrom:
               - secretRef:
