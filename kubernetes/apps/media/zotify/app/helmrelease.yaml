@@ -116,7 +116,7 @@ spec:
             - path: /root/.config/zotify
       zotify-downloadsurls:
           type: secret
-          name: zotify-music-config
+          name: zotify-music-urls
           defaultMode: 420
           items:
               - key: downloads.txt
