@@ -38,6 +38,7 @@ spec:
             envFrom:
               - secretRef:
                   name: zotify-music-env
+            command: ["python3","-m","zotify","$ARGSS"]
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
             probes:
@@ -112,6 +113,8 @@ spec:
           items:
               - key: config.json
                 path: config.json
+              - key: creds.json
+                path: creds.json
           globalMounts:
             - path: /root/.config/zotify
       zotify-downloadsurls:
