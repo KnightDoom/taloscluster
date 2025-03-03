@@ -32,7 +32,7 @@ spec:
         containers:
           app:
             image:
-              repository: alior99/zotify
+              repository: renan1050/zotify
               tag: latest
               pullPolicy: Always
             envFrom:
