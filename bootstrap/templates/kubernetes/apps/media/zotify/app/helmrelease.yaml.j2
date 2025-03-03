@@ -101,12 +101,13 @@ spec:
           - path: /root/Music
             subPath: Music
       zotify-config:
-        eixtingClaim: zotify-config
+        type: persistentVolumeClaim
+        existingClaim: zotify-config
         globalMounts:
           - path: /root/temp
       zotify-configmap:
           type: secret
-          secretName: zotify-music-config
+          name: zotify-music-config
           defaultMode: 420
           items:
               - key: config.json
@@ -115,7 +116,7 @@ spec:
             - path: /root/.config/zotify
       zotify-downloadsURLs:
           type: secret
-          secretName: zotify-music-config
+          name: zotify-music-config
           defaultMode: 420
           items:
               - key: downloads.txt
