@@ -34,20 +34,10 @@ spec:
             image:
               repository: alior99/zotify:latest
               tag: latest
-            imagePullPolicy: Always
+              pullPolicy: Always
             envFrom:
               - secretRef:
                   name: zotify-music-env
-            volumeMounts:
-              - mountPath: /root/temp
-                name: zotify-config
-              - mountPath: /root/Music
-                name: media
-                subPath: Music
-              - mountPath: /root/.config/zotify
-                name: zotify-configmap
-              - mountPath: /root/.config/urls
-                name: zotify-downloadsURLs
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
             probes:
@@ -108,22 +98,28 @@ spec:
         server: 192.168.86.9
         path: /PlexLib
         globalMounts:
-          - path: /library
+          - path: /root/Music
+            subPath: Music
       zotify-config:
-        persistentVolumeClaim:
-          claimName: zotify-config
+        eixtingClaim: zotify-config
+        globalMounts:
+          - path: /root/temp
       zotify-configmap:
-          secret:
-            secretName: zotify-music-config
-            defaultMode: 420
-            items:
+          type: secret
+          secretName: zotify-music-config
+          defaultMode: 420
+          items:
               - key: config.json
                 path: config.json
+          globalMounts:
+            - path: /root/.config/zotify
       zotify-downloadsURLs:
-          secret:
-            secretName: zotify-music-urls
-            defaultMode: 420
-            items:
+          type: secret
+          secretName: zotify-music-config
+          defaultMode: 420
+          items:
               - key: downloads.txt
                 path: downloads.txt
+          globalMounts:
+            - path: /root/.config/urls
 
