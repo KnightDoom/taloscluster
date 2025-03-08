@@ -33,13 +33,13 @@ spec:
           app:
             image:
               repository: ghcr.io/knightdoom/zotify
-              tag: latest@sha256:e91b0be8d21de121eadf1dfe2cd21a1deda1f94ff34ade0e3e93c470039c9520
+              tag: latest@sha256:e51933972c8c5d8cd2823cfbe84fa19276c8148d4707f40b8f2c1380f80b5d33
               pullPolicy: Always
             envFrom:
               - secretRef:
                   name: zotify-music-env
             command: ["/bin/sh","-c"]
-            args: [ " cp /root/.config/config/* /root/.config/zotify/ && sleep 5 && python3 -m zotify $ARGSS && sleep 600 "]
+            args: [ "sleep 10 && cp /root/.config/config/* /root/.config/zotify/ && sleep 5 && python3 -m zotify $ARGSS && sleep 600 "]
             #command: ["sleep","3600"]
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
