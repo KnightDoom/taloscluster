@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/knightdoom/zotify
-              tag: latest@sha256:e51933972c8c5d8cd2823cfbe84fa19276c8148d4707f40b8f2c1380f80b5d33
+              tag: latest@sha256:3f672413b0ff2587dcc58167ff6f84817199e3930fb4ccab77797194c29502ca
               pullPolicy: Always
             envFrom:
               - secretRef:
