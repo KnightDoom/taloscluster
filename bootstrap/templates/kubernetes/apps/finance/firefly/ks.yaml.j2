@@ -38,3 +38,25 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app3 firefly-aiworker
+  namespace: flux-system
+spec:
+  targetNamespace: finance
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app3
+  path: ./kubernetes/apps/finance/firefly/ai-worker
+  dependsOn:
+    - name: firefly
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: false
+  interval: 30m
+  timeout: 5m
+
