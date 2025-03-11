@@ -46,6 +46,8 @@ spec:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
               portNum: &port 8000
+              PGID: 1000
+              PUID: 1000
               TZ: America/New_York
             # envFrom: *envFrom
             probes:
@@ -63,8 +65,8 @@ spec:
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              readOnlyRootFilesystem: false
+              capabilities: { add: ["CHOWN"] }
             resources:
               requests:
                 cpu: 100m
@@ -73,7 +75,7 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
@@ -118,4 +120,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-
