@@ -62,7 +62,7 @@ spec:
                 memory: 4Gi
           browser:
             image:
-              repository: docker.io/browserless/chrome
+              repository: ghcr.io/browserless/chrome
               tag: latest@sha256:920475b96f2a76d49bb5a5e78da98b794119f87f9e26382f033a4f47f1e66534
               pullPolicy: IfNotPresent
 
@@ -101,14 +101,14 @@ spec:
                 memory: 512Mi
               limits:
                 memory: 1Gi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: { type: RuntimeDefault }
+      # defaultPodOptions:
+      #securityContext:
+      #  runAsNonRoot: true
+      #  runAsUser: 1000
+      #  runAsGroup: 1000
+      #  fsGroup: 1000
+      #  fsGroupChangePolicy: OnRootMismatch
+      #  seccompProfile: { type: RuntimeDefault } #}
     service:
       app:
         controller: changedetection
