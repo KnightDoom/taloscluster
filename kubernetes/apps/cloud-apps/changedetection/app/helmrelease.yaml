@@ -63,7 +63,7 @@ spec:
           browser:
             image:
               repository: docker.io/browserless/chrome
-              tag: latest@sha256:57d19e414d9fe4ae9d2ab12ba768c97f38d51246c5b31af55a009205c136012f
+              tag: latest@sha256:920475b96f2a76d49bb5a5e78da98b794119f87f9e26382f033a4f47f1e66534
               pullPolicy: IfNotPresent
 
             env:
