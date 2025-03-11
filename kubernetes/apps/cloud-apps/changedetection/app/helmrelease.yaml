@@ -67,7 +67,7 @@ spec:
               pullPolicy: IfNotPresent
 
             env:
-              - {name: PORT, value: &port2 "3000"}
+              - {name: PORT, value: &port2 3000}
               - {name: SCREEN_WIDTH, value: "1920"}
               - {name: SCREEN_HEIGHT, value: "1024"}
               - {name: SCREEN_DEPTH, value: "16"}
@@ -127,7 +127,7 @@ spec:
         #  nginx.ingress.kubernetes.io/auth-snippet: |
         #  proxy_set_header X-Forwarded-Host ;
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "change.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
