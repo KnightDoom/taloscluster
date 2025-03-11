@@ -1,0 +1,151 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: changedetection
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+     #enter values here for global overrides
+    controllers:
+      changedetection:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/dgtlmoon/changedetection.io
+              tag: "0.49.3@sha256:f87e0a23499679e7a0944bdaf0d3baa10b27e1a6354517d28f059e8611d4e085"
+            env:
+              PORT: &port 5000
+              USE_X_SETTINGS: 1
+              PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/browserless-cache-123
+              TZ: America/New_York
+            # envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 4Gi
+          browser:
+            image:
+              repository: docker.io/browserless/chrome
+              tag: latest@sha256:57d19e414d9fe4ae9d2ab12ba768c97f38d51246c5b31af55a009205c136012f
+              pullPolicy: IfNotPresent
+
+            env:
+              - {name: PORT, value: &port2 "3000"}
+              - {name: SCREEN_WIDTH, value: "1920"}
+              - {name: SCREEN_HEIGHT, value: "1024"}
+              - {name: SCREEN_DEPTH, value: "16"}
+              - {name: ENABLE_DEBUGGER, value: "false"}
+              - {name: PREBOOT_CHROME, value: "true"}
+              - {name: CONNECTION_TIMEOUT, value: "300000"}
+              - {name: MAX_CONCURRENT_SESSIONS, value: "10"}
+              - {name: CHROME_REFRESH_TIME, value: "600000"}
+              - {name: DEFAULT_BLOCK_ADS, value: "true"}
+              - {name: DEFAULT_STEALTH, value: "true"}
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port2
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 25m
+                memory: 512Mi
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: changedetection
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        #annotations:
+        #  nginx.ingress.kubernetes.io/app-root: /changedetection
+        #  external-dns.alpha.kubernetes.io/target: "external."
+        #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
+        #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
+        #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
+        #  nginx.ingress.kubernetes.io/auth-snippet: |
+        #  proxy_set_header X-Forwarded-Host ;
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        existingClaim: changedetection
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+

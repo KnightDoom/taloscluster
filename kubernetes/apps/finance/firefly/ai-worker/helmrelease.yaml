@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/knightdoom/firefly-iii-ai-categorize
-              tag: latest@@sha256:ab4ba23544768661e0c7fbfeb18a2dbf01c5c9c3b37440f571c126ceaaa30425
+              tag: latest@sha256:ab4ba23544768661e0c7fbfeb18a2dbf01c5c9c3b37440f571c126ceaaa30425
             env:
               portNum: &port 3000
               TRUSTED_PROXIES: "**"
