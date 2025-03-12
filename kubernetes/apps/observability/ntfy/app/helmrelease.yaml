@@ -2,13 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: apprise
+  name: ntfy
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 3.7.1
+     # version: 4.1.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -22,11 +22,12 @@ spec:
       retries: 3
 #  valuesFrom:
 #   - kind: ConfigMap
-#     name: apprise-helm-values
+#     name: ntfy-helm-values
   values:
      #enter values here for global overrides
     controllers:
-      apprise:
+      ntfy:
+      #  type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -40,20 +41,33 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/caronc/apprise
-              tag: 1.1.9@sha256:0ef025a04a2f7bc5869f294d44c2826ebfa2827b6c8069d643d1ca08fd982bd8
+              repository: docker.io/binwiederhier/ntfy
+              tag: latest
+              pullPolicy: Always
+            command: ["ntfy", "serve"]
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              portNum: &port 8000
-              PGID: 1000
-              PUID: 1000
+              portNum: &port 8080
+              NTFY_UPSTREAM_BASE_URL: https://ntfy.sh
+              NTFY_CACHE_FILE: "/var/cache/ntfy/cache.db"
+              NTFY_AUTH_FILE: "/var/cache/ntfy/auth.db"
+              NTFY_ATTACHMENT_CACHE_DIR: "/var/cache/ntfy/attachments"
+              NTFY_WEB_PUSH_FILE: "/var/cache/ntfy/webpush.db"
+              NTFY_ENABLE_LOGIN: false
+              NTFY_BEHIND_PROXY: true
+              NTFY_BASE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+              NTFY_LISTEN_HTTP: ":8080"
               TZ: America/New_York
+              #NTFY_AUTH_DEFAULT_ACCESS: deny-all
+              #NTFY_WEB_PUSH_PUBLIC_KEY: <public_key>
+              #NTFY_WEB_PUSH_PRIVATE_KEY: <private_key>
+              #NTFY_WEB_PUSH_EMAIL_ADDRESS: <email>
             # envFrom: *envFrom
             probes:
               liveness: &probes
-                enabled: false
-                custom: false
+                enabled: true
+                custom: true
                 spec:
                   httpGet:
                     path: /health
@@ -65,8 +79,8 @@ spec:
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: { add: ["CHOWN"] }
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 100m
@@ -75,15 +89,15 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
-        fsGroup: 0
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: apprise
+        controller: ntfy
         ports:
           http:
             port: *port
@@ -91,7 +105,7 @@ spec:
       app:
         className: internal
         #annotations:
-        #  nginx.ingress.kubernetes.io/app-root: /apprise
+        #  nginx.ingress.kubernetes.io/app-root: /ntfy
         #  external-dns.alpha.kubernetes.io/target: "external."
         #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
         #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
@@ -106,8 +120,10 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      config:
-        existingClaim: apprise
+      cache:
+        existingClaim: ntfy
+        globalMounts:
+          - path: /var/cache
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -120,3 +136,4 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
+
