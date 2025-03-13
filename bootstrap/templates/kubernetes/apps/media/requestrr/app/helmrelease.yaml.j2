@@ -23,8 +23,8 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: requestrr-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
     controllers:
       requestrr:
         annotations:
@@ -71,6 +71,7 @@ spec:
               limits:
                 memory: 4Gi
     defaultPodOptions:
+      hostname: notifiarr-talos
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
