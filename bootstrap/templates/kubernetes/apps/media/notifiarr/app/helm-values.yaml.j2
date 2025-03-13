@@ -5,7 +5,7 @@
           # secretKeyRef:
             # name: notifiarr-app-key
             # key: api-token
-            
+
     controllers:
       notifiarr:
         annotations:
@@ -52,6 +52,7 @@
               limits:
                 memory: 1Gi
     defaultPodOptions:
+      hostname: notifiarr-talos
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
