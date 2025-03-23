@@ -148,6 +148,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
+      nltk_data:
+        existingClaim: mealie
+        globalMounts:
+          - path: /var/www/nltk_data
       media:
         type: nfs
         server: 192.168.86.9
