@@ -1,0 +1,29 @@
+# https://github.com/ChuckPa/DBRepair
+
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+spec:
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+  containers:
+  - name: busybox
+    image: plexinc/pms-docker:latest
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: plex-config
+      mountPath: /config
+    securityContext:
+      privileged: true
+      allowPrivilegeEscalation: true
+      runAsUser: 0
+      runAsGroup: 0
+  volumes:
+  - name: plex-config
+    persistentVolumeClaim:
+      claimName: plex-config
+EOF
