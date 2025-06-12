@@ -45,6 +45,7 @@ spec:
               NEXTAUTH_URL: "https://hoarder.${SECRET_DOMAIN}"
               DISABLE_SIGNUPS: "false"
               DISABLE_PASSWORD_AUTH: "true"
+              INFERENCE_ENABLE_AUTO_SUMMARIZATION: "true"
             envFrom:
               - secretRef:
                   name: hoarder-env
