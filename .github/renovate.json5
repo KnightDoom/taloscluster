@@ -89,6 +89,12 @@
       ],
     },
     {
+      "description": ["Auto merge all patch updates"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
       description: [
         'Talos Group',
       ],
