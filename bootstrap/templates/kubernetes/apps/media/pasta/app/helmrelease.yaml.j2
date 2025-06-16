@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: hoarder
+  name: pasta
 spec:
   interval: 30m
   chart:
@@ -22,33 +22,32 @@ spec:
       retries: 3
 #  valuesFrom:
 #   - kind: ConfigMap
-#     name: hoarder-helm-values
+#     name: pasta-helm-values
   values:
      #enter values here for global overrides
     controllers:
-      hoarder:
+      pasta:
         annotations:
           reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
         containers:
           app:
             image:
-              repository: ghcr.io/karakeep-app/karakeep
-              tag: 0.25.0
+              repository: cglatot/pasta
+              tag: 1.6.6@sha256:e7d8050f3800c44628753da337ee267f23d408d19735bc4c62e21027bdde40fe
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              portNum: &port 3000
+              portNum: &port 80
               TZ: America/New_York
-              DATA_DIR: "/config"
-              #NEXTAUTH_URL: "http://hoarder:3000"
-              NEXTAUTH_URL_INTERNAL: "http://localhost:3000"
-              NEXTAUTH_URL: "https://hoarder.${SECRET_DOMAIN}"
-              DISABLE_SIGNUPS: "false"
-              DISABLE_PASSWORD_AUTH: "true"
-              INFERENCE_ENABLE_AUTO_SUMMARIZATION: "true"
-            envFrom:
-              - secretRef:
-                  name: hoarder-env
+            # envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
@@ -64,8 +63,8 @@ spec:
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: { add: ["CHOWN"] }
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 100m
@@ -74,25 +73,31 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: hoarder
+        controller: pasta
         ports:
           http:
             port: *port
     ingress:
       app:
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        className: internal
+        #annotations:
+        #  nginx.ingress.kubernetes.io/app-root: /pasta
+        #  external-dns.alpha.kubernetes.io/target: "external."
+        #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
+        #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
+        #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
+        #  nginx.ingress.kubernetes.io/auth-snippet: |
+        #  proxy_set_header X-Forwarded-Host ;
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}."
             paths:
               - path: /
                 service:
@@ -100,7 +105,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: hoarder
+        existingClaim: pasta
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -113,4 +118,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-
