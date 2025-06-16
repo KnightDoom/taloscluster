@@ -50,18 +50,18 @@ spec:
               LOG_LEVEL: info
             # envFrom: *envFrom
             probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: *port
-                  initialDelaySeconds: 15
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+              # liveness: &probes
+              #   enabled: true
+              #   custom: true
+              #   spec:
+              #     httpGet:
+              #       path: /health
+              #       port: *port
+              #     initialDelaySeconds: 15
+              #     periodSeconds: 10
+              #     timeoutSeconds: 1
+              #     failureThreshold: 3
+              # readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

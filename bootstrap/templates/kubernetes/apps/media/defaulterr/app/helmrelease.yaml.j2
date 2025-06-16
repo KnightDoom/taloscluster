@@ -49,7 +49,7 @@ spec:
               TZ: America/New_York
               LOG_LEVEL: info
             # envFrom: *envFrom
-            probes:
+            {# probes:
               liveness: &probes
                 enabled: true
                 custom: true
@@ -61,7 +61,7 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
-              readiness: *probes
+              readiness: *probes #}
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
