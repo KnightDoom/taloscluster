@@ -119,7 +119,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      logs:
+      logs2:
         type: emptyDir
         globalMounts:
           - path: /usr/local/apache2/logs

@@ -107,19 +107,11 @@ spec:
     persistence:
       config:
         existingClaim: pasta
-      # scripts:
-        # type: configMap
-        # name: radarr-configmap
-        # defaultMode: 0775
-        # globalMounts:
-          # - path: /scripts/pushover-notifier.sh
-            # subPath: pushover-notifier.sh
-            # readOnly: true
       tmp:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      logs:
+      logs2:
         type: emptyDir
         globalMounts:
           - path: /usr/local/apache2/logs
