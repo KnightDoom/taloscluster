@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pasta
+  name: defaulterr
 spec:
   interval: 30m
   chart:
@@ -22,11 +22,11 @@ spec:
       retries: 3
 #  valuesFrom:
 #   - kind: ConfigMap
-#     name: pasta-helm-values
+#     name: defaulterr-helm-values
   values:
      #enter values here for global overrides
     controllers:
-      pasta:
+      defaulterr:
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -40,14 +40,14 @@ spec:
         containers:
           app:
             image:
-              repository: cglatot/pasta
-              tag: 1.6.6@sha256:e7d8050f3800c44628753da337ee267f23d408d19735bc4c62e21027bdde40fe
+              repository: varthe/defaulterr
+              tag: latest@sha256:7fa294016fe73dab92bbf0f76c7dc4a5f77c89c7921bcca935c90f96bdd30687
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              portNum: &port 80
-              serverName: pasta.${SECRET_DOMAIN}
+              portNum: &port 3184
               TZ: America/New_York
+              LOG_LEVEL: info
             # envFrom: *envFrom
             probes:
               liveness: &probes
@@ -55,7 +55,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /health
                     port: *port
                   initialDelaySeconds: 15
                   periodSeconds: 10
@@ -82,7 +82,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: pasta
+        controller: defaulterr
         ports:
           http:
             port: *port
@@ -90,7 +90,7 @@ spec:
       app:
         className: internal
         #annotations:
-        #  nginx.ingress.kubernetes.io/app-root: /pasta
+        #  nginx.ingress.kubernetes.io/app-root: /defaulterr
         #  external-dns.alpha.kubernetes.io/target: "external."
         #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
         #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
@@ -98,7 +98,7 @@ spec:
         #  nginx.ingress.kubernetes.io/auth-snippet: |
         #  proxy_set_header X-Forwarded-Host ;
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "defsubs.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -106,12 +106,30 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: pasta
+        existingClaim: defaulterr
+      config-secret:
+        type: secret
+        name: defaulterr-config
+        defaultMode: 420
+        items:
+          - key: config.yaml
+            path: config.yaml
+        globalMounts:
+          - path: /config
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
       tmp:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      logs2:
+      logs:
         type: emptyDir
         globalMounts:
-          - path: /usr/local/apache2/logs
+          - path: /logs
+tas

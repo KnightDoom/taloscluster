@@ -16,3 +16,4 @@ resources:
   - ./qbit/ks.yaml
   - ./zotify/ks.yaml
   - ./pasta/ks.yaml
+  - ./defaulterr/ks.yaml
