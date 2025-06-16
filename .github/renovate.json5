@@ -89,8 +89,9 @@
       ],
     },
     {
-      "description": ["Auto merge all patch updates"],
+      "description": ["Auto merge all patch updates except OCIRepository"],
       "matchUpdateTypes": ["patch"],
+      "excludePackageNames": ["*OCIRepository*"],
       "automerge": true,
       "automergeType": "pr"
     },
