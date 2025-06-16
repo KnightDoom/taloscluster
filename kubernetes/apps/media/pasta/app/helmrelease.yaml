@@ -46,7 +46,7 @@ spec:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
               portNum: &port 80
-              serverName: pasta.{{ SECRET_DOMAIN }}
+              serverName: pasta.${SECRET_DOMAIN}
               TZ: America/New_York
             # envFrom: *envFrom
             probes:
