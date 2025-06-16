@@ -98,7 +98,7 @@ spec:
         #  nginx.ingress.kubernetes.io/auth-snippet: |
         #  proxy_set_header X-Forwarded-Host ;
         hosts:
-          - host: "{{ .Release.Name }}."
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
