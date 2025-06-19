@@ -86,24 +86,24 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      app:
-        className: internal
-        #annotations:
-        #  nginx.ingress.kubernetes.io/app-root: /defaulterr
-        #  external-dns.alpha.kubernetes.io/target: "external."
-        #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
-        #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
-        #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
-        #  nginx.ingress.kubernetes.io/auth-snippet: |
-        #  proxy_set_header X-Forwarded-Host ;
-        hosts:
-          - host: "defsubs.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+    # ingress:
+    #   app:
+    #     className: internal
+    #     #annotations:
+    #     #  nginx.ingress.kubernetes.io/app-root: /defaulterr
+    #     #  external-dns.alpha.kubernetes.io/target: "external."
+    #     #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
+    #     #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
+    #     #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
+    #     #  nginx.ingress.kubernetes.io/auth-snippet: |
+    #     #  proxy_set_header X-Forwarded-Host ;
+    #     hosts:
+    #       - host: "defsubs.${SECRET_DOMAIN}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: app
+    #               port: http
     persistence:
      # config:
       #  existingClaim: defaulterr
