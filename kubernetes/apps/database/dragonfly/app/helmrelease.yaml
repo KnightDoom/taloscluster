@@ -25,6 +25,8 @@ spec:
   values:
     controllers:
       dragonfly-operator:
+        serviceAccount:
+          identifier: myServiceAccount
         strategy: RollingUpdate
         containers:
           app:
@@ -91,7 +93,6 @@ spec:
     serviceAccount:
       myServiceAccount:
         staticToken: true
-      name: *app
     serviceMonitor:
       app:
         serviceName: *app
