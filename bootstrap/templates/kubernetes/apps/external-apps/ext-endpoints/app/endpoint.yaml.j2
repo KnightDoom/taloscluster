@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: hass-endpoint
+subsets:
+  - addresses:
+      - ip: 192.168.86.22
+    ports:
+      - port: 8123
+      - port: 4357
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hass-endpoint
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8123
+    - protocol: TCP
+      port: 4357
+      targetPort: 4357
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    derp: "on"
+    external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+    nginx.ingress.kubernetes.io/auth-response-headers: Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid
+    nginx.ingress.kubernetes.io/auth-signin: https://sso2.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri
+    nginx.ingress.kubernetes.io/auth-snippet: |
+      proxy_set_header X-Forwarded-Host $http_host;
+    nginx.ingress.kubernetes.io/auth-url: http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+  name: hass-ingress
+spec:
+  ingressClassName: external
+  rules:
+  - host: hass.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: hass-endpoint-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: observer.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: hass-endpoint-svc
+            port:
+              number: 4357
+        path: /
+        pathType: Prefix
+
+
