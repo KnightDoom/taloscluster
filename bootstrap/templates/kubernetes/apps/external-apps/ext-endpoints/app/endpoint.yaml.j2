@@ -7,7 +7,9 @@ subsets:
       - ip: 192.168.86.22
     ports:
       - port: 8123
+        name: http
       - port: 4357
+        name: observer
 ---
 apiVersion: v1
 kind: Service
