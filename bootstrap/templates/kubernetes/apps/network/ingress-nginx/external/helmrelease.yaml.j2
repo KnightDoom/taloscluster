@@ -53,6 +53,9 @@ spec:
         client-header-timeout: 120
         annotations-risk-level: "Critical"
         allow-snippet-annotations: "true"
+        proxy-buffer-size: "16k"
+        proxy-buffers: "4 16k"
+        proxy-busy-buffers-size: "32k"
         enable-brotli: "true"
         enable-real-ip: "true"
         hsts-max-age: 31449600
@@ -66,7 +69,6 @@ spec:
           "request_length": $request_length, "duration": $request_time, "method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
-        proxy-buffer-size: 16k
         ssl-protocols: TLSv1.3 TLSv1.2
       metrics:
         enabled: true
