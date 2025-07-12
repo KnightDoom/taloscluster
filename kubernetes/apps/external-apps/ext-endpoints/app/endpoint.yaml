@@ -25,9 +25,11 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8123
+      name: http
     - protocol: TCP
       port: 4357
       targetPort: 4357
+      name: observer
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
