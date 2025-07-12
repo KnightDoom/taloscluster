@@ -10,13 +10,13 @@ endpoints:
       - "192.168.86.22"
 ports:
   - port: 8123
-    name: http
+    name: main
     appProtocol: http
     protocol: TCP
-  - port: 4357
-    name: observer
-    appProtocol: http
-    protocol: TCP
+  # - port: 4357
+  #   name: observer
+  #   appProtocol: http
+  #   protocol: TCP
 ---
 apiVersion: v1
 kind: Service
@@ -30,13 +30,13 @@ spec:
   #type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
+      port: 8123
       targetPort: 8123
-      name: http
-    - protocol: TCP
-      port: 4357
-      targetPort: 4357
-      name: observer
+      name: main
+    # - protocol: TCP
+    #   port: 4357
+    #   targetPort: 4357
+    #   name: observer
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -60,18 +60,18 @@ spec:
           service:
             name: hass-endpoint
             port:
-              number: 80
+              number: 8123
         path: /
         pathType: Prefix
-  - host: observer.${SECRET_DOMAIN}
-    http:
-      paths:
-      - backend:
-          service:
-            name: hass-endpoint
-            port:
-              number: 4357
-        path: /
-        pathType: Prefix
+  # - host: observer.${SECRET_DOMAIN}
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: hass-endpoint
+  #           port:
+  #             number: 4357
+  #       path: /
+  #       pathType: Prefix
 
 
