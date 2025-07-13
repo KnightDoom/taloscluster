@@ -47,8 +47,6 @@ spec:
               repository: ghcr.io/mealie-recipes/mealie
               tag: v3.0.0@sha256:6d6efd40f9758142202362195dabdf7eb9a9761a32bf8931289b2d89d2ec98b3
             env:
-              # RADARR__APP__INSTANCENAME: Radarr
-              # RADARR__APP__THEME: dark
               portNum: &port 9000
               TZ: America/New_York
               THEME_LIGHT_PRIMARY: "#E58325"
@@ -65,7 +63,6 @@ spec:
               THEME_DARK_INFO: "#1976D2"
               THEME_DARK_WARNING:  "#FF6D00"
               THEME_DARK_ERROR: "#EF5350"
-              OIDC_AUTH_ENABLED: false
               LDAP_AUTH_ENABLED: false
               ALLOW_SIGNUP: true
               DEFAULT_GROUP: Home
@@ -149,7 +146,8 @@ spec:
         globalMounts:
           - path: /tmp
       nltk-data:
-        existingClaim: mealie
+        type: emptyDir
+        #existingClaim: mealie
         globalMounts:
           - path: /var/www/nltk_data
       media:
