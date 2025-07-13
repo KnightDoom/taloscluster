@@ -39,7 +39,7 @@ spec:
               - secretRef:
                   name: zotify-music-env
             command: ["/bin/sh","-c"]
-            args: [ "sleep 10 && cp /root/.config/config/* /root/.config/zotify/ && sleep 5 && python3 -m zotify $ARGSS && sleep 600 "]
+            args: [ "sleep 10 && cp /root/.config/config/* /root/.config/zotify/ && sleep 5 && python3 -m zotify $ARGSS && sleep 36000 "]
             #command: ["sleep","3600"]
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File

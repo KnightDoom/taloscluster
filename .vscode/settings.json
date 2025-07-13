@@ -9,8 +9,6 @@
     },
     "vs-kubernetes": {
         "vs-kubernetes.kubeconfig": "./kubeconfig",
-        "vs-kubernetes.knownKubeconfigs": [
-          "./kubeconfig"
-      ]
+        "vs-kubernetes.knownKubeconfigs": []
     }
 }
