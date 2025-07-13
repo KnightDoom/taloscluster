@@ -93,14 +93,14 @@ spec:
     #               port: http
     persistence:
       config:
-      #  existingClaim: free-game-notifier
-        type: configMap
-        name: free-game-notifier-configmap
-        defaultMode: 0775
+        type: secret
+        name: free-game-notifier-config-env
+        defaultMode: 0777
+        items:
+            - key: default.yaml
+              path: default.yaml
         globalMounts:
-          - path: /app/config/default.yaml
-            subPath: default.yaml
-            readOnly: false
+          - path: /app/config/
       tmp:
         type: emptyDir
         globalMounts:
