@@ -1,0 +1,108 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: free-game-notifier
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s #bjw-s-labs
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: free-game-notifier-helm-values
+  values:
+     #enter values here for global overrides
+    controllers:
+      free-game-notifier:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # initContainers:
+          # init-db:
+            # image:
+              # repository: ghcr.io/onedr0p/postgres-init
+              # tag: 16
+            # envFrom: &envFrom
+              # - secretRef:
+                  # name: radarr-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/knightdoom/free-game-notifier
+              tag: latest
+            env:
+              portNum: &port
+              TZ: America/New_York
+            probes:
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: free-game-notifier
+        ports:
+          http:
+            port: *port
+    # ingress:
+    #   app:
+    #     className: internal
+    #     #annotations:
+    #     #  nginx.ingress.kubernetes.io/app-root: /free-game-notifier
+    #     #  external-dns.alpha.kubernetes.io/target: "external."
+    #     #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
+    #     #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
+    #     #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
+    #     #  nginx.ingress.kubernetes.io/auth-snippet: |
+    #     #  proxy_set_header X-Forwarded-Host ;
+    #     hosts:
+    #       - host: "{{ .Release.Name }}."
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: app
+    #               port: http
+    persistence:
+      config:
+      #  existingClaim: free-game-notifier
+        type: configMap
+        name: free-game-notifier-configmap
+        defaultMode: 0775
+        globalMounts:
+          - path: /app/config/default.yaml
+            subPath: default.yaml
+            readOnly: false
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+
