@@ -26,6 +26,9 @@ spec:
      #enter values here for global overrides
     controllers:
       free-game-claimer:
+        type: cronjob
+        cronjob:
+          schedule: "2 0 * * *"
         annotations:
           reloader.stakater.com/auto: "true"
         # initContainers:
@@ -41,13 +44,6 @@ spec:
             image:
               repository: ghcr.io/vogler/free-games-claimer
               tag: latest@sha256:ed65ccb9d075da9411758e0c7fec4a1ec0ee35bda94557afe49ca91dba4f7fda
-            command:
-              - /bin/bash
-              - -c
-              - node
-              - prime-gaming;
-              - node
-              - gog
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
@@ -58,7 +54,7 @@ spec:
                   name: free-game-claimer-env
             probes:
               liveness: &probes
-                enabled: true
+                enabled: false
                 custom: true
                 spec:
                   tcpSocket:
@@ -115,13 +111,13 @@ spec:
         existingClaim: free-game-claimer
         globalMounts:
          - path: /fgc/data
-      # scripts:
-        # type: configMap
-        # name: radarr-configmap
-        # defaultMode: 0775
-        # globalMounts:
-          # - path: /scripts/pushover-notifier.sh
-            # subPath: pushover-notifier.sh
+      scripts:
+         type: configMap
+         name: fgc-configmap
+         defaultMode: 0775
+         globalMounts:
+           - path: /fgc/epic-games.js
+             subPath: epic-games.js
             # readOnly: true
       tmp:
         type: emptyDir
