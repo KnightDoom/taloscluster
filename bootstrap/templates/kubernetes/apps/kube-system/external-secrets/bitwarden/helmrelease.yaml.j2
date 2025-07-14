@@ -24,8 +24,9 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/larivierec/bitwarden-cli
-              tag: latest
+           #   repository: ghcr.io/larivierec/bitwarden-cli
+              repository: ghcr.io/knightdoom/bitwarden-cli
+              tag: latest@sha256:a1bedd6fe23ff671495289aa56be38e5d9427f6de89a3cfe6c5abd9a5c281963
             envFrom:
                - secretRef:
                    name: bitwarden-cli
@@ -51,4 +52,8 @@ spec:
         ports:
           http:
             port: 8087
-    
+    persistence:
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /config
