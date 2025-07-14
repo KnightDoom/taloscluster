@@ -24,8 +24,8 @@ spec:
         containers:
           app:
             image:
+           #   repository: ghcr.io/larivierec/bitwarden-cli
               repository: ghcr.io/knightdoom/bitwarden-cli
-              #ghcr.io/larivierec/bitwarden-cli
               tag: latest@sha256:a1bedd6fe23ff671495289aa56be38e5d9427f6de89a3cfe6c5abd9a5c281963
             envFrom:
                - secretRef:

@@ -10,3 +10,4 @@ resources:
   - ./changedetection/ks.yaml
   - ./omni/ks.yaml
   - ./free-game-notifier/ks.yaml
+  - ./free-game-claimer/ks.yaml

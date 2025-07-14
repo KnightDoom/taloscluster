@@ -1,0 +1,39 @@
+FROM debian:bullseye
+
+ARG VERSION=2024.9.0
+ARG TARGETPLATFORM=linux/amd64
+
+# Set up working directory
+WORKDIR /usr/local/bin
+
+# Install required packages
+RUN apt update && apt install -y curl unzip libsecret-1-0 jq
+
+# Download and install Bitwarden CLI
+RUN curl -LO "https://github.com/bitwarden/clients/releases/download/cli-v${VERSION}/bw-oss-linux-${VERSION}.zip" \
+    && unzip *.zip \
+    && chmod +x ./bw \
+    && rm *.zip
+
+# Copy custom entrypoint script
+COPY entrypoint.sh /
+
+# Set entrypoint
+CMD ["/entrypoint.sh"]
+
+
+
+Entrypoint is this:
+
+#!/usr/bin/env bash
+
+set -e
+
+bw config server ${BW_HOST}
+
+bw login --apikey --raw
+export BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
+bw unlock --check
+
+echo 'Running `bw server` on port 8087'
+bw serve --hostname 0.0.0.0 #--disable-origin-protection
