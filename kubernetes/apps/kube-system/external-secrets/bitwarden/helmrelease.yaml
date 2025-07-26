@@ -26,7 +26,7 @@ spec:
             image:
            #   repository: ghcr.io/larivierec/bitwarden-cli
               repository: ghcr.io/knightdoom/bitwarden-cli
-              tag: latest@sha256:ddbf39c4271d6e4bff2b5481c348f8d4eeae8d21a8eacc8a17a6575053e8f1e0
+              tag: latest@sha256:bfd392678af507f0e54fe1145d8c22a2c0031f8f3734efcab5e2a8ca73db6d79
             envFrom:
                - secretRef:
                    name: bitwarden-cli
