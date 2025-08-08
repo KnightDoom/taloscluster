@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository:  baldissaramatheus/tasks.md
-              tag: 2.5.4
+              tag: 3.0.4
             args:
               - |
                  echo "1"
