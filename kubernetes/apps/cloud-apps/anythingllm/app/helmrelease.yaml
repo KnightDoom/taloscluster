@@ -50,8 +50,9 @@ spec:
               STORAGE_DIR: /config
               UID: "1000"
               GID: "1000"
-
-            # envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: anythingllm-env
             probes:
               liveness: &probes
                 custom: true
