@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # Include ingress.yaml only if required
+  
+  # Include secret.sops.yaml only if required
+  
+  - ./helmrelease.yaml
+#configMapGenerator:
+#  - name: anythingllm-helm-values
+#    files:
+#      - values.yaml=./helm-values.yaml
+#configurations:
+#  - kustomizeconfig.yaml
+generatorOptions:
+  disableNameSuffixHash: true
