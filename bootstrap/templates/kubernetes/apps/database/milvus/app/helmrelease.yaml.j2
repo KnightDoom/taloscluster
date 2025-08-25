@@ -40,6 +40,10 @@ spec:
     minio:
       enabled: true
       mode: standalone
+      accessKey: minioadmin
+      secretKey: minioadmin
+      persistence:
+        size: 10Gi
     etcd:
       replicaCount: 1
     pulsarv3:

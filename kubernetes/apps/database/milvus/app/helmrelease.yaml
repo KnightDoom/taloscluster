@@ -44,6 +44,10 @@ spec:
     minio:
       enabled: true
       mode: standalone
+      accessKey: minioadmin
+      secretKey: minioadmin
+      persistence:
+        size: 10Gi
     standalone:
       enabled: true
       resources:
