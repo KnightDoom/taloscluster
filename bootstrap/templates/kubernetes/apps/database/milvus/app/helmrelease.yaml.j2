@@ -37,6 +37,10 @@ spec:
         pullPolicy: IfNotPresent
     cluster:
       enabled: false
+    etcd:
+      replicaCount: 1
+    pulsarv3:
+      enabled: false
     minio:
       enabled: true
       mode: standalone
@@ -44,10 +48,6 @@ spec:
       secretKey: minioadmin
       persistence:
         size: 10Gi
-    etcd:
-      replicaCount: 1
-    pulsarv3:
-      enabled: false
     standalone:
       enabled: true
       resources:

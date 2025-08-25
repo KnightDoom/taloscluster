@@ -47,11 +47,10 @@ spec:
               # RADARR__APP__THEME: dark
               portNum: &port 3001
               TZ: America/New_York
-              STORAGE_DIR: /config
+              STORAGE_DIR: "/app/server/storage"
               UID: "1000"
               GID: "1000"
               GENERIC_OPENAI_STREAMING_DISABLED: "true"
-
             envFrom:
               - secretRef:
                   name: anythingllm-env
@@ -98,7 +97,7 @@ spec:
       app:
         className: external
         annotations:
-        # - nginx.ingress.kubernetes.io/app-root: /tasks
+        # - nginx.ingress.kubernetes.io/app-root: /
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
                   # This should be the in-cluster DNS name for the authentik outpost service
         # as when the external URL is specified here, nginx will overwrite some crucial headers
@@ -121,6 +120,11 @@ spec:
     persistence:
       config:
         existingClaim: anythingllm
+        globalMounts:
+          - path: "/app/server/storage"
+            subPath: storage
+          - path: "/app/server/.env"
+            subPath: .env
       # scripts:
         # type: configMap
         # name: radarr-configmap
