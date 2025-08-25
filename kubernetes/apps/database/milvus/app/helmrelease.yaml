@@ -33,7 +33,7 @@ spec:
         app.kubernetes.io/name: milvus
     image:
       all:
-        tag: 2.6.0
+        tag: v2.6.0
         pullPolicy: IfNotPresent
     cluster:
       enabled: false
