@@ -18,6 +18,7 @@ resources:
   - ./userinit-controller.yaml
   - ./stakater.yaml
   - ./external-secrets.yaml
+  - ./zilliztech.yaml
  # - ./onedr0p.yaml
   - ./nvdp.yaml
   - ./longhorn.yaml

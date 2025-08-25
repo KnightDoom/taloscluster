@@ -1,0 +1,74 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app milvus
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: milvus
+      version: 5.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: zilliztech
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    monitoring: true
+    install:
+      clusterLabels:
+        app.kubernetes.io/name: milvus
+    image:
+      all:
+        tag: 2.6.0
+        pullPolicy: IfNotPresent
+    cluster:
+      enabled: false
+    etcd:
+      replicaCount: 1
+    pulsarv3:
+      enabled: false
+    standalone:
+      enabled: true
+      resources:
+        requests:
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+    woodpecker:
+      enabled: true
+    streaming:
+      enabled: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: milvus-ingress
+  #annotations:
+    #external-dns.alpha.kubernetes.io/target: "lh.${SECRET_DOMAIN}"
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "milvus.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: milvus-milvus
+                port:
+                  number: 80
