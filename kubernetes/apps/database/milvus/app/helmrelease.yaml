@@ -41,6 +41,9 @@ spec:
       replicaCount: 1
     pulsarv3:
       enabled: false
+    minio:
+      enabled: true
+      mode: standalone
     standalone:
       enabled: true
       resources:

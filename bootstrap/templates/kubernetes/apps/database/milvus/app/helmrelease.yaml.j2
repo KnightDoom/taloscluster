@@ -37,6 +37,9 @@ spec:
         pullPolicy: IfNotPresent
     cluster:
       enabled: false
+    minio:
+      enabled: true
+      mode: standalone
     etcd:
       replicaCount: 1
     pulsarv3:
