@@ -50,6 +50,8 @@ spec:
               STORAGE_DIR: /config
               UID: "1000"
               GID: "1000"
+              GENERIC_OPENAI_STREAMING_DISABLED: "true"
+
             envFrom:
               - secretRef:
                   name: anythingllm-env
@@ -94,15 +96,21 @@ spec:
             port: 9090
     ingress:
       app:
-        className: internal
-        #annotations:
-        #  nginx.ingress.kubernetes.io/app-root: /anythingllm
-        #  external-dns.alpha.kubernetes.io/target: "external."
-        #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
-        #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2./outpost.goauthentik.io/start?rd=://"
-        #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
-        #  nginx.ingress.kubernetes.io/auth-snippet: |
-        #  proxy_set_header X-Forwarded-Host ;
+        className: external
+        annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /tasks
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+                  # This should be the in-cluster DNS name for the authentik outpost service
+        # as when the external URL is specified here, nginx will overwrite some crucial headers
+          nginx.ingress.kubernetes.io/auth-url: |-
+            http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+        # If you're using domain-level auth, use the authentication URL instead of the application URL
+          nginx.ingress.kubernetes.io/auth-signin: |-
+            https://sso2.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri
+          nginx.ingress.kubernetes.io/auth-response-headers: |-
+            Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            proxy_set_header X-Forwarded-Host $http_host;
         hosts:
           - host: "llm.${SECRET_DOMAIN}"
             paths:
