@@ -317,6 +317,16 @@
       ],
     },
   ],
+  regexManagers: [
+    {
+      "matchStrings": [
+        "FROM fireflyiii/core:(?<currentValue>version-[0-9.]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "fireflyiii/core",
+      "versioningTemplate": "loose"
+    },
+  ],
   customManagers: [
     {
       customType: 'regex',
@@ -330,6 +340,7 @@
         'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+:(&\\S+\\s)?(?<currentValue>(version-)?\\S+)',
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
+      versioningTemplate: 'loose',
     },
   ],
 }
