@@ -327,10 +327,9 @@
         '/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/',
       ],
       matchStrings: [
-        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+: (&\\S+\\s)?(?<currentValue>\\S+)',
+        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+:(&\\S+\\s)?(?<currentValue>(version-)?\\S+)',
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
-      versioningTemplate: 'loose',
     },
   ],
 }
