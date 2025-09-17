@@ -12,11 +12,11 @@ spec:
 
   dataVolumeClaimSpec:
     #storageClassName: longhorn
+    dataSource:
+      kind: PersistentVolumeClaim
+      name: pgadmin-data-pvc
     accessModes:
     - "ReadWriteOnce"
-    resources:
-      requests:
-        storage: 3Gi
   serverGroups:
   - name: postgres
     postgresClusterSelector: {}
