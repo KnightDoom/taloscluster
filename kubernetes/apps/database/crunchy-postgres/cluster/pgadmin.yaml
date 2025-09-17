@@ -11,7 +11,7 @@ spec:
       key: password
 
   dataVolumeClaimSpec:
-    storageClassName: longhorn
+    #storageClassName: longhorn
     accessModes:
     - "ReadWriteOnce"
     resources:
