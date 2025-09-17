@@ -17,6 +17,9 @@ spec:
       name: pgadmin-data-pvc
     accessModes:
     - "ReadWriteOnce"
+    resources:
+      requests:
+        storage: 1Gi
   serverGroups:
   - name: postgres
     postgresClusterSelector: {}
