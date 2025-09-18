@@ -23,8 +23,8 @@ spec:
 #  valuesFrom:
 #   - kind: ConfigMap
 #     name: firefly-helm-values
-  values: 
-     #enter values here for global overrides  
+  values:
+     #enter values here for global overrides
     controllers:
       fireflydi:
         annotations:
@@ -63,7 +63,7 @@ spec:
               SESSION_LIFETIME: "120"
               IS_EXTERNAL: "false"
               REDIS_HOST: "127.0.0.1"
-              REDIS_PASSWORD: "null" 
+              REDIS_PASSWORD: "null"
               REDIS_PORT: "6379"
               ASSET_URL: ""
               # always use quotes
@@ -98,7 +98,7 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 100Mi
+                memory: 101Mi
               limits:
                 memory: 4Gi
       fireflydi-cron:
@@ -107,7 +107,7 @@ spec:
           schedule: "0 0 * * *"
         containers:
           fireflydi-cron:
-            image: 
+            image:
               repository: yauritux/busybox-curl
               tag: latest
             command:
@@ -196,7 +196,7 @@ metadata:
 data:
   script.sh: |
     #! /bin/sh
-                  
+
     # Optional: ensure 'curl' is available (uncomment if needed)
     # apk add --no-cache curl
     # The Bash script:
