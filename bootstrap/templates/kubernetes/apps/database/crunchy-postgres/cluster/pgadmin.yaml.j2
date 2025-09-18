@@ -9,14 +9,17 @@ spec:
     passwordRef:
       name: pgadmin-password-secret
       key: password
-  
+
   dataVolumeClaimSpec:
-    storageClassName: longhorn
+    #storageClassName: longhorn
+    dataSource:
+      kind: PersistentVolumeClaim
+      name: pgadmin-data-pvc
     accessModes:
     - "ReadWriteOnce"
     resources:
       requests:
-        storage: 5Gi
+        storage: 1Gi
   serverGroups:
   - name: postgres
     postgresClusterSelector: {}
@@ -52,7 +55,7 @@ spec:
       targetPort: 5050
   selector:
     postgres-operator.crunchydata.com/pgadmin: pgadmin
-  
+
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
