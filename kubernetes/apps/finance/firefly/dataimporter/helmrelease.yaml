@@ -94,7 +94,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: true
               readOnlyRootFilesystem: false
-              runAsUser: 0
+              runAsUser: 33
               runAsNonRoot: false
               capabilities: { add: ["CHOWN"] }
             resources:
