@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/linuxserver/apprise-api
-              tag: 1.2.2@sha256:31fc75e049546a808fb287af2d26b934c6417d1961c739e8fb583066de99bfca
+              tag: 1.2.2@sha256:21295ffabb1e93ac751662160aaa514c6d7f6acc8dfcbe956c9fb32384d51be6
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
