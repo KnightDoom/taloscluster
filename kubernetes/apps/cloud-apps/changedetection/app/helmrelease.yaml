@@ -63,7 +63,7 @@ spec:
           browser:
             image:
               repository: ghcr.io/browserless/chrome
-              tag: latest@sha256:8e9ee0175dddd56e2468879c8d78440ec9eff31b44d1e1f9a7e8f11d7e163578
+              tag: latest@sha256:9479cb6e69911d9c613f6f768f560a29bf16155c6f0436d818c15e6ec6d07dee
               pullPolicy: IfNotPresent
 
             env:
