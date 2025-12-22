@@ -75,12 +75,20 @@ spec:
               - name: VPN_INTERFACE
                 value: "wg0"
               - name: VPN_SERVICE_PROVIDER
-                value: "nordvpn"
+                value: "custom"
               - name: WIREGUARD_PRIVATE_KEY
                 valueFrom:
                   secretKeyRef:
                     name: qbit-info
                     key: nordwg
+              - name: WIREGUARD_ENDPOINT_IP
+                value: "191.96.36.148"
+              - name: WIREGUARD_ENDPOINT_PORT
+                value: "1337"
+              - name: WIREGUARD_PUBLIC_KEY
+                value: "TBydWswUWShiPaRXi2/1Pn4qzNVdCVOdD3EL7+cJghE="
+              - name: WIREGUARD_ADDRESSES
+                value: "10.24.223.65/32"
               - name: FIREWALL_INPUT_PORTS
                 value: 10095
               - name: FIREWALL_OUTBOUND_SUBNETS
@@ -88,7 +96,7 @@ spec:
               - name: TZ
                 value: "America/New_York"
               - name: DNS_ADDRESS
-                value:  208.67.222.222
+                value:  1.1.1.1
               - name: BLOCK_MALICIOUS
                 value: 'off'
             # envFrom: *envFrom
