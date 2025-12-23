@@ -66,8 +66,6 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: latest
             env:
-#              - name: DOT
-#                value: "off"
               - name: portNum
                 value: "8080"
               - name: VPN_TYPE
@@ -75,12 +73,20 @@ spec:
               - name: VPN_INTERFACE
                 value: "wg0"
               - name: VPN_SERVICE_PROVIDER
-                value: "nordvpn"
+                value: "custom"
               - name: WIREGUARD_PRIVATE_KEY
                 valueFrom:
                   secretKeyRef:
                     name: qbit-info
                     key: nordwg
+              - name: WIREGUARD_ENDPOINT_IP
+                value: "178.249.214.106"
+              - name: WIREGUARD_ENDPOINT_PORT
+                value: "1337"
+              - name: WIREGUARD_PUBLIC_KEY
+                value: "WQ6Q/7QXs9xUMFJm2QWYvOfTVpPZIEdRANbqs0pfnWs="
+              - name: WIREGUARD_ADDRESSES
+                value: "10.9.162.171/32"
               - name: FIREWALL_INPUT_PORTS
                 value: 10095
               - name: FIREWALL_OUTBOUND_SUBNETS
@@ -88,7 +94,7 @@ spec:
               - name: TZ
                 value: "America/New_York"
               - name: DNS_ADDRESS
-                value:  208.67.222.222
+                value: "10.0.0.243"
               - name: BLOCK_MALICIOUS
                 value: 'off'
             # envFrom: *envFrom
