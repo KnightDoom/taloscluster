@@ -123,8 +123,8 @@ spec:
         globalMounts:
           - path: "/app/server/storage"
             subPath: storage
-      #    - path: "/app/server/.env"
-      #      subPath: .env
+        #  - path: "/app/server/.env"
+        #    subPath: .env
       # scripts:
         # type: configMap
         # name: radarr-configmap

@@ -50,7 +50,7 @@ spec:
               CAN_POST_AUTOIMPORT: true
               CAN_POST_FILES: true
               #JSON_CONFIGURATION_DIR: "storage/configurations"
-              #CONNECTION_TIMEOUT: "31.41"
+              CONNECTION_TIMEOUT: "31.41"
               APP_ENV: local
               APP_DEBUG: false
               LOG_CHANNEL: stack
@@ -74,6 +74,7 @@ spec:
               FALLBACK_IN_DIR: "true"
               TZ: "America/New_York"
               APP_NAME: *appname
+              VERIFY_TLS_SECURITY: "false"
             envFrom:
               - secretRef:
                    name: firefly-app-token

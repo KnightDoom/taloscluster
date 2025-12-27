@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: cilium
         namespace: flux-system
-  install:
+  install: # Could not find data file, "/home/node/.config/Bitwarden CLI/data.json"; creating it instead.
     remediation:
       retries: 3
   upgrade:

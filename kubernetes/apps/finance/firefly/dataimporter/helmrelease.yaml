@@ -49,9 +49,8 @@ spec:
               IGNORE_NOT_FOUND_TRANSACTIONS: "false"
               CAN_POST_AUTOIMPORT: true
               CAN_POST_FILES: true
-              CONNECTION_TIMEOUT: "31.41"
               #JSON_CONFIGURATION_DIR: "storage/configurations"
-              #CONNECTION_TIMEOUT: "31.41"
+              CONNECTION_TIMEOUT: "31.41"
               APP_ENV: local
               APP_DEBUG: false
               LOG_CHANNEL: stack
