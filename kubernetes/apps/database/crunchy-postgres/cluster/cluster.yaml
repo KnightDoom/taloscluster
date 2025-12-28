@@ -97,7 +97,7 @@ spec:
       databases: ["firefly"]
       password:
         type: AlphaNumeric
-    - name: "immichh"
+    - name: "immich"
       databases: ["immich"]
       password:
         type: AlphaNumeric
