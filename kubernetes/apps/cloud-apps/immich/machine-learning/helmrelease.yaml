@@ -1,0 +1,106 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich-machine-learning
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: immich-helm-values
+  values:
+    controllers:
+      immich-machine-learning:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v2.4.1-openvino@sha256:1c6c703477072b8878b5285d2186af7861f941458a55f2d994158bef373ef010
+            env:
+              TZ: America/New_York
+              MPLCONFIGDIR: /cache/matplotlib
+              NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+            envFrom:
+              - configMapRef:
+                  name: immich-configmap
+              - secretRef:
+                  name: immich-db-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: &port 3003
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              # claims:
+              3  - name: gpu
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 4000Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      runtimeClassName: nvidia
+      #nodeSelector:
+        #intel.feature.node.kubernetes.io/gpu: "true"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    persistence:
+      media:
+        type: nfs
+        server: 192.168.86.9
+        path: /BackedStorage/photos
+        globalMounts:
+          - path: /usr/src/app/upload
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          immich-machine-learning:
+            app:
+              - path: /cache
+                subPath: cache
+              - path: /.cache
+                subPath: dotCache
+              - path: /tmp
+                subPath: tmp
