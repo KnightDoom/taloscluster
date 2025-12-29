@@ -49,6 +49,10 @@ spec:
               # RADARR__APP__THEME: dark
               IMMICH_WORKERS_INCLUDE: api
               IMMICH_METRICS_INCLUDE: all
+              #% if bootstrap_plex.nvidia_enabled %#
+              NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+              #% endif %#
               portNum: &port 2283
               TZ: America/New_York
             envFrom: *envFrom
@@ -76,6 +80,9 @@ spec:
               limits:
                 memory: 4Gi
     defaultPodOptions:
+      #% if bootstrap_plex.nvidia_enabled %#
+      runtimeClassName: nvidia
+      #% endif %#
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
