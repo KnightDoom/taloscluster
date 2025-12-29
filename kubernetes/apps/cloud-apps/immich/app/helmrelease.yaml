@@ -49,7 +49,7 @@ spec:
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
-              IMMICH_WORKERS_INCLUDE: api
+              # IMMICH_WORKERS_INCLUDE: api
               IMMICH_METRICS_INCLUDE: all
               NVIDIA_VISIBLE_DEVICES: all
               NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
