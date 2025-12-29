@@ -51,6 +51,8 @@ spec:
               # RADARR__APP__THEME: dark
               IMMICH_WORKERS_INCLUDE: api
               IMMICH_METRICS_INCLUDE: all
+              NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
               portNum: &port 2283
               TZ: America/New_York
             # envFrom: *envFrom
