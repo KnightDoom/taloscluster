@@ -1,0 +1,72 @@
+  538  talosctl mounts --nodes 192.168.86.26
+  539  talosctl login
+  540  talosctl
+  541  talosctl time
+  542  ls
+  543  kubectl
+  544  kubectl  get nodes
+  545  talosctl
+  546  talosctl netstat
+  547  talosctl -n 192.168.86.26  config new talosconfig-new --roles os:admin
+  548  talosctl -n 192.168.86.26 config new talosconfig-new --roles os:admin
+  549  ls
+  550  ls -la
+  551  talosctl -n 192.168.86.25 config new talosconfig-new --roles os:admin
+  552  cd kubernetes/
+  553  cd bootstrap/
+  554  ls
+  555  cd talos/
+  556  ls
+  557  sops talsecret.sops.yaml
+  558  ls
+  559  cd clusterconfig/
+  560  ls
+  561  yq eval .machine.ca.crt taloscluster-talos0.yaml | base64 -d > ca.crt
+  562  yq eval .machine.ca.key taloscluster-talos0.yaml | base64 -d > ca.key
+  563  ls
+  564  talosctl gen key --name admin
+  565  talosctl gen csr --key admin.key --ip 127.0.0.1
+  566  talosctl gen crt --ca ca --csr admin.csr --name admin
+  567  ls
+  568  cat ca.crt
+  569  cat admin.crt
+  570  cat admin.key
+  571  cd ..
+  572  ls
+  573  sops talsecret.sops.yaml
+  574  cd clusterconfig/
+  575  ls
+  576  cp talosconfig talosconfig.bak
+  577  talosctl get time
+  578  talosctl time
+  579  cd $TC
+  580  talosctl time
+  581  cd /home/knightdoom/control/taloscluster/kubernetes/bootstrap/talos/clusterconfig/
+  582  nano talosconfig
+  583  talosctl time
+  584  cp talosconfig.bak talosconfig
+  585  talosctl time
+  586  rm admin.crt
+  587  rm admin.csr
+  588  rm admin.key
+  589  ls
+  590  ls -la
+  591  cd ..
+  592  ls
+  593  sops -d talsecret.sops.yaml
+  594  sops -d talsecret.sops.yaml > secrets.yaml
+  595  ls
+  596  talosctl gen config --with-secrets secrets.yaml --output-types talosconfig -o talosconfig taloscluster https://192.168.86.25
+  597  ls
+  598  ls -la
+  599  rm secrets.yaml
+  600  mv talosconfig ./clusterconfig/talosconfig
+  601  ls
+  602  cd clusterconfig/
+  603  ls
+  604  ls -la
+  605  talosctl time
+  606  rm ca.crt
+  607  rm ca.key
+  608  ls
+  609  cd ..
