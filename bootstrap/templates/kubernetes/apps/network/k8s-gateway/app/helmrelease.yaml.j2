@@ -23,7 +23,7 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
-    fallthrough: 
+    fallthrough:
       enabled: true
     ttl: 1
     extraZonePlugins:
@@ -53,9 +53,11 @@ spec:
       annotations:
         lbipam.cilium.io/ips: "#{ bootstrap_cloudflare.gateway_vip }#"
       #% if bgp.enabled %#
-      externalTrafficPolicy: Local
+      #externalTrafficPolicy: Local
       #% else %#
-      externalTrafficPolicy: Cluster
+      #externalTrafficPolicy: Cluster
       #% endif %#
+      externalTrafficPolicy: "#{ 'Local' if bgp.enabled else 'Cluster' }#"
+
     watchedResources: ["Ingress", "Service"]
 
