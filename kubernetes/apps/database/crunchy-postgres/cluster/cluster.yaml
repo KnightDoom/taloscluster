@@ -151,6 +151,12 @@ spec:
         # type: AlphaNumeric
   backups:
     pgbackrest:
+      restore: # Optional: restore from backup on cluster creation
+        enabled: false
+        repoName: repo1
+        options:
+          - --type=time
+          - --target="2026-03-03 09:15:02
       configuration: &backupConfig
         - secret:
             name: crunchy-pgo-secret
@@ -208,7 +214,7 @@ spec:
               accessModes: ["ReadWriteMany"]
               resources:
                 requests:
-                  storage: 6Gi
+                  storage: 23Gi
           schedules:
             full: "15 1 * * 0" # Sunday at 01:15
             differential: "15 1 * * 1-6" # Mon-Sat at 01:15

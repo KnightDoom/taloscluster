@@ -199,6 +199,13 @@
       semanticCommitScope: 'helm',
     },
     {
+      description: 'Auto merge minor updates for Docker & Helm',
+      matchDatasources: ['docker', 'helm'],
+      matchUpdateTypes: ['minor'],
+      automerge: true,
+      automergeType: 'pr',
+    },
+    {
       matchDatasources: [
         'github-releases',
         'github-tags',
