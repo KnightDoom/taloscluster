@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: cglatot/pasta
-              tag: 2.2.8@sha256:03fe1de8d67df5e9b948757631af46038d58bfdf79c540efb96d06b18cbb5b54
+              tag: 2.2.9@sha256:573532fa321790be9f7652afb11088b78c8f6c5eddf0c64e42537dc01630ce44
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
