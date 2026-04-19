@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: fireflyiii/data-importer
-              tag: version-2.3.0
+              tag: version-2.3.2
             env:
               IGNORE_DUPLICATE_ERRORS: "false"
               FIREFLY_III_URL: "http://firefly:8080"
