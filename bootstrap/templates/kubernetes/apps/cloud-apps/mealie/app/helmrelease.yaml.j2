@@ -84,8 +84,7 @@ spec:
                 spec:
                   exec:
                     command:
-                      - python
-                      - /app/healthcheck.py
+                      - /app/healthcheck.sh
                   initialDelaySeconds: 15
                   periodSeconds: 10
                   timeoutSeconds: 10
