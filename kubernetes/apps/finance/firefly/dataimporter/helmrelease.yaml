@@ -230,6 +230,28 @@ data:
             mv "$csv_file" "$csv_file.completed"
           done
         fi
+        # Check for SimpleFin integration
+        if [ -f "$folder/simplefin.json" ]; then
+          echo "Found simplefin.json in: $folder"
+          # Make the curl request for SimpleFin
+          response=$(curl --location --request POST \
+            "http://fireflydi:8080/autoupload?secret=$AUTO_IMPORT_SECRET" \
+            --header 'Accept: application/json' \
+            --header "Authorization: Bearer $FIREFLY_III_ACCESS_TOKEN" \
+            --form 'json=@"$folder/simplefin.json"' \
+            --silent --show-error)
+          status=$?
+          if [ $status -eq 0 ]; then
+            echo "SimpleFin import succeeded: $response"
+          else
+            echo "SimpleFin import failed with status: $status and $response"
+            response="Failed: $response"
+          fi
+          echo $response > $folder/$(date +'%b%d_%Y-simplefin-import-report.txt').report.txt
+          echo "SimpleFin report created $folder/$(date +'%b%d_%Y-simplefin-import-report.txt')"
+          # Rename the file to mark as processed
+          #mv "$folder/simplefin.json" "$folder/simplefin.json.completed"
+        fi
       fi
     done
 
