@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/imputnet/cobalt
-              tag: 11@sha256:36afcf789a62ed9d2c40997a1b108fd9e6f8013d4c23f1b9b2bdacbb15f6731a
+              tag: 11@sha256:df14a3b3fe4390d4e1c2d4761ed58981d34aa5fc82d0df2091bab890e7dfaa8b
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
