@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: flux-manifests
@@ -81,6 +81,14 @@ spec:
         - op: add
           path: /spec/template/spec/containers/0/args/-
           value: --oom-watch-interval=500ms
+      target:
+        kind: Deployment
+        name: helm-controller
+    # Fix malformed events-addr URL with trailing ./
+    - patch: |
+        - op: replace
+          path: /spec/template/spec/containers/0/args/0
+          value: --events-addr=http://notification-controller.flux-system.svc.cluster.local/
       target:
         kind: Deployment
         name: helm-controller

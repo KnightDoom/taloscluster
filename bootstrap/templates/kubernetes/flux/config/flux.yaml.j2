@@ -84,3 +84,11 @@ spec:
       target:
         kind: Deployment
         name: helm-controller
+    # Fix malformed events-addr URL with trailing ./
+    - patch: |
+        - op: replace
+          path: /spec/template/spec/containers/0/args/0
+          value: --events-addr=http://notification-controller.flux-system.svc.cluster.local/
+      target:
+        kind: Deployment
+        name: helm-controller
