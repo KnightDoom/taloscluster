@@ -56,6 +56,11 @@ spec:
               portNum: &port 2283
               TZ: America/New_York
             # envFrom: *envFrom
+            envFrom:
+              - configMapRef:
+                  name: immich-configmap
+              - secretRef:
+                  name: immich-db-secret
             probes:
               liveness: &probes
                 enabled: true

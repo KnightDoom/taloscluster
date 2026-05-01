@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.11.1
+talosVersion: v1.13.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.34.1
+kubernetesVersion: v1.36.0
 
 clusterName: "taloscluster"
 endpoint: https://192.168.86.25:6443
@@ -26,7 +26,7 @@ nodes:
   - hostname: "talos0"
     ipAddress: "192.168.86.26"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/79849d666bdcf4c20bc8f3562565160cab33e413f7f21cf2cc7ca51943c94ce2
+    talosImageURL: factory.talos.dev/installer/a82dc33f47cac341cfe4f9bde1696903296c9a75920ab3444d35f23a77d67333
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -41,15 +41,15 @@ nodes:
         vip:
           ip: "192.168.86.25"
     nodeLabels:
-      gpu: nvidia 
-      nvidia.com/gpu: true 
-      nvidia.com/gpu.present: true 
+      gpu: nvidia
+      nvidia.com/gpu: true
+      nvidia.com/gpu.present: true
     patches:
       - "@./patches/talos0/gpu-worker-patch.yaml"
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/d964f773a9abe4b45d6d49c5e73edaef6c6de07686e83f86920c4d6fd262e524
+    talosImageURL: factory.talos.dev/installer/5a53346bf2653168535dfdf5eca46ee001241b2d35a2e1aefe11b973c1f8c29e
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -64,7 +64,7 @@ nodes:
   - hostname: "talos2"
     ipAddress: "192.168.86.28"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/d964f773a9abe4b45d6d49c5e73edaef6c6de07686e83f86920c4d6fd262e524
+    talosImageURL: factory.talos.dev/installer/5a53346bf2653168535dfdf5eca46ee001241b2d35a2e1aefe11b973c1f8c29e
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
