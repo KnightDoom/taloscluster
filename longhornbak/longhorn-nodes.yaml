@@ -1,0 +1,280 @@
+apiVersion: v1
+items:
+- apiVersion: longhorn.io/v1beta2
+  kind: Node
+  metadata:
+    creationTimestamp: "2024-12-20T08:21:06Z"
+    finalizers:
+    - longhorn.io
+    generation: 7
+    name: talos0
+    namespace: longhorn-system
+    resourceVersion: "69486297"
+    uid: bcb8f3cd-d650-43f4-b905-5f7cf54ca9e6
+  spec:
+    allowScheduling: true
+    disks: {}
+    evictionRequested: false
+    instanceManagerCPURequest: 0
+    name: talos0
+    tags: []
+  status:
+    autoEvicting: false
+    conditions:
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-03-12T01:03:24Z"
+      message: Node talos0 is ready
+      reason: ""
+      status: "True"
+      type: Ready
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-05-01T01:23:56Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Schedulable
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: MountPropagation
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-02-03T23:09:01Z"
+      message: All required packages [cryptsetup dmsetup nfs-common iscsiadm] are
+        installed
+      reason: ""
+      status: "True"
+      type: RequiredPackages
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Multipathd
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:54Z"
+      message: Kernel modules [dm_crypt] are loaded
+      reason: ""
+      status: "True"
+      type: KernelModulesLoaded
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:54Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: NFSClientInstalled
+    diskStatus: {}
+    region: ""
+    snapshotCheckStatus: {}
+    zone: ""
+- apiVersion: longhorn.io/v1beta2
+  kind: Node
+  metadata:
+    creationTimestamp: "2024-12-20T08:21:06Z"
+    finalizers:
+    - longhorn.io
+    generation: 5
+    name: talos1
+    namespace: longhorn-system
+    resourceVersion: "69485853"
+    uid: cd2eae11-2620-4135-b783-da6814d9c702
+  spec:
+    allowScheduling: true
+    disks:
+      disk-01:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /var/lib/longhorn/
+        storageReserved: 9910637036
+        tags: []
+    evictionRequested: false
+    instanceManagerCPURequest: 0
+    name: talos1
+    tags: []
+  status:
+    autoEvicting: false
+    conditions:
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-05-01T04:37:27Z"
+      message: Node talos1 is ready
+      reason: ""
+      status: "True"
+      type: Ready
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-05-01T01:23:56Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Schedulable
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: MountPropagation
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:51Z"
+      message: All required packages [cryptsetup dmsetup nfs-common iscsiadm] are
+        installed
+      reason: ""
+      status: "True"
+      type: RequiredPackages
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Multipathd
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:51Z"
+      message: Kernel modules [dm_crypt] are loaded
+      reason: ""
+      status: "True"
+      type: KernelModulesLoaded
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:51Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: NFSClientInstalled
+    diskStatus:
+      disk-01:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-05-01T03:52:47Z"
+          message: Disk disk-01(/var/lib/longhorn/) on node talos1 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-05-01T04:28:17Z"
+          message: Disk disk-01(/var/lib/longhorn/) on node talos1 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: default-disk-080600000000
+        diskPath: /var/lib/longhorn/
+        diskType: filesystem
+        diskUUID: 4f36b819-5351-4f8f-9565-960f05ce16dc
+        filesystemType: xfs
+        instanceManagerName: instance-manager-5f1b92101f330105eec60951ec0055a1
+        scheduledBackingImage: {}
+        scheduledReplica:
+          test1-r-2f9c3060: 21474836480
+        storageAvailable: 231630438400
+        storageMaximum: 247724601344
+        storageScheduled: 21474836480
+    region: ""
+    snapshotCheckStatus: {}
+    zone: ""
+- apiVersion: longhorn.io/v1beta2
+  kind: Node
+  metadata:
+    creationTimestamp: "2024-12-20T08:21:06Z"
+    finalizers:
+    - longhorn.io
+    generation: 5
+    name: talos2
+    namespace: longhorn-system
+    resourceVersion: "69487104"
+    uid: 2397a746-3cbb-423e-8db5-3236d387012f
+  spec:
+    allowScheduling: true
+    disks:
+      disk-02:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /var/lib/longhorn/
+        storageReserved: 9910637036
+        tags: []
+    evictionRequested: false
+    instanceManagerCPURequest: 0
+    name: talos2
+    tags: []
+  status:
+    autoEvicting: false
+    conditions:
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-05-01T15:21:14Z"
+      message: Node talos2 is ready
+      reason: ""
+      status: "True"
+      type: Ready
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-05-01T01:23:56Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Schedulable
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: MountPropagation
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:52Z"
+      message: All required packages [cryptsetup dmsetup nfs-common iscsiadm] are
+        installed
+      reason: ""
+      status: "True"
+      type: RequiredPackages
+    - lastProbeTime: ""
+      lastTransitionTime: "2024-12-20T08:21:37Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Multipathd
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:52Z"
+      message: Kernel modules [dm_crypt] are loaded
+      reason: ""
+      status: "True"
+      type: KernelModulesLoaded
+    - lastProbeTime: ""
+      lastTransitionTime: "2025-01-22T08:33:52Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: NFSClientInstalled
+    diskStatus:
+      disk-02:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-05-01T03:54:11Z"
+          message: Disk disk-02(/var/lib/longhorn/) on node talos2 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-05-01T03:54:11Z"
+          message: Disk disk-02(/var/lib/longhorn/) on node talos2 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: default-disk-080600000000
+        diskPath: /var/lib/longhorn/
+        diskType: filesystem
+        diskUUID: ab7d2906-d385-4393-adec-b05a2f584ff4
+        filesystemType: xfs
+        instanceManagerName: instance-manager-461f0267efb21abfd0ffbef7acba3227
+        scheduledBackingImage: {}
+        scheduledReplica:
+          test1-r-3e025b9a: 21474836480
+          test1-r-2790701a: 21474836480
+        storageAvailable: 327575142400
+        storageMaximum: 349680267264
+        storageScheduled: 42949672960
+    region: ""
+    snapshotCheckStatus: {}
+    zone: ""
+kind: List
+metadata:
+  resourceVersion: ""

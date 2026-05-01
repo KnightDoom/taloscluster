@@ -1,0 +1,1386 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-03-11T19:50:03Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: apprise
+    resourceVersion: "67694176"
+    uid: 4ab594db-58ee-49d9-b50a-fa9a493a828c
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: apprise
+      namespace: observability
+      resourceVersion: "67452564"
+      uid: a7943ae9-b9eb-434e-814c-a870c74ad1d0
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: apprise
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-03-11T19:50:26Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-02-03T05:25:56Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: authentik-media
+    resourceVersion: "67684657"
+    uid: 06abfd52-1ecb-4468-b1eb-a074361abc23
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 100Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: authentik-media
+      namespace: authentik
+      resourceVersion: "36211878"
+      uid: 8c26737f-04c2-4aa5-b6ab-8b02981604c8
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        migratable: "false"
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: authentik-media
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-02-03T05:25:57Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-26T01:24:24Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: bazarr
+    resourceVersion: "68218594"
+    uid: aae0b12c-36b0-4776-b772-c0324b5505e2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 500Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: bazarr
+      namespace: media
+      resourceVersion: "4247504"
+      uid: 4e0ba749-f264-48ee-ad1a-5ba25cbdb469
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: bazarr-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-26T01:24:25Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-31T07:03:44Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: bitwarden-backup
+    resourceVersion: "62346846"
+    uid: 8ba4377f-0a39-4967-9d63-d2bb23580114
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: bitwarden-backup
+      namespace: kube-system
+      resourceVersion: "8178797"
+      uid: 7dffff19-ae42-4ccd-9d79-1e038478c82b
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: bitwarden-backup
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-31T07:03:45Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-03-11T16:32:01Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: changedetection
+    resourceVersion: "68229374"
+    uid: f6318436-a424-4856-8233-ae6c2e0928e2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: changedetection
+      namespace: cloud-apps
+      resourceVersion: "67319465"
+      uid: 22d15619-23b7-4496-a2ff-8e92378cf0c6
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: changedetection
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-03-11T16:32:02Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-06T18:49:52Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    labels:
+      app.kubernetes.io/name: crunchy-postgres-operator-cluster
+      kustomize.toolkit.fluxcd.io/name: crunchy-postgres-operator-cluster
+      kustomize.toolkit.fluxcd.io/namespace: flux-system
+    name: crunchy-backup
+    resourceVersion: "67327716"
+    uid: 75de32ff-de57-499c-b1f8-0619c798f9dd
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 200Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-repo1
+      namespace: database
+      resourceVersion: "13378658"
+      uid: 5d9bf032-b00c-4ab3-96f0-cddced03c13c
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: crunchy-backup
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-06T18:50:04Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-12T18:25:41Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: firefly
+    resourceVersion: "68230589"
+    uid: 4baaccaf-a360-4d2f-9933-5a2be02ebce5
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 2Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: firefly
+      namespace: finance
+      resourceVersion: "18347105"
+      uid: 21d94afb-8b51-4c16-9f0f-11fd7d1c4916
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: firefly
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-12T18:25:43Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-12T18:26:00Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: fireflydi
+    resourceVersion: "67673629"
+    uid: ac666a4d-35d2-4c25-9e25-50036f20dd5f
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 512Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: fireflydi
+      namespace: finance
+      resourceVersion: "18347300"
+      uid: ae8e7c65-bb18-4930-b34c-c5c91cee066f
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: fireflydi
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-12T18:26:01Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-25T07:20:41Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: flaresolverr
+    resourceVersion: "67665135"
+    uid: 620d3b1b-1c0e-4c56-ade4-b3901a1d41ec
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 500Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: flaresolverr
+      namespace: media
+      resourceVersion: "3695659"
+      uid: 4766b443-3a90-4746-a966-f1b4a7cba4bc
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: flaresolverr
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-25T07:20:42Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-20T07:09:41Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: hoarder
+    resourceVersion: "68250323"
+    uid: 2523b323-094a-4c14-8e63-055c8c6f0b75
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 3Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: hoarder
+      namespace: cloud-apps
+      resourceVersion: "24792402"
+      uid: 8acbfbdb-f6e0-446e-8d5c-23a3978080ca
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: hoarder
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-20T07:09:42Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-05T06:06:39Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: mealie
+    resourceVersion: "68229223"
+    uid: 7aa98854-61e6-4a03-9120-ca8cd1e6062f
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: mealie
+      namespace: cloud-apps
+      resourceVersion: "12111440"
+      uid: 9b8600d6-7a3a-4c03-9c9f-c3d9e42dca39
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: mealie
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-05T06:06:40Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-20T07:09:54Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: meilisearch
+    resourceVersion: "67684871"
+    uid: 23b9b5ae-8d21-4b55-8668-4c389ff473ae
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 2Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: meilisearch
+      namespace: cloud-apps
+      resourceVersion: "24792559"
+      uid: 75d2026d-1df4-4a5d-af71-67d0609a142f
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: meilisearch
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-20T07:09:55Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-25T05:40:32Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: notifiarr
+    resourceVersion: "67683908"
+    uid: 307cd088-9780-4a11-869b-0b67777b9ef1
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 256Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: notifiarr
+      namespace: media
+      resourceVersion: "3638416"
+      uid: 23e1fe85-396a-47d4-8a87-6c5383a58fcc
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: notifiarr-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-25T05:40:33Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-20T10:45:37Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: plex-config
+    resourceVersion: "68218573"
+    uid: ed6fdb4a-76a3-4663-af68-93069b26170c
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 35Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: plex-config
+      namespace: media
+      resourceVersion: "121053"
+      uid: ee7b78c1-f397-4758-b26c-c399b6a8de13
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: plex-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-20T10:45:39Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-20T10:29:06Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: prowlarr-configs
+    resourceVersion: "36715826"
+    uid: ca6b502d-1abc-4cd2-aae6-7841d3679415
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 4Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: prowlarr-config
+      namespace: media
+      resourceVersion: "112180"
+      uid: 3f230f45-5a3a-4765-8279-f2ea4edeb38a
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: prowlarr-configs
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-20T10:29:07Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2025-01-06T18:49:58Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-0982511a-be6f-4b49-b1c4-507c89a2f3dd
+    resourceVersion: "68229169"
+    uid: d907e716-b7c7-4eb7-8fd0-37ce4078184e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 22Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-postgres-nkbg-pgdata
+      namespace: database
+      resourceVersion: "13378368"
+      uid: 0982511a-be6f-4b49-b1c4-507c89a2f3dd
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "1"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1735885835046-1391-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-0982511a-be6f-4b49-b1c4-507c89a2f3dd
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-1r
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-06T18:49:58Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2026-04-30T02:30:14Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-121d7a54-83ce-4380-8845-a44e2825c84b
+    resourceVersion: "68230471"
+    uid: 80008f78-dfb6-4786-9609-63f3611695ca
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: milvus-minio
+      namespace: database
+      resourceVersion: "68228513"
+      uid: 121d7a54-83ce-4380-8845-a44e2825c84b
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "3"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1777516189768-1023-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-121d7a54-83ce-4380-8845-a44e2825c84b
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2026-04-30T02:30:14Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2026-04-30T02:30:14Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-19e81e3f-ea2d-4291-888f-fcf9af175e5d
+    resourceVersion: "68230474"
+    uid: 96580f1d-d3b3-4745-96e4-b8331be8ebfc
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 50Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: milvus
+      namespace: database
+      resourceVersion: "68228514"
+      uid: 19e81e3f-ea2d-4291-888f-fcf9af175e5d
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "3"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1777516189768-1023-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-19e81e3f-ea2d-4291-888f-fcf9af175e5d
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2026-04-30T02:30:14Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2026-04-30T02:30:14Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-3b5354bb-896a-4386-bbeb-b91f053f8531
+    resourceVersion: "68230419"
+    uid: b51dcca5-2eae-4993-bd1d-110bfad26f26
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: data-milvus-etcd-0
+      namespace: database
+      resourceVersion: "68228552"
+      uid: 3b5354bb-896a-4386-bbeb-b91f053f8531
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "3"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1777516189768-1023-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-3b5354bb-896a-4386-bbeb-b91f053f8531
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2026-04-30T02:30:14Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2025-01-18T17:19:35Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-4fe7d899-ede3-4f81-9cdb-edc7acd60f52
+    resourceVersion: "68242838"
+    uid: 9a744d3e-da60-4dd0-9a0a-2361397f9ba9
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 22Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-postgres-lg6z-pgdata
+      namespace: database
+      resourceVersion: "23468869"
+      uid: 4fe7d899-ede3-4f81-9cdb-edc7acd60f52
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "1"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1737162381210-8904-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-4fe7d899-ede3-4f81-9cdb-edc7acd60f52
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-1r
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-18T17:19:35Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2025-01-06T18:49:57Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-d50e1e75-aba4-413f-bd2c-9c273cfaf964
+    resourceVersion: "59595154"
+    uid: b61050f6-4848-4eb9-a392-121676c98528
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pgadmin-57d13c0d-e353-4628-91c4-9061997a0d81
+      namespace: database
+      resourceVersion: "13378270"
+      uid: d50e1e75-aba4-413f-bd2c-9c273cfaf964
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "3"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1735885835046-1391-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-d50e1e75-aba4-413f-bd2c-9c273cfaf964
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-06T18:49:57Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/provisioned-by: driver.longhorn.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ""
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ""
+    creationTimestamp: "2025-01-06T18:50:00Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: pvc-e0cecd6c-575f-491b-8abc-e867c6b615e8
+    resourceVersion: "68242877"
+    uid: d20725be-fb65-472c-8ea3-a1bd439685c2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 22Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-postgres-w452-pgdata
+      namespace: database
+      resourceVersion: "13378460"
+      uid: e0cecd6c-575f-491b-8abc-e867c6b615e8
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        dataEngine: v1
+        dataLocality: best-effort
+        disableRevisionCounter: "true"
+        fromBackup: ""
+        fsType: ext4
+        numberOfReplicas: "1"
+        staleReplicaTimeout: "30"
+        storage.kubernetes.io/csiProvisionerIdentity: 1735885835046-1391-driver.longhorn.io
+        unmapMarkSnapChainRemoved: enabled
+      volumeHandle: pvc-e0cecd6c-575f-491b-8abc-e867c6b615e8
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-1r
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2026-04-30T02:48:10Z"
+    phase: Released
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-26T20:59:34Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: qbit-config
+    resourceVersion: "68218497"
+    uid: af80644c-8ac2-4524-a490-f6edc5fcdfcb
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 5Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: qbit
+      namespace: media
+      resourceVersion: "4845385"
+      uid: 1c631dbf-3495-43a3-af3c-5bd8f4cc8218
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: qbit-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-26T20:59:37Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-28T06:00:27Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: qbit-incomplete
+    resourceVersion: "67679180"
+    uid: 41d9a7ba-302b-4831-8bb7-44ef4dcc2642
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 120Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: qbit-incomplete
+      namespace: media
+      resourceVersion: "5865605"
+      uid: 403d75e0-3319-4ccb-844a-7ac938bfd6d5
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "1"
+        staleReplicaTimeout: "20"
+      volumeHandle: qbit-incomplete
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-28T06:00:28Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-20T10:29:49Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: radarr-configs
+    resourceVersion: "68229027"
+    uid: 7c5fdbd2-3a9a-426a-ba77-b52f08d0c3c0
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: radarr
+      namespace: media
+      resourceVersion: "112587"
+      uid: 2c2f66a0-d581-41fa-9752-d4f00dd532b2
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: radarr-configs
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-20T10:29:53Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-25T20:20:07Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: requestrr
+    resourceVersion: "67691359"
+    uid: 67c550fc-e6d8-4a50-ac67-e51b268433cc
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 500Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: requestrr
+      namespace: media
+      resourceVersion: "4091345"
+      uid: ccd28487-0b45-474e-a9ba-9e9f2174dbdc
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: requestrr-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-25T20:20:08Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: disks are unavailable;precheck new replica
+        failed
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-20T10:30:31Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: sabnab-config
+    resourceVersion: "68230736"
+    uid: 4addd2fc-07aa-469f-999b-f62459f0461d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 70Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: sabnab-configs
+      namespace: media
+      resourceVersion: "112928"
+      uid: e662b75c-cd37-4023-b4bd-958cb4dcd39a
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: sabnab-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-20T10:30:34Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-20T10:31:03Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: sonarr-configs
+    resourceVersion: "67694173"
+    uid: 085a3734-9cec-432b-8001-92e827e950b2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 4Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: sonarr
+      namespace: media
+      resourceVersion: "113259"
+      uid: 568cad7c-ec15-4183-ad1a-59d0eeb65a93
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: sonarr-configs
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-20T10:31:05Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-19T18:13:19Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: tasks
+    resourceVersion: "36749661"
+    uid: ef896a16-756b-4b73-a537-f72b073c66d4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: tasks
+      namespace: cloud-apps
+      resourceVersion: "24334108"
+      uid: a5bdd6fb-085d-4fde-8397-80f368132d44
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: tasks
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-01-19T18:13:20Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-25T07:20:06Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: tautuli
+    resourceVersion: "67667351"
+    uid: 6fee38d9-a558-4dd2-b379-e1267693321f
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 3Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: tautuli
+      namespace: media
+      resourceVersion: "3695316"
+      uid: 97d0c436-1d9b-4851-9c28-5dcb1d8513e9
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: tautuli
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-25T07:20:07Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-28T06:58:19Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: trillium
+    resourceVersion: "67694175"
+    uid: 52b33965-3959-497c-b646-3976f5bc5e15
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 5Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: trillium
+      namespace: cloud-apps
+      resourceVersion: "5898016"
+      uid: b4836498-f109-4127-90f6-aef7a07ca32f
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: trillium
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-28T07:00:33Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2024-12-31T07:00:02Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: uptime
+    resourceVersion: "68218577"
+    uid: b3ea0766-a99b-4971-859f-3e9745d1db77
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 4Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: uptime
+      namespace: observability
+      resourceVersion: "8176461"
+      uid: 6a480702-778f-451b-ae15-f41ed6581787
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: uptime
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2024-12-31T07:00:03Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-03-03T04:17:18Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    name: zotify-config
+    resourceVersion: "67686215"
+    uid: c9f66b2c-0f00-4bc0-b0fc-4c9913f50296
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: zotify-config
+      namespace: media
+      resourceVersion: "59881131"
+      uid: 9354f0ad-12da-4463-b6e3-3dbfb9283b32
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: zotify-config
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn-static
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-03-03T04:17:19Z"
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""
