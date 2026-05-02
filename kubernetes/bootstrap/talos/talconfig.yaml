@@ -26,7 +26,7 @@ nodes:
   - hostname: "talos0"
     ipAddress: "192.168.86.26"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/8d73c1538168825e06d81fa98508b3724217386c770a818705629c9d76278836
+    talosImageURL: factory.talos.dev/installer/0d0ef5eed326fa017d292773733929225c3e2c16096039d7b19928d5894f2c6f
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -49,7 +49,7 @@ nodes:
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/5a53346bf2653168535dfdf5eca46ee001241b2d35a2e1aefe11b973c1f8c29e
+    talosImageURL: factory.talos.dev/installer/0d0ef5eed326fa017d292773733929225c3e2c16096039d7b19928d5894f2c6f
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -87,7 +87,7 @@ patches:
   - "@./patches/global/kubelet.yaml"
   - "@./patches/global/longhorn.yaml"
   - "@./patches/global/ntp.yaml"
-  - "@./patches/global/openebs-local.yaml"
+  #- "@./patches/global/openebs-local.yaml"
   - "@./patches/global/sysctl.yaml"
 
 # Controller patches
