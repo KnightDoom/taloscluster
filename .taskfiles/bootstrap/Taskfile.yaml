@@ -61,6 +61,8 @@ tasks:
       - until kubectl wait --for=condition=Ready=False nodes --all --timeout=600s; do sleep 10; done
       - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff #--debug
       - until kubectl wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
+      - kubectl apply -f {{.KUBERNETES_DIR}}/bootstrap/talos/rbac.yaml # Apply RBAC settings before CNI to ensure CNI pods can start successfully
+      - kubectl apply -f {{.KUBERNETES_DIR}}/bootstrap/talos/longhorn-settings.yaml # Apply Longhorn settings before CNI to ensure Longhorn pods can start successfully
     preconditions:
       - test -f {{.KUBECONFIG}}
       - test -f {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml

@@ -3,8 +3,8 @@ cluster:
   apiServer:
     admissionControl:
       $$patch: delete
-    extraArgs:
-      feature-gates: AuthorizeNodeWithSelectors=false
+    #extraArgs:
+    #  feature-gates: AuthorizeNodeWithSelectors=false
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
