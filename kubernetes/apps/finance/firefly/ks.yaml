@@ -5,6 +5,8 @@ metadata:
   name: &app firefly
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   targetNamespace: finance
   commonMetadata:
     labels:
@@ -52,6 +54,7 @@ spec:
   path: ./kubernetes/apps/finance/firefly/ai-worker
   dependsOn:
     - name: firefly
+    - name: external-secrets
   prune: false
   sourceRef:
     kind: GitRepository

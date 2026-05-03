@@ -5,6 +5,8 @@ metadata:
   name: &app anythingllm
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   targetNamespace: cloud-apps
   commonMetadata:
     labels:

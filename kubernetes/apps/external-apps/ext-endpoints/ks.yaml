@@ -5,6 +5,8 @@ metadata:
   name: &app ext-endpoints
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   targetNamespace: external-apps
   commonMetadata:
     labels:

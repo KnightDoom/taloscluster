@@ -5,6 +5,8 @@ metadata:
   name: &app zotify
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   targetNamespace: media
   commonMetadata:
     labels:
