@@ -26,7 +26,7 @@ nodes:
   - hostname: "talos0"
     ipAddress: "192.168.86.26"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/0d0ef5eed326fa017d292773733929225c3e2c16096039d7b19928d5894f2c6f
+    talosImageURL: factory.talos.dev/installer/a8c51113b82263a5b1e6d9edf0e53f444e2abdc699e6feb91c89d5f27c34a715
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -44,12 +44,12 @@ nodes:
       gpu: nvidia
       nvidia.com/gpu: true
       nvidia.com/gpu.present: true
-    patches:
-      - "@./patches/talos0/gpu-worker-patch.yaml"
+    #patches:
+    #  - "@./patches/talos0/gpu-worker-patch.yaml"
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/0d0ef5eed326fa017d292773733929225c3e2c16096039d7b19928d5894f2c6f
+    talosImageURL: factory.talos.dev/installer/a8c51113b82263a5b1e6d9edf0e53f444e2abdc699e6feb91c89d5f27c34a715
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -64,7 +64,7 @@ nodes:
   - hostname: "talos2"
     ipAddress: "192.168.86.28"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/0d0ef5eed326fa017d292773733929225c3e2c16096039d7b19928d5894f2c6f
+    talosImageURL: factory.talos.dev/installer/a8c51113b82263a5b1e6d9edf0e53f444e2abdc699e6feb91c89d5f27c34a715
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -94,6 +94,6 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
-    - "@./patches/controller/disable-admission-controller.yaml"
+#    - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
 
