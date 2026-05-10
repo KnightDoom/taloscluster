@@ -19,6 +19,7 @@ resources:
   - ./stakater.yaml
   - ./external-secrets.yaml
   - ./zilliztech.yaml
+  - ./nvidia.yaml
  # - ./onedr0p.yaml
   - ./nvdp.yaml
   - ./longhorn.yaml
