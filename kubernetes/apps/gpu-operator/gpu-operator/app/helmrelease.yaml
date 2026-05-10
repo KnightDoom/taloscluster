@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gpu-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: gpu-operator
+     # version: 4.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: nvidia
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+#  valuesFrom:
+#   - kind: ConfigMap
+#     name: gpu-operator-helm-values
+  values:
+    driver:
+      enabled: false #enter values here for global overrides
+    toolkit:
+      enabled: false  #enter values here for global overrides
+    hostPaths:
+      driverInstallDir: /usr/local
+
