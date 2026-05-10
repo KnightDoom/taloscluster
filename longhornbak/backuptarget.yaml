@@ -1,0 +1,16 @@
+apiVersion: v1
+items:
+- apiVersion: longhorn.io/v1beta2
+  kind: BackupTarget
+  metadata:
+    finalizers:
+    - longhorn.io
+    name: default
+    namespace: longhorn-system
+  spec:
+    backupTargetURL: nfs://192.168.86.9:/BackedStorage/Backup
+    credentialSecret: ""
+    pollInterval: 5m0s
+kind: List
+metadata:
+  resourceVersion: ""

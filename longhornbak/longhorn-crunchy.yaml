@@ -1,0 +1,42 @@
+  ---
+  apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      longhorn.io/volume-scheduling-error: ""
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2025-01-06T18:49:52Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+    labels:
+      app.kubernetes.io/name: crunchy-postgres-operator-cluster
+      kustomize.toolkit.fluxcd.io/name: crunchy-postgres-operator-cluster
+      kustomize.toolkit.fluxcd.io/namespace: flux-system
+    name: crunchy-backup
+    resourceVersion: "67327716"
+    uid: 75de32ff-de57-499c-b1f8-0619c798f9dd
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 200Mi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-repo1
+      namespace: database
+      resourceVersion: "13378658"
+      uid: 5d9bf032-b00c-4ab3-96f0-cddced03c13c
+    csi:
+      driver: driver.longhorn.io
+      fsType: ext4
+      volumeAttributes:
+        diskSelector: ""
+        nodeSelector: ""
+        numberOfReplicas: "2"
+        staleReplicaTimeout: "20"
+      volumeHandle: crunchy-backup
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: longhorn
+    volumeMode: Filesystem

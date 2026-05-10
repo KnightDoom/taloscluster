@@ -9,6 +9,6 @@ resources:
   - ./reloader/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
-  - ./nvidia-device-plugin/ks.yaml
+#  - ./nvidia-device-plugin/ks.yaml # deprecated, see nvidia-device-plugin-deprecated as of Talos v1.13.0
   - ./tun-device/ks.yaml
   - ./external-secrets/ks.yaml
