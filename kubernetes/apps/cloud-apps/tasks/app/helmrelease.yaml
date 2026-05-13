@@ -43,11 +43,6 @@ spec:
                 cp -r /config/stylesheets/. /stylesheets/ 2>/dev/null || true
                 cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
                 chown -R 1000:1000 /config /stylesheets
-            volumeMounts:
-              - name: config
-                mountPath: /config
-              - name: stylesheets
-                mountPath: /stylesheets
             securityContext:
               runAsUser: 0
               runAsGroup: 0
