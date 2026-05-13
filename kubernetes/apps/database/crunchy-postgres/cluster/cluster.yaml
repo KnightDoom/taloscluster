@@ -230,7 +230,7 @@ spec:
       - --target=2026-04-08 12:15:02-05
       #stanza: db
       #configuration: *backupConfig
-      #global: *backupFlag
+      #global: *backupFlag #s
       #repo:
       #  name: repo1
       #  volume: *nfs
