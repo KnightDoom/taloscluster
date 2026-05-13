@@ -43,7 +43,7 @@ metadata:
   selfLink: /api/v1/persistentvolumes/crunchy-backup
 spec:
   capacity:
-    storage: 200Mi
+    storage: 25Gi
   csi:
     driver: driver.longhorn.io
     volumeHandle: crunchy-backup
@@ -51,7 +51,7 @@ spec:
     volumeAttributes:
       diskSelector: ''
       nodeSelector: ''
-      numberOfReplicas: '2'
+      numberOfReplicas: '3'
       staleReplicaTimeout: '20'
   accessModes:
     - ReadWriteMany
@@ -71,7 +71,7 @@ spec:
     # - ReadWriteMany
   # resources:
     # requests:
-      # storage: 200Mi
+      # storage: 25Gi
   # volumeName: crunchy-backup
   # storageClassName: longhorn-static
   # volumeMode: Filesystem
