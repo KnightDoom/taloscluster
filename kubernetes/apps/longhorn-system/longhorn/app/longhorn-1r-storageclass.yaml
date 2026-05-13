@@ -3,6 +3,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: longhorn-1r
+  manually: yes
 parameters:
   backupTargetName: default
   dataEngine: v1
