@@ -20,14 +20,7 @@
     accessModes:
     - ReadWriteMany
     capacity:
-      storage: 200Mi
-    claimRef:
-      apiVersion: v1
-      kind: PersistentVolumeClaim
-      name: postgres-repo1
-      namespace: database
-      resourceVersion: "13378658"
-      uid: 5d9bf032-b00c-4ab3-96f0-cddced03c13c
+      storage: 33Gi
     csi:
       driver: driver.longhorn.io
       fsType: ext4
