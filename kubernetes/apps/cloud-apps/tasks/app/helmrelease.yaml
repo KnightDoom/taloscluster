@@ -37,12 +37,19 @@ spec:
               repository: baldissaramatheus/tasks.md
               tag: 3.3.0
             command: ["sh", "-c"]
+            env: &envs
+              portNum: &port 8080
+              PUID: 1000
+              PGID: 1000
+              TZ: America/New_York
+              BASE_PATH: /
+              CONFIG_DIR: /config
+              TASKS_DIR: /tasks
             args:
               - |
                 mkdir -p /config/stylesheets /config/images /config/sort /config/tasks
                 cp -r /config/stylesheets/. /stylesheets/ 2>/dev/null || true
                 cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
-                chown -R 1000:1000 /config /stylesheets
                 cd /app
                 npm run build -- --base=${BASE_PATH}
                 rm -f dist/stylesheets/custom.css
@@ -66,14 +73,7 @@ spec:
               - |
                 node /api/server.js
             command: ["sh", "-c"]
-            env:
-              portNum: &port 8080
-              PUID: 1000
-              PGID: 1000
-              TZ: America/New_York
-              BASE_PATH: /
-              CONFIG_DIR: /config                                                                                                                                                                             │
-              TASKS_DIR: /tasks
+            env: *envs
             # envFrom: *envFrom
             probes:
               liveness: &probes
@@ -91,7 +91,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"]}
+              capabilities: { drop: ["ALL"], add: ["CHOWN"]}
             resources:
               requests:
                 cpu: 100m
