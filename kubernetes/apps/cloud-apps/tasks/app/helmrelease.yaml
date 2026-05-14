@@ -145,10 +145,19 @@ spec:
         annotations:
         # - nginx.ingress.kubernetes.io/app-root: /tasks
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            rewrite ^/registerSW\.js$ /assets/registerSW.js break;
-            rewrite ^/sw\.js$ /assets/sw.js break;
-            rewrite ^/(workbox-[^/]+\.js)$ /assets/$1 break;
+          nginx.ingress.kubernetes.io/server-snippet: |
+            location = /registerSW.js {
+              rewrite ^ /assets/registerSW.js last;
+              proxy_pass http://tasks-app:8080;
+            }
+            location = /sw.js {
+              rewrite ^ /assets/sw.js last;
+              proxy_pass http://tasks-app:8080;
+            }
+            location ~* ^/(workbox-[^/]+\.js)$ {
+              rewrite ^/(workbox-[^/]+\.js)$ /assets/$1 last;
+              proxy_pass http://tasks-app:8080;
+            }
         hosts:
           - host: tasks.${SECRET_DOMAIN}
             paths:
