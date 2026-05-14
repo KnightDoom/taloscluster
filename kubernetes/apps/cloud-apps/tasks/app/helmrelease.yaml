@@ -91,7 +91,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: { drop: ["ALL"], add: ["CHOWN"] }
             resources:
               requests:
                 cpu: 100m
@@ -155,6 +155,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
+      dist:
+        type: emptyDir
+        globalMounts:
+          - path: /app/dist
       # scripts:
         # type: configMap
         # name: radarr-configmap
