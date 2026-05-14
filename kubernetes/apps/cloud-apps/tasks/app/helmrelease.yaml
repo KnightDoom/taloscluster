@@ -72,9 +72,9 @@ spec:
               PUID: 1000
               PGID: 1000
               TZ: America/New_York
-              BASE_PATH: "/"
-              CONFIG_DIR: "/config"                                                                                                                                                                             │
-              TASKS_DIR: "/tasks"
+              BASE_PATH: /
+              CONFIG_DIR: /config                                                                                                                                                                             │
+              TASKS_DIR: /tasks
             # envFrom: *envFrom
             probes:
               liveness: &probes
