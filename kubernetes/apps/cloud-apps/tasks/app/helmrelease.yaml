@@ -52,8 +52,7 @@ spec:
             image:
               repository:  baldissaramatheus/tasks.md
               tag: 3.3.0
-            command: ["sh", "-c"]
-            args:
+              args:
               - |
                 set -e
                 cd /app
@@ -67,6 +66,7 @@ spec:
                 cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
                 chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
                 node /api/server.js
+            command: ["sh", "-c"]
             env:
               portNum: &port 8080
               PUID: 1000
