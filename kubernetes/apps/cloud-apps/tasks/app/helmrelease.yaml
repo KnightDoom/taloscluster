@@ -52,7 +52,7 @@ spec:
             image:
               repository:  baldissaramatheus/tasks.md
               tag: 3.3.0
-              args:
+            args:
               - |
                 cd /app
                 npm run build -- --base=${BASE_PATH}
