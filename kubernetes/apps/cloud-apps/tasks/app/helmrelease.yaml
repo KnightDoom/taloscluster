@@ -65,10 +65,7 @@ spec:
                 cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
                 cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
                 chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
-            args:
-              - /api/server.js
-            command:
-              - node
+                node /api/server.js
             env:
               portNum: &port 8080
               PUID: 1000
