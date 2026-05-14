@@ -155,9 +155,29 @@ spec:
                 service:
                   identifier: app
                   port: 80
-
+              - path: /workbox-
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: 80
+              - path: /assets
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: 80
+              - path: /static
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: 80
               - path: /icons
                 pathType: Prefix
+                service:
+                  identifier: app
+                  port: 80
+
+              - path: /registerSW.js
+                pathType: Exact
                 service:
                   identifier: app
                   port: 80
