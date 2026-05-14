@@ -42,7 +42,7 @@ spec:
               PUID: 1000
               PGID: 1000
               TZ: America/New_York
-              BASE_PATH: /
+              BASE_PATH: ""
               CONFIG_DIR: /config
               TASKS_DIR: /tasks
             args:
@@ -161,6 +161,11 @@ spec:
                   identifier: app
                   port: http
               - path: /assets
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /api/static
                 pathType: Prefix
                 service:
                   identifier: app
