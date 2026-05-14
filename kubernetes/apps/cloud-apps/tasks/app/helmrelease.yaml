@@ -148,45 +148,45 @@ spec:
                 pathType: Exact
                 service:
                   identifier: app
-                  port: 80
+                  port: http
 
               - path: /favicon.ico
                 pathType: Exact
                 service:
                   identifier: app
-                  port: 80
+                  port: http
               - path: /workbox-
                 pathType: Prefix
                 service:
                   identifier: app
-                  port: 80
+                  port: http
               - path: /assets
                 pathType: Prefix
                 service:
                   identifier: app
-                  port: 80
+                  port: http
               - path: /static
                 pathType: Prefix
                 service:
                   identifier: app
-                  port: 80
+                  port: http
               - path: /icons
                 pathType: Prefix
                 service:
                   identifier: app
-                  port: 80
+                  port: http
 
               - path: /registerSW.js
                 pathType: Exact
                 service:
                   identifier: app
-                  port: 80
+                  port: http
 
               - path: /sw.js
                 pathType: Exact
                 service:
                   identifier: app
-                  port: 80
+                  port: http
     persistence:
       config:
         existingClaim: tasks
