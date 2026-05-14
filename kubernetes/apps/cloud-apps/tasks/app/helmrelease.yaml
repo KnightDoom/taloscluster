@@ -136,6 +136,46 @@ spec:
                 service:
                   identifier: app
                   port: http
+      assets:
+        className: external
+        annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /tasks
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        rules:
+          - host: tasks.${SECRET_DOMAIN}
+            http:
+              paths:
+                - path: /manifest.webmanifest
+                  pathType: Exact
+                  backend:
+                    service:
+                      name: tasks
+                      port:
+                        number: 80
+
+                - path: /favicon.ico
+                  pathType: Exact
+                  backend:
+                    service:
+                      name: tasks
+                      port:
+                        number: 80
+
+                - path: /icons
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: tasks
+                      port:
+                        number: 80
+
+                - path: /sw.js
+                  pathType: Exact
+                  backend:
+                    service:
+                      name: tasks
+                      port:
+                        number: 80
     persistence:
       config:
         existingClaim: tasks
