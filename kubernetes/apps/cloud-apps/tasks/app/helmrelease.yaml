@@ -44,6 +44,7 @@ spec:
                 cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
                 chown -R 1000:1000 /config /stylesheets
             securityContext:
+              runAsNonRoot: false
               runAsUser: 0
               runAsGroup: 0
         containers:
@@ -51,6 +52,19 @@ spec:
             image:
               repository:  baldissaramatheus/tasks.md
               tag: 3.3.0
+            command: ["sh", "-c"]
+            args:
+              - |
+                cd /app
+                npm run build -- --base=${BASE_PATH}
+                rm -f dist/stylesheets/custom.css
+                rm -rf /api/static/*
+                cp -r
+                awk '{gsub("@import url\\((.*)/stylesheets/color-themes/","@import url('"${BASE_PATH}"'/stylesheets/color-themes/")}1' "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
+                mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
+                cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
+                cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
+                chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
             args:
               - /api/server.js
             command:
@@ -60,6 +74,9 @@ spec:
               PUID: 1000
               PGID: 1000
               TZ: America/New_York
+              BASE_PATH: "/"
+              CONFIG_DIR: "/config"                                                                                                                                                                                 │
+              TASKS_DIR: "/tasks"
             # envFrom: *envFrom
             probes:
               liveness: &probes
@@ -141,6 +158,10 @@ spec:
           # - path: /scripts/pushover-notifier.sh
             # subPath: pushover-notifier.sh
             # readOnly: true
+      api:
+        type: emptyDir
+        globalMounts:
+          - path: /api
       tmp:
         type: emptyDir
         globalMounts:
