@@ -54,7 +54,6 @@ spec:
               tag: 3.3.0
               args:
               - |
-                set -e
                 cd /app
                 npm run build -- --base=${BASE_PATH}
                 rm -f dist/stylesheets/custom.css
