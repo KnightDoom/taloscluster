@@ -59,6 +59,8 @@ spec:
                 mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
                 cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
                 cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
+                cp /api/static/registerSW.js /api/static/assets/registerSW.js
+                cp /api/static/sw.js /api/static/assets/sw.js
                 chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
             securityContext:
               runAsNonRoot: false
@@ -71,7 +73,8 @@ spec:
               tag: 3.3.0
             args:
               - |
-                node /api/server.js
+                cd /api
+                node ./server.js
             command: ["sh", "-c"]
             env: *envs
             # envFrom: *envFrom
@@ -141,6 +144,9 @@ spec:
         annotations:
         # - nginx.ingress.kubernetes.io/app-root: /tasks
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite ^/registerSW\.js$ /assets/registerSW.js break;
+            rewrite ^/sw\.js$ /assets/sw.js break;
         hosts:
           - host: tasks.${SECRET_DOMAIN}
             paths:
