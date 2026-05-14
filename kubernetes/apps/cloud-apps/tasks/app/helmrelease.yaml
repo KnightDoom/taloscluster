@@ -147,14 +147,6 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /stylesheets
-      # scripts:
-        # type: configMap
-        # name: radarr-configmap
-        # defaultMode: 0775
-        # globalMounts:
-          # - path: /scripts/pushover-notifier.sh
-            # subPath: pushover-notifier.sh
-            # readOnly: true
       api:
         type: emptyDir
         globalMounts:
@@ -163,4 +155,11 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-
+      # scripts:
+        # type: configMap
+        # name: radarr-configmap
+        # defaultMode: 0775
+        # globalMounts:
+          # - path: /scripts/pushover-notifier.sh
+            # subPath: pushover-notifier.sh
+            # readOnly: true
