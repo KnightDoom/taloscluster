@@ -43,6 +43,16 @@ spec:
                 cp -r /config/stylesheets/. /stylesheets/ 2>/dev/null || true
                 cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
                 chown -R 1000:1000 /config /stylesheets
+                cd /app
+                npm run build -- --base=${BASE_PATH}
+                rm -f dist/stylesheets/custom.css
+                rm -rf /api/static/*
+                cp -r dist/* /api/static/
+                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url(${BASE_PATH}/stylesheets/color-themes/|g" "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
+                mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
+                cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
+                cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
+                chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
             securityContext:
               runAsNonRoot: false
               runAsUser: 0
@@ -54,16 +64,6 @@ spec:
               tag: 3.3.0
             args:
               - |
-                cd /app
-                npm run build -- --base=${BASE_PATH}
-                rm -f dist/stylesheets/custom.css
-                rm -rf /api/static/*
-                cp -r dist/* /api/static/
-                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url(${BASE_PATH}/stylesheets/color-themes/|g" "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
-                mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
-                cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
-                cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
-                chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
                 node /api/server.js
             command: ["sh", "-c"]
             env:
@@ -91,7 +91,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"], add: ["CHOWN"] }
+              capabilities: { drop: ["ALL"]}
             resources:
               requests:
                 cpu: 100m
