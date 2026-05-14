@@ -60,7 +60,7 @@ spec:
                 rm -f dist/stylesheets/custom.css
                 rm -rf /api/static/*
                 cp -r dist/* /api/static/
-                awk '{gsub("@import url\\((.*)/stylesheets/color-themes/","@import url('"${BASE_PATH}"'/stylesheets/color-themes/")}1' "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
+                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url(${BASE_PATH}/stylesheets/color-themes/|g" "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
                 mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
                 cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
                 cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
@@ -72,7 +72,7 @@ spec:
               PGID: 1000
               TZ: America/New_York
               BASE_PATH: "/"
-              CONFIG_DIR: "/config"                                                                                                                                                                                 │
+              CONFIG_DIR: "/config"                                                                                                                                                                             │
               TASKS_DIR: "/tasks"
             # envFrom: *envFrom
             probes:
