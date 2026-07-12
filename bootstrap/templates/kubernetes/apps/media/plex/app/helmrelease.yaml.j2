@@ -41,7 +41,7 @@ spec:
               TZ: America/New_York
               PLEX_ADVERTISE_URL: "#{ bootstrap_plex.advertise_url }#"
               PLEX_NO_AUTH_NETWORKS: "#{ bootstrap_plex.no_auth_networks }#"
-              #% if bootstrap_plex.nvidia_enabled %#
+              #% if bootstrap_nvidia.enabled %#
               NVIDIA_VISIBLE_DEVICES: all
               NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
               #% endif %#
@@ -82,7 +82,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
-      #% if bootstrap_plex.nvidia_enabled %#
+      #% if bootstrap_nvidia.enabled %#
       runtimeClassName: nvidia
       #% endif %#
       #nodeSelector:

@@ -49,7 +49,7 @@ spec:
               # RADARR__APP__THEME: dark
               IMMICH_WORKERS_INCLUDE: api
               IMMICH_METRICS_INCLUDE: all
-              #% if bootstrap_plex.nvidia_enabled %#
+              #% if bootstrap_nvidia.enabled %#
               NVIDIA_VISIBLE_DEVICES: all
               NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
               #% endif %#
@@ -85,7 +85,7 @@ spec:
               limits:
                 memory: 4Gi
     defaultPodOptions:
-      #% if bootstrap_plex.nvidia_enabled %#
+      #% if bootstrap_nvidia.enabled %#
       runtimeClassName: nvidia
       #% endif %#
       securityContext:

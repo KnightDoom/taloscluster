@@ -5,6 +5,8 @@ metadata:
   name: &app free-game-claimer
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   targetNamespace: cloud-apps
   commonMetadata:
     labels:

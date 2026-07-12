@@ -49,13 +49,13 @@ spec:
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres
-      replicas: &replicas 3
+      replicas: &replicas 2
       dataVolumeClaimSpec:
         storageClassName: longhorn-1r
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 22Gi
+            storage: 25Gi
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: "kubernetes.io/hostname"
@@ -151,6 +151,12 @@ spec:
         # type: AlphaNumeric
   backups:
     pgbackrest:
+      #restore: # Optional: restore from backup on cluster creation
+      #  enabled: true
+      #  repoName: repo1
+      #  options:
+      #    - --type=time
+      #    - --target=2026-04-08 12:15:02-05
       configuration: &backupConfig
         - secret:
             name: crunchy-pgo-secret
@@ -208,19 +214,26 @@ spec:
               accessModes: ["ReadWriteMany"]
               resources:
                 requests:
-                  storage: 6Gi
+                  storage: 25Gi
           schedules:
             full: "15 1 * * 0" # Sunday at 01:15
             differential: "15 1 * * 1-6" # Mon-Sat at 01:15
             incremental: "15 3-23 * * *" # Every hour except 01:30-2:30
-  # dataSource:
-    # pgbackrest:
-      # stanza: db
-      # configuration: *backupConfig
-      # global: *backupFlag
-      # repo:
-         # name: repo1
-         # volume: *nfs
+  # this dont work :/s  PostgresCluster.postgres-operator.crunchydata.com "postgres" i
+  # Invalid value: Only S3, GCS or Azure repos can be used as a pgBackRest data source s
+  dataSource:
+    postgresCluster:
+      clusterName: postgres
+      repoName: repo1
+      options:
+      - --type=time
+      - --target="2026-04-08 12:15:02-05"
+      #stanza: db
+      #configuration: *backupConfig
+      #global: *backupFlag #s
+      #repo:
+      #  name: repo1
+      #  volume: *nfs
   proxy:
     pgBouncer:
       service:

@@ -25,8 +25,20 @@ additionalMachineCertSans: *sans
 cniConfig:
   name: none
 
+#% set nvidia_machine_names = bootstrap_nvidia.machines | default([], true) | map(attribute='name') | list %#
+#% set i915_machines = bootstrap_i915.machines | default([], true) %#
+#% set i915_machine_names = i915_machines | map(attribute='name') | list %#
+
 nodes:
   #% for item in bootstrap_node_inventory %#
+  #% set is_nvidia_machine = bootstrap_nvidia.enabled and item.name in nvidia_machine_names %#
+  #% set is_i915_machine = bootstrap_i915.enabled and item.name in i915_machine_names %#
+  #% set i915_machine = namespace(cpu_generation='') %#
+  #% for gpu_machine in i915_machines %#
+  #% if gpu_machine.name == item.name %#
+  #% set i915_machine.cpu_generation = gpu_machine.cpu_generation %#
+  #% endif %#
+  #% endfor %#
   - hostname: "#{ item.name }#"
     ipAddress: "#{ item.address }#"
     #% if item.disk.startswith('/') %#
@@ -86,11 +98,24 @@ nodes:
       - #{ manifest }#
       #% endfor %#
     #% endif %#
-    #% if item.labels %#
+    #% if item.labels or is_nvidia_machine or is_i915_machine %#
     nodeLabels:
+      #% if item.labels %#
       #% for key, value in item.labels.items() %#
+      #% if key not in ['gpu', 'nvidia.com/gpu', 'nvidia.com/gpu.present', 'intel.feature.node.kubernetes.io/gpu', 'intel.feature.node.kubernetes.io/cpu-generation'] %#
       #{ key }#: #{ value }#
+      #% endif %#
       #% endfor %#
+      #% endif %#
+      #% if is_nvidia_machine %#
+      gpu: "nvidia"
+      nvidia.com/gpu: "true"
+      nvidia.com/gpu.present: "true"
+      #% elif is_i915_machine %#
+      gpu: "intel"
+      intel.feature.node.kubernetes.io/gpu: "true"
+      intel.feature.node.kubernetes.io/cpu-generation: "#{ i915_machine.cpu_generation }#"
+      #% endif %#
     #% endif %#
     #% if item.extension_services %#
     extensionServices:
@@ -110,7 +135,14 @@ nodes:
         #% endif %#
       #% endfor %#
     #% endif %#
+    #% set node_patch_files = [] %#
     #% for file in talos_patches('%s' % (item.name)) %#
+    #% set patch_name = file | basename %#
+    #% if patch_name != 'gpu-worker-patch.yaml' or is_nvidia_machine %#
+    #% set _ = node_patch_files.append(file) %#
+    #% endif %#
+    #% endfor %#
+    #% for file in node_patch_files %#
     #% if loop.index == 1 %#
     patches:
     #% endif %#
