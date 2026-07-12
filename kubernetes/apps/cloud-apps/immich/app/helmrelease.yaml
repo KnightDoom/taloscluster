@@ -82,6 +82,7 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 4Gi
+                #nvidia.com/gpu: 1
     defaultPodOptions:
       runtimeClassName: nvidia
       securityContext:

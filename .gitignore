@@ -26,3 +26,5 @@ wiki
 # Bootstrap
 /config.yaml
 support.zip
+kubernetes/apps/kube-system/external-secrets/bitwarden/do-not-uploda-test.yaml
+kubernetes/apps/kube-system/external-secrets/bitwarden/do-not-upload-deployment.yaml

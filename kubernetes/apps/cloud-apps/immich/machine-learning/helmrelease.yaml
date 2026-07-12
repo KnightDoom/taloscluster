@@ -67,6 +67,7 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 4000Mi
+                #nvidia.com/gpu: 1
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
