@@ -50,7 +50,7 @@ spec:
       # Render the config.toml with the real API key before any container starts
       initContainers:
         - name: gluetun-auth-init
-          image: busybox:1.36
+          image: busybox:1.38
           command:
             - sh
             - -c
