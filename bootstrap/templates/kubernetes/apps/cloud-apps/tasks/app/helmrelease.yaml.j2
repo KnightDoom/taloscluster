@@ -29,14 +29,42 @@ spec:
       tasks:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-          # init-db:
-            # image:
-              # repository: ghcr.io/onedr0p/postgres-init
-              # tag: 16
-            # envFrom: &envFrom
-              # - secretRef:
-                  # name: radarr-secret
+        initContainers:
+          setup:
+            image:
+              repository: baldissaramatheus/tasks.md
+              tag: 3.3.0
+            command: ["sh", "-c"]
+            env: &envs
+              portNum: &port 8080
+              PUID: 1000
+              PGID: 1000
+              TZ: America/New_York
+              BASE_PATH: ""
+              CONFIG_DIR: /config
+              TASKS_DIR: /tasks
+            args:
+              - |
+                mkdir -p /config/stylesheets /config/images /config/sort /config/tasks
+                cp -r /config/stylesheets/. /stylesheets/ 2>/dev/null || true
+                cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
+                cd /app
+                npm run build -- --base=${BASE_PATH}/
+                rm -f dist/stylesheets/custom.css
+                rm -rf /api/static/*
+                cp -r dist/* /api/static
+                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url(${BASE_PATH}/stylesheets/color-themes/|g" "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
+                mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
+                cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
+                cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
+                cp /api/static/registerSW.js /api/static/assets/registerSW.js
+                cp /api/static/sw.js /api/static/assets/sw.js
+                cp /api/static/workbox-*.js /api/static/assets/
+                chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+              runAsGroup: 0
         containers:
           app:
             image:
@@ -44,22 +72,10 @@ spec:
               tag: 3.3.0
             args:
               - |
-                 echo "1"
-                 mkdir -p /config/stylesheets && echo "stylesheets_created"
-                 mkdir -p /config/images && echo "images_created"
-                 mkdir -p /config/sort && echo "sort_created"
-                 mkdir -p /config/tasks && echo "tasks_created"
-                 cp -r /config/stylesheets/. /stylesheets/ && echo "copied config_stylesheets to stylesheets"
-                 cp -r /stylesheets/. /config/stylesheets && echo "copied stylesheets to config_stylesheets"
-                 node /api/server.js
-            command:
-              - sh
-              - -c
-            env:
-              portNum: &port 8080
-              PUID: 1000
-              PGID: 1000
-              TZ: America/New_York
+                cd /api
+                node ./server.js
+            command: ["sh", "-c"]
+            env: *envs
             # envFrom: *envFrom
             probes:
               liveness: &probes
@@ -72,12 +88,12 @@ spec:
                   initialDelaySeconds: 15
                   periodSeconds: 10
                   timeoutSeconds: 1
-                  failureThreshold: 3
+                  failureThreshold: 4
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: { drop: ["ALL"], add: ["CHOWN"]}
             resources:
               requests:
                 cpu: 100m
@@ -122,6 +138,66 @@ spec:
                 service:
                   identifier: app
                   port: http
+      assets:
+        className: external
+        annotations:
+        # - nginx.ingress.kubernetes.io/app-root: /tasks
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite ^/registerSW\.js$ /assets/registerSW.js break;
+            rewrite ^/sw\.js$ /assets/sw.js break;
+            rewrite ^/(workbox-[^/]+\.js)$ /assets/$1 break;
+        hosts:
+          - host: tasks.${SECRET_DOMAIN}
+            paths:
+              - path: /manifest.webmanifest
+                pathType: Exact
+                service:
+                  identifier: app
+                  port: http
+
+              - path: /favicon.ico
+                pathType: Exact
+                service:
+                  identifier: app
+                  port: http
+              - path: /workbox-
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /assets
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /api/static
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /static
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /icons
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+
+              - path: /registerSW.js
+                pathType: Exact
+                service:
+                  identifier: app
+                  port: http
+
+              - path: /sw.js
+                pathType: Exact
+                service:
+                  identifier: app
+                  port: http
     persistence:
       config:
         existingClaim: tasks
@@ -129,6 +205,22 @@ spec:
           - path: /tasks
             subPath: tasks
           - path: /config
+      stylesheets:
+        type: emptyDir
+        globalMounts:
+          - path: /stylesheets
+      api:
+        type: emptyDir
+        globalMounts:
+          - path: /api/static
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      dist:
+        type: emptyDir
+        globalMounts:
+          - path: /app/dist
       # scripts:
         # type: configMap
         # name: radarr-configmap
@@ -137,8 +229,3 @@ spec:
           # - path: /scripts/pushover-notifier.sh
             # subPath: pushover-notifier.sh
             # readOnly: true
-      tmp:
-        type: emptyDir
-        globalMounts:
-          - path: /tmp
-

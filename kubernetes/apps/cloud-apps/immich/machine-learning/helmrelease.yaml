@@ -37,8 +37,6 @@ spec:
             env:
               TZ: America/New_York
               MPLCONFIGDIR: /cache/matplotlib
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
             envFrom:
               - configMapRef:
                   name: immich-configmap
@@ -67,13 +65,12 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 4000Mi
-                #nvidia.com/gpu: 1
+
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
-      runtimeClassName: nvidia
       #nodeSelector:
         #intel.feature.node.kubernetes.io/gpu: "true"
       securityContext:

@@ -22,9 +22,10 @@ spec:
       retries: 3
   values:
     args:
-      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      - --kubelet-preferred-address-types=Hostname,InternalDNS,ExternalIP,InternalIP
       - --kubelet-use-node-status-port
       - --metric-resolution=15s
+      - --kubelet-insecure-tls
     metrics:
       enabled: true
     serviceMonitor:

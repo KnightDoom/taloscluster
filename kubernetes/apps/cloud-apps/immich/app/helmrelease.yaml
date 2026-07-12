@@ -49,8 +49,6 @@ spec:
               # RADARR__APP__THEME: dark
               IMMICH_WORKERS_INCLUDE: api
               IMMICH_METRICS_INCLUDE: all
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
               portNum: &port 2283
               TZ: America/New_York
             # envFrom: *envFrom
@@ -82,9 +80,8 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 4Gi
-                #nvidia.com/gpu: 1
+
     defaultPodOptions:
-      runtimeClassName: nvidia
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

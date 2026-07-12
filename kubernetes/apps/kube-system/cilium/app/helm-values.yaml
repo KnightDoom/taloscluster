@@ -27,7 +27,7 @@ k8sServicePort: 7445
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l2announcements:
-  enabled: true
+  enabled: "True" # https://github.com/cilium/cilium/issues/28985
 loadBalancer:
   algorithm: maglev
   mode: "dsr"

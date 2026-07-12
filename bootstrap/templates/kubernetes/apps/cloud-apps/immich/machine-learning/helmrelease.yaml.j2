@@ -69,6 +69,10 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 4000Mi
+                #% if bootstrap_nvidia.enabled %#
+                # nvidia.com/gpu: 1
+                #% endif %#
+
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
