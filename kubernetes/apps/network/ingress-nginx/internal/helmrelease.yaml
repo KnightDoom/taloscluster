@@ -8,9 +8,11 @@ spec:
   chart:
     spec:
       chart: ingress-nginx
+      # datasource=helm depName=ingress-nginx repository=https://kubernetes.github.io/ingress-nginx
       version: 4.15.1
       sourceRef:
         kind: HelmRepository
+
         name: ingress-nginx
         namespace: flux-system
   install:
@@ -29,7 +31,7 @@ spec:
         annotations:
           lbipam.cilium.io/ips: "192.168.86.230"
           nginx.ingress.kubernetes.io/configuration-snippet: "real_ip_header CF-Connecting-IP;"
-        externalTrafficPolicy: Cluster #modified?
+        externalTrafficPolicy: "Cluster"
       ingressClassResource:
         name: internal
         default: true
@@ -71,6 +73,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN/./-}-production-tls"
+
       resources:
         requests:
           cpu: 100m

@@ -22,6 +22,7 @@ additionalMachineCertSans: *sans
 cniConfig:
   name: none
 
+
 nodes:
   - hostname: "talos0"
     ipAddress: "192.168.86.26"
@@ -41,11 +42,9 @@ nodes:
         vip:
           ip: "192.168.86.25"
     nodeLabels:
-      gpu: nvidia
-      nvidia.com/gpu: true
-      nvidia.com/gpu.present: true
-    #patches:
-    #  - "@./patches/talos0/gpu-worker-patch.yaml"
+      gpu: "intel"
+      intel.feature.node.kubernetes.io/gpu: "true"
+      intel.feature.node.kubernetes.io/cpu-generation: "10th-gen"
   - hostname: "talos1"
     ipAddress: "192.168.86.27"
     installDisk: "/dev/sda"
@@ -61,6 +60,10 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.86.1"
         mtu: 1500
+    nodeLabels:
+      gpu: "intel"
+      intel.feature.node.kubernetes.io/gpu: "true"
+      intel.feature.node.kubernetes.io/cpu-generation: "11th-gen"
   - hostname: "talos2"
     ipAddress: "192.168.86.28"
     installDisk: "/dev/sda"
@@ -76,6 +79,10 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.86.1"
         mtu: 1500
+    nodeLabels:
+      gpu: "intel"
+      intel.feature.node.kubernetes.io/gpu: "true"
+      intel.feature.node.kubernetes.io/cpu-generation: "10th-gen"
 
 # Global patches
 patches:
@@ -94,6 +101,6 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
-#    - "@./patches/controller/disable-admission-controller.yaml"
+    - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
 

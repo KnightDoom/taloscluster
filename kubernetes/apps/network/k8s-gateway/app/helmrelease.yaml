@@ -23,7 +23,7 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
-    fallthrough: 
+    fallthrough:
       enabled: true
     ttl: 1
     extraZonePlugins:
@@ -52,6 +52,8 @@ spec:
       port: 53
       annotations:
         lbipam.cilium.io/ips: "192.168.86.229"
-      externalTrafficPolicy: Cluster
+      #externalTrafficPolicy: Cluster
+      externalTrafficPolicy: "Cluster"
+
     watchedResources: ["Ingress", "Service"]
 
