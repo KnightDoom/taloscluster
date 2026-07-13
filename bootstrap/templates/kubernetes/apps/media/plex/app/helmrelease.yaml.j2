@@ -71,8 +71,20 @@ spec:
               requests:
                 cpu: 100m
                 memory: 500Mi
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
+                #% endif %#
+                #% if bootstrap_nvidia.enabled %#
+                nvidia.com/gpu: 1
+                #% endif %#
               limits:
                 memory: 16Gi
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
+                #% endif %#
+                #% if bootstrap_nvidia.enabled %#
+                nvidia.com/gpu: 1
+                #% endif %#
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -85,8 +97,10 @@ spec:
       #% if bootstrap_nvidia.enabled %#
       runtimeClassName: nvidia
       #% endif %#
-      #nodeSelector:
-        #intel.feature.node.kubernetes.io/gpu: "true"
+      #% if bootstrap_i915.enabled %#
+      nodeSelector:
+        gpu: "intel"
+      #% endif %#
     service:
       app:
         controller: plex

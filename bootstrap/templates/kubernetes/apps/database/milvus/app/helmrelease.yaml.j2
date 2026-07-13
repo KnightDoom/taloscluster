@@ -52,9 +52,19 @@ spec:
       enabled: true
       resources:
         requests:
+          #% if bootstrap_i915.enabled %#
+          gpu.intel.com/i915: 1
+          #% endif %#
+          #% if bootstrap_nvidia.enabled %#
           nvidia.com/gpu: 1
+          #% endif %#
         limits:
+          #% if bootstrap_i915.enabled %#
+          gpu.intel.com/i915: 1
+          #% endif %#
+          #% if bootstrap_nvidia.enabled %#
           nvidia.com/gpu: 1
+          #% endif %#
     woodpecker:
       enabled: true
     streaming:

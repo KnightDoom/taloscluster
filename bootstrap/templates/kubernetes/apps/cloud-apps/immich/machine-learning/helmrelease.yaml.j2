@@ -67,8 +67,17 @@ spec:
               requests:
                 cpu: 10m
                 memory: 100Mi
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
+                #% endif %#
+                #% if bootstrap_nvidia.enabled %#
+                nvidia.com/gpu: 1
+                #% endif %#
               limits:
                 memory: 4000Mi
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
+                #% endif %#
                 #% if bootstrap_nvidia.enabled %#
                 # nvidia.com/gpu: 1
                 #% endif %#
@@ -81,8 +90,10 @@ spec:
       #% if bootstrap_nvidia.enabled %#
       runtimeClassName: nvidia
       #% endif %#
-      #nodeSelector:
-        #intel.feature.node.kubernetes.io/gpu: "true"
+      #% if bootstrap_i915.enabled %#
+      nodeSelector:
+        gpu: "intel"
+      #% endif %#
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
