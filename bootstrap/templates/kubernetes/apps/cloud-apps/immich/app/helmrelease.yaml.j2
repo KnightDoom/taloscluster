@@ -82,10 +82,19 @@ spec:
               requests:
                 cpu: 100m
                 memory: 100Mi
+                #% if bootstrap_nvidia.enabled %#
+                nvidia.com/gpu: 1
+                #% endif %#
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
+                #% endif %#
               limits:
                 memory: 4Gi
                 #% if bootstrap_nvidia.enabled %#
-                # nvidia.com/gpu: 1
+                nvidia.com/gpu: 1
+                #% endif %#
+                #% if bootstrap_i915.enabled %#
+                gpu.intel.com/i915: 1
                 #% endif %#
 
     defaultPodOptions:
