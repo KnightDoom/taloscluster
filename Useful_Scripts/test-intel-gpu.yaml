@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: intel-gpu-test
+  namespace: intel-gpu
+spec:
+  restartPolicy: Never
+  containers:
+    - name: intel-gpu-test
+      image: intel/opencl-icd:latest
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          echo "===== /dev/dri contents ====="
+          ls -la /dev/dri || echo "No /dev/dri found!"
+
+          echo "===== clinfo (OpenCL) ====="
+          clinfo || echo "clinfo failed or not available"
+
+          echo "===== vainfo (VA-API) ====="
+          vainfo || echo "vainfo failed or not available"
+
+          echo "===== Sleeping so you can exec in ====="
+          sleep 3600
+      resources:
+        limits:
+          gpu.intel.com/i915: 1
+      securityContext:
+        privileged: false
+  nodeSelector:
+    kubernetes.io/arch: amd64
