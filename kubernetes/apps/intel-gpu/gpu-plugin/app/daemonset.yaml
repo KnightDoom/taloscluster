@@ -45,8 +45,6 @@ spec:
           args:
             - --logtostderr
             - --v=2
-            - --device-plugin-mode=all
-            - --resource-name=intel.com/gpu
             - --shared-dev-num=3
           imagePullPolicy: IfNotPresent
           securityContext:
