@@ -1,0 +1,44 @@
+# HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: intel
+  namespace: intel-gpu
+spec:
+  interval: 1h
+  url: https://intel.github.io/helm-charts
+---
+# HelmRelease for the operator
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: intel-device-plugins-operator
+  namespace: intel-gpu
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: intel-device-plugins-operator
+      sourceRef:
+        kind: HelmRepository
+        name: intel
+        namespace: intel-gpu
+---
+# HelmRelease for the GPU plugin itself
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: intel-device-plugins-gpu
+  namespace: intel-gpu
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: intel-device-plugins-gpu
+      sourceRef:
+        kind: HelmRepository
+        name: intel
+        namespace: intel-gpu
+  values:
+    name: i915
+    sharedDevNum: 3
