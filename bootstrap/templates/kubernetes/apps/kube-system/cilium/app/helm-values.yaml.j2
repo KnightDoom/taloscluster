@@ -36,7 +36,7 @@ k8sServicePort: 7445
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l2announcements:
-  enabled: "#{ not (bootstrap_bgp.enabled or bootstrap_feature_gates.dual_stack_ipv4_first) }#" # https://github.com/cilium/cilium/issues/28985
+  enabled: #{ not (bootstrap_bgp.enabled or bootstrap_feature_gates.dual_stack_ipv4_first) }# # https://github.com/cilium/cilium/issues/28985
 loadBalancer:
   algorithm: maglev
   mode: "#{ bootstrap_loadbalancer_mode | default('dsr', true) }#"

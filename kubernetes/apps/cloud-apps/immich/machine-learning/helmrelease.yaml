@@ -63,16 +63,18 @@ spec:
               requests:
                 cpu: 10m
                 memory: 100Mi
+                gpu.intel.com/i915: 1
               limits:
                 memory: 4000Mi
+                gpu.intel.com/i915: 1
 
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
-      #nodeSelector:
-        #intel.feature.node.kubernetes.io/gpu: "true"
+      nodeSelector:
+        gpu: "intel"
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

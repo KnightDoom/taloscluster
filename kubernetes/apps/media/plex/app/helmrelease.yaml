@@ -67,8 +67,10 @@ spec:
               requests:
                 cpu: 100m
                 memory: 500Mi
+                gpu.intel.com/i915: 1
               limits:
                 memory: 16Gi
+                gpu.intel.com/i915: 1
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -78,8 +80,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
-      #nodeSelector:
-        #intel.feature.node.kubernetes.io/gpu: "true"
+      nodeSelector:
+        gpu: "intel"
     service:
       app:
         controller: plex

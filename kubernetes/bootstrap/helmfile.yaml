@@ -3,7 +3,7 @@ helmDefaults:
   wait: true
   waitForJobs: true
   timeout: 600
-  recreatePods: true
+  #recreatePods: true
   force: true
 
 repositories:
@@ -63,7 +63,7 @@ releases:
     namespace: longhorn-system
     chart: longhorn/longhorn
     version: 1.12.0
-    values: 
+    values:
       - ../apps/longhorn-system/longhorn/app/helm-values.yaml
     needs:
       - observability/prometheus-operator-crds
