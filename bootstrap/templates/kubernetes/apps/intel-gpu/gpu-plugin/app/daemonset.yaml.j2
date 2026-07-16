@@ -60,6 +60,8 @@ spec:
               mountPath: /dev/dri
             - name: kubeletsockets
               mountPath: /var/lib/kubelet/device-plugins
+            - name: cdi
+              mountPath: /var/run/cdi
       volumes:
         - name: devfs
           hostPath:
@@ -69,3 +71,7 @@ spec:
           hostPath:
             path: /var/lib/kubelet/device-plugins
             type: Directory
+        - name: cdi
+          hostPath:
+            path: /var/run/cdi
+            type: DirectoryOrCreate
