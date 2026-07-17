@@ -14,3 +14,12 @@ spec:
         - matchLabels:
             app.kubernetes.io/instance: external-secrets
             app.kubernetes.io/name: external-secrets
+    - ingress:
+      - fromEndpoints:
+          - matchLabels:
+              app.kubernetes.io/instance: external-secrets
+              app.kubernetes.io/name: external-secrets
+        toPorts:
+          - ports:
+              - port: "8087"
+                protocol: TCP
