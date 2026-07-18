@@ -152,7 +152,7 @@ spec:
   backups:
     pgbackrest:
       restore: # Optional: restore from backup on cluster creation
-        enabled: true
+        enabled: false
         repoName: repo1
         options:
           - --type=time
