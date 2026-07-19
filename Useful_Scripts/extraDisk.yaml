@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: extra-data
+provisioning:
+  diskSelector:
+    match: 'disk.bus_path == "/pci0000:00/0000:00:1e.0/0000:05:04.0/0000:09:02.0/virtio3/host27/target27:0:0/27:0:0:1"'
+  minSize: 400GB
+filesystem:
+  type: xfs
