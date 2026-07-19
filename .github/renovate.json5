@@ -168,6 +168,8 @@
       ],
       semanticCommitType: 'chore',
       semanticCommitScope: 'container',
+      automerge: true,
+      automergeType: 'pr',
     },
     {
       matchDatasources: [
