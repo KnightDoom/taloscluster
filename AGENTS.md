@@ -12,6 +12,7 @@ This repository manages a Talos Linux Kubernetes cluster with Flux. It is design
 - For Kubernetes app changes, edit the matching file under `bootstrap/templates/kubernetes/apps/**` first. If updates are made to `kubernetes/apps/**`, ensure they are matched similarly in the corresponding template files in `bootstrap/templates/kubernetes/apps/**` (which will have a `.j2` suffix and be in jinja syntax).
 - Run `task configure -y` after template edits. This renders templates with `makejinja`, encrypts `*.sops.*` files when needed, and validates manifests with kubeconform.
 - Generated files in `kubernetes/apps/**`, `kubernetes/flux/**`, and `kubernetes/bootstrap/**` may be overwritten by `task configure -y`.
+- Do not run 'task configure -y' unless explicitly asked. This is a user action unless mentioned in the prompt.
 
 ## Rendering Flow
 
