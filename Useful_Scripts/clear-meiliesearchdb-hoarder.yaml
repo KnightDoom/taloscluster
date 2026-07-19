@@ -1,0 +1,2 @@
+#!/bin/bash
+kubectl run meili-cleanup -n cloud-apps --rm -it --image=busybox --restart=Never --overrides='{"spec":{"containers":[{"name":"cleanup","image":"busybox","command":["sh","-c","rm -rf /meili_data/*"],"volumeMounts":[{"name":"data","mountPath":"/meili_data"}]}],"volumes":[{"name":"data","persistentVolumeClaim":{"claimName":"meilisearch"}}]}}'
