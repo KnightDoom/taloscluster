@@ -49,18 +49,18 @@ spec:
                 cp -r /config/stylesheets/. /stylesheets/ 2>/dev/null || true
                 cp -r /stylesheets/. /config/stylesheets 2>/dev/null || true
                 cd /app
-                npm run build -- --base=${BASE_PATH}/
+                npm run build -- --base=$${BASE_PATH}/
                 rm -f dist/stylesheets/custom.css
                 rm -rf /api/static/*
                 cp -r dist/* /api/static
-                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url(${BASE_PATH}/stylesheets/color-themes/|g" "${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
-                mv /tmp/custom.css "${CONFIG_DIR}/stylesheets/custom.css"
-                cp -r ${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
-                cp -r /api/static/stylesheets/. ${CONFIG_DIR}/stylesheets/
+                sed -E "s|@import url\\((.*)/stylesheets/color-themes/|@import url($${BASE_PATH}/stylesheets/color-themes/|g" "$${CONFIG_DIR}/stylesheets/custom.css" > /tmp/custom.css
+                mv /tmp/custom.css "$${CONFIG_DIR}/stylesheets/custom.css"
+                cp -r $${CONFIG_DIR}/stylesheets/. /api/static/stylesheets/
+                cp -r /api/static/stylesheets/. $${CONFIG_DIR}/stylesheets/
                 cp /api/static/registerSW.js /api/static/assets/registerSW.js
                 cp /api/static/sw.js /api/static/assets/sw.js
                 cp /api/static/workbox-*.js /api/static/assets/
-                chown -R 1000:1000 ${CONFIG_DIR} ${TASKS_DIR} /api/static
+                chown -R 1000:1000 $${CONFIG_DIR} $${TASKS_DIR} /api/static
             securityContext:
               runAsNonRoot: false
               runAsUser: 0
