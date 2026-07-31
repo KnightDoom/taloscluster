@@ -10,9 +10,8 @@ This repository manages a Talos Linux Kubernetes cluster with Flux. It is design
 - Treat `bootstrap/templates/kubernetes/**` and `bootstrap/overrides/**` as the source templates.
 - Treat `kubernetes/**` as generated output from the templates.
 - For Kubernetes app changes, edit the matching file under `bootstrap/templates/kubernetes/apps/**` first. If updates are made to `kubernetes/apps/**`, ensure they are matched similarly in the corresponding template files in `bootstrap/templates/kubernetes/apps/**` (which will have a `.j2` suffix and be in jinja syntax).
-- Run `task configure -y` after template edits. This renders templates with `makejinja`, encrypts `*.sops.*` files when needed, and validates manifests with kubeconform.
+- While `task configure -y` after template edits is normal, this is a USER only action, do not run automatically unless specifically requested by user. This renders templates with `makejinja`, encrypts `*.sops.*` files when needed, and validates manifests with kubeconform.
 - Generated files in `kubernetes/apps/**`, `kubernetes/flux/**`, and `kubernetes/bootstrap/**` may be overwritten by `task configure -y`.
-- Do not run 'task configure -y' unless explicitly asked. This is a user action unless mentioned in the prompt.
 
 ## Rendering Flow
 
@@ -58,24 +57,18 @@ The namespace-level `kustomization.yaml.j2` should include `namespace.yaml` and 
 
 ## YAML Style
 
-- Start Kubernetes YAML documents with `---`.
-- Use two-space indentation.
-- Keep resource names lowercase and hyphenated.
 - Use YAML anchors for repeated app names where the repo already does this, for example `name: &app radarr` and `app.kubernetes.io/name: *app`.
 - Keep Flux intervals and timeouts consistent with nearby apps unless there is a reason to change them.
 - Follow existing HelmRelease structure: `interval`, `chart`, `install.remediation`, `upgrade`, then `values` or `valuesFrom`.
-- Keep commented optional blocks only when they are useful as local examples for future changes.
 
 ## Secrets
 
 - Never write real secret material into non-SOPS files.
 - Template secret manifests as `secret.sops.yaml.j2` when they must be generated.
-- Let `task configure -y` and `bootstrap:secrets` handle SOPS encryption for generated `*.sops.*` files.
 - Do not print or copy secret values from `config.yaml`, `age.key`, or generated SOPS files into chat or documentation.
 
 ## Validation
 
-- After template changes, run `task configure -y` whenever practical.
 - If only validating generated manifests, run `task kubernetes:kubeconform`.
 - For live-cluster reconciliation, use `task kubernetes:reconcile` after committing and pushing changes.
 - Do not hand-edit generated files as the only fix unless the user explicitly asks for a temporary generated-output patch.
