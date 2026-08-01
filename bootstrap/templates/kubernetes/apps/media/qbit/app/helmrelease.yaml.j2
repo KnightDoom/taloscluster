@@ -69,7 +69,7 @@ spec:
                 #              - name: DOT
                 #                value: "off"
               - name: portNum
-                value: "8080"
+                value: "8000"
               - name: VPN_TYPE
                 value: "wireguard"
               - name: VPN_INTERFACE
@@ -90,7 +90,7 @@ spec:
               - name: WIREGUARD_ADDRESSES
                 value: "10.17.247.215/32"
               - name: FIREWALL_INPUT_PORTS
-                value: 10095
+                value: "10095,8000"
               - name: FIREWALL_OUTBOUND_SUBNETS
                 value: "10.96.0.0/16,10.69.0.0/16"
               - name: TZ
@@ -141,7 +141,7 @@ spec:
               - name: QBT_ADDR
                 value: 'http://qbit-app:10095'
               - name: GTN_ADDR
-                value: 'http://qbit-gluetun:8080'
+                value: 'http://qbit-gluetun:8000'
             probes:
               liveness: &probes
                 enabled: false
@@ -183,7 +183,7 @@ spec:
         controller: qbit
         ports:
           gluetun:
-            port: 8080
+            port: 8000
     ingress:
       app:
         className: internal
