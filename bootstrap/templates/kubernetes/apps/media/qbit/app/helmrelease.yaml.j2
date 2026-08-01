@@ -139,9 +139,9 @@ spec:
                     name: qbit-info
                     key: qbitpassword
               - name: QBT_ADDR
-                value: 'http://qbit:6767'
+                value: 'http://qbit-app:10095'
               - name: GTN_ADDR
-                value: 'http://gluetun:8000'
+                value: 'http://qbit-gluetun:8080'
             probes:
               liveness: &probes
                 enabled: false
@@ -183,7 +183,7 @@ spec:
         controller: qbit
         ports:
           gluetun:
-            port: 8000
+            port: 8080
     ingress:
       app:
         className: internal
