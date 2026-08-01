@@ -97,6 +97,8 @@ spec:
                 value: "America/New_York"
               - name: DNS_ADDRESS
                 value: "10.0.0.243"
+              - name: HTTP_CONTROL_SERVER_AUTH
+                value: "false"
               - name: BLOCK_MALICIOUS
                 value: 'off'
             # envFrom: *envFrom
