@@ -78,6 +78,8 @@ spec:
                 value: "CA Ontario, CA Ontario Streaming Optimized,CA Toronto"
               - name: VPN_SERVICE_PROVIDER
                 value: "private internet access"
+              - name: VPN_PORT_FORWARDING
+                value: "on"
               - name: WIREGUARD_PRIVATE_KEY
                 valueFrom:
                   secretKeyRef:
