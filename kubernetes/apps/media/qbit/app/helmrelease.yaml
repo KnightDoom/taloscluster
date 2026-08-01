@@ -72,8 +72,10 @@ spec:
                 value: "8000"
               - name: VPN_TYPE
                 value: "openvpn"
-              - name: VPN_INTERFACE
-                value: "wg0"
+              #- name: VPN_INTERFACE
+              #  value: "wg0"
+              - name: SERVER_REGIONS
+                value: "Canada,United States"
               - name: VPN_SERVICE_PROVIDER
                 value: "private internet access"
               - name: WIREGUARD_PRIVATE_KEY

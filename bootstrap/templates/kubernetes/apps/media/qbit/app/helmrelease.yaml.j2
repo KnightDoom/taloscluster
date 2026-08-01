@@ -72,8 +72,8 @@ spec:
                 value: "8000"
               - name: VPN_TYPE
                 value: "openvpn"
-              - name: VPN_INTERFACE
-                value: "wg0"
+              #- name: VPN_INTERFACE
+              #  value: "wg0"
               - name: VPN_SERVICE_PROVIDER
                 value: "private internet access"
               - name: WIREGUARD_PRIVATE_KEY
@@ -93,6 +93,8 @@ spec:
                     key: openvpn_pass
               - name: PORT_FORWARD_ONLY
                 value: "true"
+              - name: SERVER_REGIONS
+                value: "Canada,United States"
               - name: WIREGUARD_ENDPOINT_PORT
                 value: "1337"
               - name: WIREGUARD_PUBLIC_KEY
