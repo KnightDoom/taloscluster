@@ -97,10 +97,13 @@ spec:
                 value: "America/New_York"
               - name: DNS_ADDRESS
                 value: "10.0.0.243"
-              - name: HTTP_CONTROL_SERVER_AUTH
-                value: "false"
               - name: BLOCK_MALICIOUS
                 value: 'off'
+              - name: HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE
+                valueFrom:
+                  secretKeyRef:
+                    name: qbit-info
+                    key: gluetunconfig
             # envFrom: *envFrom
             securityContext:
               runAsUser: 0
@@ -136,6 +139,16 @@ spec:
                     name: qbit-info
                     key: qbitusername
               - name: QBT_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: qbit-info
+                    key: qbitpassword
+              - name: GTN_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: qbit-info
+                    key: qbitusername
+              - name: GTN_PASSWORD
                 valueFrom:
                   secretKeyRef:
                     name: qbit-info
