@@ -42,8 +42,10 @@ spec:
           max_worker_processes: 5
           max_parallel_workers_per_gather: 3
           max_parallel_workers: 5
+          log_temp_files: "10240kB"
           max_parallel_maintenance_workers: 3
           #max_connections: 500
+          temp_file_limit: "5242880kB"
   instances:
     - name: postgres
       metadata:
@@ -162,8 +164,8 @@ spec:
             name: crunchy-pgo-secret
       global: &backupFlag
         # Global
-        compress-type: "bz2"
-        compress-level: "9"
+        compress-type: "zst"
+        #compress-level: "7"
         # Minio
         # repo2-block: "y"
         # repo2-bundle: "y"
