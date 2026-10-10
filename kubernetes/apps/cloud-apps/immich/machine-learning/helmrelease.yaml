@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v3.2.4-cuda@sha256:7db69de1769cfee1cfeadf6d4e8481810e3f12eed9eae0533354a06bd90eb4c0
+              tag: v3.3.1-cuda@sha256:619a93f206247015f3298a30d368b9be7804f45b6467990ba710f3089fe207d8
             env:
               TZ: America/New_York
               MPLCONFIGDIR: /cache/matplotlib
