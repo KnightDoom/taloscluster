@@ -12,3 +12,29 @@ items:
 kind: List
 metadata:
   resourceVersion: ""
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: trim-weekly
+  namespace: longhorn-system
+spec:
+  name: trim-weekly
+  task: filesystem-trim
+  cron: "0 3 * * 0"
+  retain: 0
+  concurrency: 1
+  groups: [default]
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: snapshot-cleanup-weekly
+  namespace: longhorn-system
+spec:
+  name: snapshot-cleanup-weekly
+  task: snapshot-cleanup
+  cron: "0 2 * * 0"
+  retain: 0
+  concurrency: 1
+  groups: [default]
