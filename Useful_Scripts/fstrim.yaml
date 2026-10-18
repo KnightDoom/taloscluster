@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fstrim-var
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      nodeName: talos0
+      tolerations:
+        - operator: Exists
+      containers:
+        - name: fstrim
+          image: debian:bookworm-slim
+          command: ["sh", "-c", "fstrim -v /host-var"]
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: var
+              mountPath: /host-var
+      volumes:
+        - name: var
+          hostPath:
+            path: /var
