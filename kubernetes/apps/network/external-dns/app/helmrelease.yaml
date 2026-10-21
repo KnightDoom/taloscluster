@@ -46,6 +46,7 @@ spec:
       - --events
       - --ignore-ingress-tls-spec
       - --ingress-class=external
+      - --enable-legacy-annotation-prefix
     policy: sync
     sources: ["crd", "ingress"]
     txtPrefix: k8s.
