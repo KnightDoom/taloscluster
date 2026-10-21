@@ -96,4 +96,23 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sso2-external-ingress
+spec:
+  ingressClassName: external
+  annotations:
+    external-dns.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+  rules:
+  - host: sso2.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-auth-knightd
+            port:
+              number: 9000
+        path: /outpost.goauthentik.io
+        pathType: Prefix
