@@ -5,7 +5,7 @@ metadata:
   name: longhorn-ingress
   namespace: longhorn-system
   #annotations:
-    #external-dns.alpha.kubernetes.io/target: "lh.${SECRET_DOMAIN}"
+    #external-dns.kubernetes.io/target: "lh.${SECRET_DOMAIN}"
 spec:
   ingressClassName: internal
   rules:

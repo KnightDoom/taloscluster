@@ -119,7 +119,7 @@ spec:
         className: external
         annotations:
         # - nginx.ingress.kubernetes.io/app-root: /tasks
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          external-dns.kubernetes.io/target: "external.${SECRET_DOMAIN}"
                   # This should be the in-cluster DNS name for the authentik outpost service
         # as when the external URL is specified here, nginx will overwrite some crucial headers
           nginx.ingress.kubernetes.io/auth-url: |-
@@ -142,7 +142,7 @@ spec:
         className: external
         annotations:
         # - nginx.ingress.kubernetes.io/app-root: /tasks
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          external-dns.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/configuration-snippet: |
             rewrite ^/registerSW\.js$ /assets/registerSW.js break;
             rewrite ^/sw\.js$ /assets/sw.js break;

@@ -241,7 +241,7 @@ spec:
       service:
         metadata:
           annotations:
-            external-dns.alpha.kubernetes.io/hostname: cpgo.${SECRET_DOMAIN}
+            external-dns.kubernetes.io/hostname: cpgo.${SECRET_DOMAIN}
             lbipam.cilium.io/ips: 10.96.108.108
         type: LoadBalancer
       port: 5432

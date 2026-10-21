@@ -294,7 +294,7 @@ spec:
         className: internal
         #annotations:
         #  nginx.ingress.kubernetes.io/app-root: /$AppName
-        #  external-dns.alpha.kubernetes.io/target: "external.\${SECRET_DOMAIN}"
+        #  external-dns.kubernetes.io/target: "external.\${SECRET_DOMAIN}"
         #  nginx.ingress.kubernetes.io/auth-url: "http://ak-outpost-auth-knightd.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx"
         #  nginx.ingress.kubernetes.io/auth-signin: "https://sso2.\${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
         #  nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
@@ -344,7 +344,7 @@ metadata:
   name: $AppName-ingress
   namespace: $SelectedNamespace
   #annotations:
-    #external-dns.alpha.kubernetes.io/target: "$AppName.\$\{SECRET_DOMAIN\}"
+    #external-dns.kubernetes.io/target: "$AppName.\$\{SECRET_DOMAIN\}"
 spec:
   ingressClassName: internal #external or internal
   rules:
