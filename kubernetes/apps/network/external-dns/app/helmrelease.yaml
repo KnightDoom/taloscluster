@@ -44,7 +44,6 @@ spec:
       - --crd-source-kind=DNSEndpoint
       - --events
       - --ignore-ingress-tls-spec
-      - --target=external.${SECRET_DOMAIN}
       - --ingress-class=external
     policy: sync
     sources: ["crd", "ingress"]
