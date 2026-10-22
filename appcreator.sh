@@ -212,7 +212,7 @@ spec:
   chart:
     spec:
       chart: $ChartName
-     # version: 4.1.1
+      # version: 5.3.0
       sourceRef:
         kind: HelmRepository
         name: $RepoName
@@ -606,7 +606,7 @@ create_app
 #  chart:
 #    spec:
 #      chart: $ChartName
-#     # version: 4.1.1
+#      # version: 5.3.0
 #      sourceRef:
 #        kind: HelmRepository
 #        name: $RepoName
