@@ -101,10 +101,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sso2-external-ingress
-spec:
-  ingressClassName: external
   annotations:
     external-dns.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+spec:
+  ingressClassName: external
   rules:
   - host: sso2.${SECRET_DOMAIN}
     http:
