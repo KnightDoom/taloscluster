@@ -32,34 +32,19 @@ spec:
               TZ: America/New_York
               SECURITY_ENABLELOGIN: "true"
               portNum: &port 8080
-              PUID: "1000"
-              PGID: "1000"
-              UMASK: "022"
-              HOME: /tmp/home
             probes:
-              startup:
+              liveness: &probes
                 enabled: true
                 custom: true
                 spec:
-                  httpGet: { path: /, port: *port }
-                  periodSeconds: 10
-                  failureThreshold: 30
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet: { path: /, port: *port }
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 60
                   periodSeconds: 15
                   timeoutSeconds: 5
                   failureThreshold: 3
-              readiness:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet: { path: /, port: *port }
-                  periodSeconds: 15
-                  timeoutSeconds: 5
-                  failureThreshold: 3
+              readiness: *probes
             resources:
               requests:
                 cpu: 100m
@@ -67,15 +52,11 @@ spec:
               limits:
                 memory: 4Gi
                 gpu.intel.com/i915: 1        # CHANGE ME if your node advertises gpu.intel.com/xe
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: { drop: ["ALL"] }
+
     defaultPodOptions:
       securityContext:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [105]            # CHANGE ME: GID of /dev/dri/renderD128 on the node
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
