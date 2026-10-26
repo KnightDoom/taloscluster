@@ -59,7 +59,7 @@ spec:
             resources:
               requests:
                 cpu: 250m
-                memory: 1Gi
+                memory: 300Mi
               limits:
                 memory: 4Gi
     service:
