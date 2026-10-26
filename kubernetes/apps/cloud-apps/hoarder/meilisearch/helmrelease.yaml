@@ -34,8 +34,6 @@ spec:
             image:
               repository: getmeili/meilisearch
               tag: "v1.55.0"
-            args:
-              - --upgrade-db
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
@@ -43,6 +41,7 @@ spec:
               TZ: America/New_York
               NEXTAUTH_URL: "http://hoarder:3000"
               MEILI_NO_ANALYTICS: true
+              MEILI_UPGRADE_DB: "true"
             envFrom:
               - secretRef:
                   name: hoarder-env
