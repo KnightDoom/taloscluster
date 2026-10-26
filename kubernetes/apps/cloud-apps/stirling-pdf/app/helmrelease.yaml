@@ -68,17 +68,11 @@ spec:
                 memory: 4Gi
                 gpu.intel.com/i915: 1        # CHANGE ME if your node advertises gpu.intel.com/xe
             securityContext:
-              runAsNonRoot: true
-              runAsUser: 1000
-              runAsGroup: 1000
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [105]            # CHANGE ME: GID of /dev/dri/renderD128 on the node
