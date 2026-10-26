@@ -34,6 +34,12 @@ spec:
               PAPERLESS_REDIS: redis://dragonfly.database.svc.cluster.local:6379
               PAPERLESS_URL: "https://ngx.${SECRET_DOMAIN}"
               PAPERLESS_TIME_ZONE: America/New_York
+              PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
+              PAPERLESS_SOCIAL_AUTO_SIGNUP: "true"
+              PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: "true"
+              PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
+              PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
+              PAPERLESS_LOGOUT_REDIRECT_URL: "https://sso2.${SECRET_DOMAIN}/application/o/paperless/end-session/"
               USERMAP_UID: "1000"
               USERMAP_GID: "1000"
               portNum: &port 8000
@@ -59,7 +65,7 @@ spec:
             resources:
               requests:
                 cpu: 250m
-                memory: 1Gi
+                memory: 100Mi
               limits:
                 memory: 4Gi
     service:
