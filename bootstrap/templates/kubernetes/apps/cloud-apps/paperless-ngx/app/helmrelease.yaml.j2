@@ -32,7 +32,7 @@ spec:
               tag: 3.3.4@sha256:9bc6e8248891bcfa6f52fffe8b81e4ea8cae75790c3ec1b9906961a7ba55c969
             env:
               PAPERLESS_REDIS: redis://dragonfly.database.svc.cluster.local:6379
-              PAPERLESS_URL: "https://paperless.${SECRET_DOMAIN}"
+              PAPERLESS_URL: "https://ngx.${SECRET_DOMAIN}"
               PAPERLESS_TIME_ZONE: America/New_York
               USERMAP_UID: "1000"
               USERMAP_GID: "1000"
@@ -72,7 +72,7 @@ spec:
         #annotations:
         #  external-dns.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
-          - host: paperless.${SECRET_DOMAIN}
+          - host: ngx.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
