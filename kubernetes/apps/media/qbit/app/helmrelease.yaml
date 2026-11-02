@@ -142,6 +142,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "* * 1 * *"
+          concurrencyPolicy: Forbid
         containers:
           qbitportforward:
             image:
@@ -255,4 +256,3 @@ spec:
         path: "/PlexLib"
         globalMounts:
           - path: /library
-

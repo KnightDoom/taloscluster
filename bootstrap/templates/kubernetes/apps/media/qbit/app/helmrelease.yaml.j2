@@ -139,6 +139,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "* * 1 * *"
+          concurrencyPolicy: Forbid
         containers:
           qbitportforward:
             image:
@@ -252,5 +253,4 @@ spec:
         path: "#{ bootstrap_plex.export_path }#"
         globalMounts:
           - path: /library
-
 

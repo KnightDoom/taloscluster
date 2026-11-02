@@ -92,6 +92,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "*/5 * * * *"
+          concurrencyPolicy: Forbid
         containers:
           fireflycron:
             image:
@@ -170,4 +171,3 @@ spec:
         path: /BackedStorage/firefly
         globalMounts:
           - path: /files
-
