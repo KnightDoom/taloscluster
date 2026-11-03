@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: mintplexlabs/anythingllm
-              tag: 1.18.0@sha256:5461782e7db41318a516925949a8f8366e258dd576411fca7961fe77dff054cc
+              tag: 1.19.0@sha256:daf5a6ae9d363ed578e7d41e2d0668c7eaa604bd90b0ff27435f893b0906833e
             env:
               # RADARR__APP__INSTANCENAME: Radarr
               # RADARR__APP__THEME: dark
