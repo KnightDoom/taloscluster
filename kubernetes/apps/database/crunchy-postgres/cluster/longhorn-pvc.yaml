@@ -43,7 +43,7 @@ metadata:
   selfLink: /api/v1/persistentvolumes/crunchy-backup
 spec:
   capacity:
-    storage: 25Gi
+    storage: 65Gi
   csi:
     driver: driver.longhorn.io
     volumeHandle: crunchy-backup
