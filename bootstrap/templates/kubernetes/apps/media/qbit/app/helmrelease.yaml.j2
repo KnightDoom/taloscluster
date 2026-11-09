@@ -95,6 +95,8 @@ spec:
                 value: "true"
               - name: SERVER_REGIONS
                 value: "CA Ontario, CA Ontario Streaming Optimized,CA Toronto"
+              - name: UPDATER_PERIOD
+                value: "480h"
               - name: WIREGUARD_ENDPOINT_PORT
                 value: "1337"
               - name: WIREGUARD_PUBLIC_KEY
@@ -231,6 +233,11 @@ spec:
         existingClaim: qbit
         globalMounts:
           - path: /config
+        advancedMounts:
+          qbit:
+            gluetun:
+              - path: /gluetun/servers
+                subPath: gluetun-servers
       # scripts:
         # type: configMap
         # name: radarr-configmap

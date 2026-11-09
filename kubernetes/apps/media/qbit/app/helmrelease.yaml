@@ -76,6 +76,8 @@ spec:
               #  value: "wg0"
               - name: SERVER_REGIONS
                 value: "CA Ontario, CA Ontario Streaming Optimized,CA Toronto"
+              - name: UPDATER_PERIOD
+                value: "480h"
               - name: VPN_SERVICE_PROVIDER
                 value: "private internet access"
               - name: VPN_PORT_FORWARDING
@@ -234,6 +236,11 @@ spec:
         existingClaim: qbit
         globalMounts:
           - path: /config
+        advancedMounts:
+          qbit:
+            gluetun:
+              - path: /gluetun/servers
+                subPath: gluetun-servers
       # scripts:
         # type: configMap
         # name: radarr-configmap
