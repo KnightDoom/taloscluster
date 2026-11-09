@@ -6,6 +6,7 @@ This repository manages a Talos Linux Kubernetes cluster with Flux. It is design
 
 ## Core Workflow
 
+- Use the mise-managed virtual environment configured in `mise.toml` (`.venv`) for repository commands. Run commands through `mise exec -- <command>` so the configured tools and environment are available; use this environment for Python scripts and dependency installation.
 - Treat `config.yaml` as the primary cluster input.
 - Treat `bootstrap/templates/kubernetes/**` and `bootstrap/overrides/**` as the source templates.
 - Treat `kubernetes/**` as generated output from the templates.
