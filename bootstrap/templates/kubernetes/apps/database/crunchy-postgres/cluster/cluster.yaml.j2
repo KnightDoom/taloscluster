@@ -10,7 +10,6 @@ spec:
       crunchy-userinit.drummyfloyd.github.com/enabled: "true"
       crunchy-userinit.drummyfloyd.github.com/superuser: &superuser "postgres"
   postgresVersion: 16
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-16.15-2633
   monitoring:
     pgmonitor:
       exporter:
@@ -158,7 +157,6 @@ spec:
         # type: AlphaNumeric
   backups:
     pgbackrest:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi9-2.59.0-2633
       #restore: # Optional: restore from backup on cluster creation
       #  enabled: true
       #  repoName: repo1
