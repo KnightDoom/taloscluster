@@ -149,6 +149,8 @@ spec:
                   key: pia-password
             - name: SERVER_REGIONS
               value: "CA Montreal"
+            - name: UPDATER_PERIOD
+              value: 480h
             - name: VPN_PORT_FORWARDING
               value: "on"
             - name: FIREWALL_INPUT_PORTS

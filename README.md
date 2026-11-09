@@ -261,18 +261,20 @@ task talos:apply-node HOSTNAME=? MODE=?
 
 #### ⬆️ Updating Talos and Kubernetes versions
 
-📍 _Ensure the `talosVersion` and `kubernetesVersion` in `talhelper.yaml` are up-to-date with the version you wish to upgrade to._
+Follow the [upgrade runbook](docs/upgrades.md) for version selection, backups,
+sequential node upgrades, Kubernetes previews, verification, and recovery.
+Version targets live in `bootstrap/templates/kubernetes/bootstrap/talos/talconfig.yaml.j2`;
+the user renders them with `mise exec -- task configure -y`.
 
 ```sh
 # Upgrade node to a newer Talos version
-task talos:upgrade-node HOSTNAME=?
-# e.g. task talos:upgrade HOSTNAME=k8s-0
+mise exec -- task talos:upgrade-node HOSTNAME=?
+# e.g. mise exec -- task talos:upgrade-node HOSTNAME=talos1
 ```
 
 ```sh
 # Upgrade cluster to a newer Kubernetes version
-task talos:upgrade-k8s
-# e.g. task talos:upgrade-k8s
+mise exec -- task talos:upgrade-k8s
 ```
 
 ## 🤖 Renovate
